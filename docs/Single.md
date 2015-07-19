@@ -42,4 +42,4 @@ zip and zipWith | Single |  将多个Single转换为一个，后者发送的数�
 
 下面的部分使用弹珠图解释这些操作符，下面的图标解释了Single在弹珠图中是如何表示的：
 
-详细的图解可以参考官方的文档：[Single](http://reactivex.io/documentation/single.html)
+详细的图解可以参考英文文档：[Single](http://reactivex.io/documentation/single.html)
