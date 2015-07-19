@@ -95,22 +95,22 @@ ReactiveX的每种编程语言的实现都实现了一组操作符的集合。�
 * Contains — 判断Observable是否会发送一个指定的数据项
 * DefaultIfEmpty — 发送来自原Observable的数据，如果原Observable没有发送数据，就发送一个默认数据
 * SequenceEqual — 判断两个Observable是否按相同的数据序列
-* SkipUntil — 一旦第二个Observable发送了一个数据，就丢弃Observable在这之前发送的数据
-* SkipWhile — 一旦某个条件判断的结果为false，就丢弃Observable在这之前发送的数据
-* TakeUntil — 一旦第二个Observable发送了一个数据，就丢弃Observable在这之后发送的数据
-* TakeWhile — 一旦某个条件判断的结果为false，就丢弃Observable在这之后发送的数据
+* SkipUntil — 丢弃原Observable发送的数据，直到第二个Observable发送了一个数据，然后发送原Observable的剩余数据
+* SkipWhile — 丢弃原Observable发送的数据，直到一个特定的条件为假，然后发送原Observable剩余的数据
+* TakeUntil — 发送来自原Observable的数据，直到第二个Observable发送了一个数据或一个通知
+* TakeWhile — 发送原Observable的数据，直到一个特定的条件为真，然后跳过剩余的数据
 
 ### 算术和聚合操作
 
-这些操作符可用与整个数据序列
+这些操作符可用于整个数据序列
 
-*Average — 计算Observable发送的数据序列的平均值，然后发送这个结果
-*Concat — 在不交叉的情况下合并发送来自多个Observable的数据
-*Count — 计算Observable发送的数据个数，然后发送这个结果
-*Max — 计算并发送数据序列的最大值
-*Min — 计算并发送数据序列的最小值
-*Reduce — 按顺序对数据序列的每一个应用某个函数，然后返回这个值
-*Sum — 计算并发送数据序列的和
+* Average — 计算Observable发送的数据序列的平均值，然后发送这个结果
+* Concat — 在不交叉的情况下合并发送来自多个Observable的数据
+* Count — 计算Observable发送的数据个数，然后发送这个结果
+* Max — 计算并发送数据序列的最大值
+* Min — 计算并发送数据序列的最小值
+* Reduce — 按顺序对数据序列的每一个应用某个函数，然后返回这个值
+* Sum — 计算并发送数据序列的和
 
 ### 连接操作
 
