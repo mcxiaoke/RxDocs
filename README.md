@@ -1,7 +1,3 @@
-ReactiveX资料翻译
-======
-
-
 ## ReactiveX
 
 * [ReactiveX介绍](docs/Intro.md)
