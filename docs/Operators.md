@@ -26,12 +26,12 @@ ReactiveX的每种编程语言的实现都实现了一组操作符的集合。�
 
 这些操作符可用于对Observable发送的数据进行变换，详细解释可以看每个操作符的文档
 
-* Buffer — 缓存，可以简单的理解为缓存，它定时从Observable收集数据到一个集合，然后把这些数据集合打包发送，而不是一次发送一个
+* Buffer — 缓存，可以简单的理解为缓存，它定期从Observable收集数据到一个集合，然后把这些数据集合打包发送，而不是一次发送一个
 * FlatMap — 扁平映射，将Observable发送的数据变换为Observables集合，然后将这些Observable发送的数据平坦化的放进一个单独的Observable，可以认为是一个将嵌套的数据结构展开的过程。
 * GroupBy — 分组，将原来的Observable分拆为Observable集合，将原来Observable发送的数据按Key分组，每一个Observable发送一组不同的数据
 * Map — 映射，通过对序列的每一项都应用一个函数变换Observable发送的数据，实质是对序列中的每一项执行一个函数，函数的参数就是这个数据项
 * Scan — 扫描，对Observable发送的每一项数据应用一个函数，然后按顺序依次发送这些值
-* Window — 窗口，periodically subdivide items from an Observable into Observable windows and emit these windows rather than emitting the items one at a time定期将来自Observable的数据分拆成一些Observable窗口，然后发送这些窗口，而不是每次发送一项。类似于Buffer，但Buffer发送的是数据，Window发送的是Observable，每一个Observable发送原来Observable的数据的一个子集，然后调用onCompleted
+* Window — 窗口，定期将来自Observable的数据分拆成一些Observable窗口，然后发送这些窗口，而不是每次发送一项。类似于Buffer，但Buffer发送的是数据，Window发送的是Observable，每一个Observable发送原来Observable的数据的一个子集，然后调用onCompleted
 
 ### 过滤操作
 
@@ -136,4 +136,4 @@ ReactiveX的每种编程语言的实现都实现了一组操作符的集合。�
 * 从Observable发送的数据中取特定的值（过滤操作）
 * 转发Observable的部分值（条件/布尔/过滤操作）
 * 对Observable发送的数据序列求值（算术/聚合操作）
-	
+
