@@ -1,6 +1,4 @@
-RxJava是 [ReactiveX (Reactive Extensions)](http://reactivex.io/) 在JVM上的一个实现，ReactiveX使用Observable序列组合异步和基于事件的程序。
-
-更多关于ReactiveX的资料，可以查看 [ReactiveX 介绍](../docs/Intro.md) 页面。
+RxJava是 [ReactiveX](http://reactivex.io/) 在JVM上的一个实现，ReactiveX使用Observable序列组合异步和基于事件的程序。更多关于ReactiveX的资料，可以查看 [ReactiveX 介绍](../docs/Intro.md) 页面。
 
 ### RxJava 是轻量级的
 
@@ -8,13 +6,10 @@ RxJava尽力做到非常轻巧。它仅关注Observable的抽象和与之相关�
 
 ### RxJava 是一个多语言实现
 
-RxJava 支持Java 6或者更新的版本，以及其它的JVM语言如 [Groovy](https://github.com/ReactiveX/RxGroovy), [Clojure](https://github.com/ReactiveX/RxClojure), [JRuby](https://github.com/ReactiveX/RxJRuby), [Kotlin](https://github.com/ReactiveX/RxKotlin) 和 [Scala](https://github.com/ReactiveX/RxScala)。
-
-RxJava 可用于更多的语言环境，而不仅仅是Java和Scala，而且它致力于尊重每一种JVM语言的习惯。(<a href="https://github.com/Netflix/RxJava/pull/304">我们仍在努力</a>)
+RxJava 支持Java 6或者更新的版本，以及其它的JVM语言如 [Groovy](https://github.com/ReactiveX/RxGroovy), [Clojure](https://github.com/ReactiveX/RxClojure), [JRuby](https://github.com/ReactiveX/RxJRuby), [Kotlin](https://github.com/ReactiveX/RxKotlin) 和 [Scala](https://github.com/ReactiveX/RxScala)。RxJava 可用于更多的语言环境，而不仅仅是Java和Scala，而且它致力于尊重每一种JVM语言的习惯。(<a href="https://github.com/Netflix/RxJava/pull/304">我们仍在努力</a>)
 
 ### RxJava文档
 
-* [介绍|Home](Home.md)
 * [入门指南](Getting-Started.md)
 * [怎样使用](How-To-Use-RxJava.md)
 * [补充阅读](Additional-Reading.md)
