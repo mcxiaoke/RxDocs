@@ -1,15 +1,19 @@
 ## ReactiveX中文文档
 
-* [ReactiveX Intro](docs/Intro.md)
+*（以下文档是对 [ReactiveX](http://reactivex.io/) 的翻译）*
+
+* [什么是Rx](docs/Intro.md)
 * [Observables](docs/Observables.md)
 * [Operators](docs/Operators.md)
 * [Single](docs/Single.md)
 * [Subject](docs/Subject.md)
-* [Schedulers](docs/Schedulers.md)
-* [Creating Operators](docs/Creating-Operators.md)
-* [Transforming Operators](docs/Transforming-Operators.md)
+* [Scheduler](docs/Scheduler.md)
+* [创建操作](docs/Creating-Operators.md)
+* [变换操作](docs/Transforming-Operators.md)
 
 ## RxJava中文文档
+
+*（以下文档是对 [RxJava Wiki](https://github.com/ReactiveX/rxjava/wiki) 的翻译）*
 
 * [介绍](rxjava/Home.md)
 * [入门指南](rxjava/Getting-Started.md)
@@ -33,13 +37,17 @@
 * [Subject](rxjava/Subject.md)
 * [Scheduler](rxjava/Scheduler.md)
 * [Plugins](rxjava/Plugins.md)
-* [Backpressure](rxjava/Backpressure.md)
+* [Backpressure](rxjava/Backpressure.md) **TODO**
 * [错误处理](rxjava/Error-Handling.md)
-* [Android模块](rxjava/The-RxJava-Android-Module.md)
+* [Android](rxjava/The-RxJava-Android-Module.md)
 * [参与开发](rxjava/How-to-Contribute.md)
 
 ## 相关链接
 
 * [ReactiveX.io](http://reactivex.io/intro.html)
-* [Javadoc](http://reactivex.io/RxJava/javadoc/rx/Observable.html)
-* [Wiki](https://github.com/ReactiveX/RxJava/wiki)
+* [RxJava Wiki](https://github.com/ReactiveX/RxJava/wiki)
+* [RxJava Javadoc](http://reactivex.io/RxJava/javadoc/)
+* [RxMarbles](http://rxmarbles.com/)
+* [Advanced RxJava](http://akarnokd.blogspot.com/)
+* [Intro to Rx](http://www.introtorx.com/content/v1.0.10621.0/01_WhyRx.html)
+* [MSDN](https://msdn.microsoft.com/en-us/data/gg577609.aspx)

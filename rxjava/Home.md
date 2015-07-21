@@ -34,7 +34,7 @@ RxJava 支持Java 6或者更新的版本，以及其它的JVM语言如 [Groovy](
 * [Plugins](Plugins.md)
 * [Backpressure](Backpressure.md)
 * [错误处理](Error-Handling.md)
-* [Android模块](The-RxJava-Android-Module.md)
+* [Android](The-RxJava-Android-Module.md)
 * [参与开发](How-to-Contribute.md)
 * [API文档](http://reactivex.io/RxJava/javadoc/rx/Observable.html)
 
