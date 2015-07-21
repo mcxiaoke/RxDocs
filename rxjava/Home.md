@@ -6,10 +6,11 @@ RxJava尽力做到非常轻巧。它仅关注Observable的抽象和与之相关�
 
 ### RxJava 是一个多语言实现
 
-RxJava 支持Java 6或者更新的版本，以及其它的JVM语言如 [Groovy](https://github.com/ReactiveX/RxGroovy), [Clojure](https://github.com/ReactiveX/RxClojure), [JRuby](https://github.com/ReactiveX/RxJRuby), [Kotlin](https://github.com/ReactiveX/RxKotlin) 和 [Scala](https://github.com/ReactiveX/RxScala)。RxJava 可用于更多的语言环境，而不仅仅是Java和Scala，而且它致力于尊重每一种JVM语言的习惯。(<a href="https://github.com/Netflix/RxJava/pull/304">我们仍在努力</a>)
+RxJava 支持Java 6或者更新的版本，以及其它的JVM语言如 [Groovy](https://github.com/ReactiveX/RxGroovy), [Clojure](https://github.com/ReactiveX/RxClojure), [JRuby](https://github.com/ReactiveX/RxJRuby), [Kotlin](https://github.com/ReactiveX/RxKotlin) 和 [Scala](https://github.com/ReactiveX/RxScala)。RxJava 可用于更多的语言环境，而不仅仅是Java和Scala，而且它致力于尊重每一种JVM语言的习惯。
 
 ### RxJava文档
 
+* [介绍](Home.md)
 * [入门指南](Getting-Started.md)
 * [怎样使用](How-To-Use-RxJava.md)
 * [补充阅读](Additional-Reading.md)
@@ -30,9 +31,9 @@ RxJava 支持Java 6或者更新的版本，以及其它的JVM语言如 [Groovy](
   * [实现自定义操作符](Implementing-Your-Own-Operators.md)
 * [Subject](Subject.md)
 * [Scheduler](Scheduler.md)
-* [插件 Plugins](Plugins.md)
-* [反压 Backpressure](Backpressure.md)
-* [错误处理 Error Handling](Error-Handling.md)
+* [Plugins](Plugins.md)
+* [Backpressure](Backpressure.md)
+* [错误处理](Error-Handling.md)
 * [Android模块](The-RxJava-Android-Module.md)
 * [参与开发](How-to-Contribute.md)
 * [API文档](http://reactivex.io/RxJava/javadoc/rx/Observable.html)
