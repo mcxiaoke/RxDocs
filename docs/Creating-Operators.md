@@ -214,7 +214,7 @@ Sequence complete
 
 ### decode
 
-![decode](St.decode.png)
+![decode](images/operators/St.decode.png)
 
 `StringObservable`类不是默认RxJava的一部分，包含一个`decode`操作符，这个操作符将一个多字节字符流转换为一个发送字节数组的Observable，这些字节数组按照字符的边界划分。
 
