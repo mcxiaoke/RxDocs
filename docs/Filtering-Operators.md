@@ -338,6 +338,173 @@ Sequence complete.
 
 first系列的这几个操作符默认不在任何特定的调度器上执行。
 
-### BlockingObservable
+## Last
 
-参见 [BlockingObservable](BlockingObservable.md) 文档。
+只发送最后一项（或者满足某个条件的最后一项）数据
+
+![last](images/operators/last.c.png)
+
+如果你只对Observable发送的最后一项数据，或者满足某个条件的最后一项数据感兴趣，你可以使用`Last`操作符。
+
+在某些实现中，`Last `没有实现为一个返回Observable的过滤操作符，而是实现为一个在当时就发送原始Observable指定数据项的阻塞函数。在这些实现中，如果你想要的是一个过滤操作符，最好使用`TakeLast(1)`。
+
+在RxJava中的实现是`last`和`lastOrDefault`。
+
+可能容易混淆，`BlockingObservable`也有名叫`last `和`lastOrDefault `的操作符，它们会阻塞并返回值，不是立即返回一个Observable。
+
+### 过滤操作符
+
+![last](images/operators/last.png)
+
+只发送最后一项数据，使用没有参数的`last `操作符。
+
+示例代码
+
+```java
+Observable.just(1, 2, 3)
+          .last()
+          .subscribe(new Subscriber<Integer>() {
+        @Override
+        public void onNext(Integer item) {
+            System.out.println("Next: " + item);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            System.err.println("Error: " + error.getMessage());
+        }
+
+        @Override
+        public void onCompleted() {
+            System.out.println("Sequence complete.");
+        }
+    });
+```
+
+输出
+
+```
+Next: 3
+Sequence complete.
+```
+
+* Javadoc: [last()](http://reactivex.io/RxJava/javadoc/rx/Observable.html#last())
+
+![last](images/operators/last.p.png)
+
+这个版本的`last`也是接受一个谓词函数，返回一个发送原始Observable中满足条件的最后一项数据的Observable。
+
+* Javadoc: [last(Func1)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#last(rx.functions.Func1))
+
+![last](images/operators/lastOrDefault.png)
+
+`lastOrDefault`与`last`类似，不同的是，如果原始Observable没有发送任何值，它发送你指定的默认值。
+
+* Javadoc: [lastOrDefault(T)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T))
+
+![last](images/operators/lastOrDefault.p.png)
+
+这个版本的`lastOrDefault`可以接受一个谓词函数，如果有数据满足条件，返回的Observable就发送原始Observable满足条件的最后一项数据，否则发送默认值。
+
+* Javadoc: [lastOrDefault(T)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T))
+
+`last`和`lastOrDefault`默认不在任何特定的调度器上执行。
+
+
+## Sample
+
+定期发送Observable最近发送的数据项
+
+![sample](images/operators/sample.c.png)
+
+`Sample`操作符定时查看一个Observable，然后发送自上次采样以来它最近发送的数据。
+
+在某些实现中，有一个`ThrottleFirst`操作符的功能类似，但不是发送采样期间的最近的数据，而是发送在那段时间内的第一项数据。
+
+RxJava将这个操作符实现为`sample`和`throttleLast`。
+
+注意：如果自上次采样以来，原始Observable没有发送任何数据，这个操作返回的Observable在那段时间内也不会发送任何数据。
+
+![sample](images/operators/sample.png)
+
+`sample`(别名`throttleLast`)的一个变体按照你参数中指定的时间间隔定时采样（`TimeUnit`指定时间单位）。
+
+`sample`的这个变体默认在`computation`调度器上执行，但是你可以使用第三个参数指定其它的调度器。
+
+* Javadoc: [sample(long,TimeUnit)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#sample(long,%20java.util.concurrent.TimeUnit))和[throttleLast(long,TimeUnit)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleLast(long,%20java.util.concurrent.TimeUnit))
+* Javadoc: [sample(long,TimeUnit,Scheduler)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#sample(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler))和[throttleLast(long,TimeUnit,Scheduler)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleLast(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler))
+
+![sample](images/operators/sample.o.png)
+
+`sample`的这个变体每当第二个Observable发送一个数据（或者当它结束）时就对原始Observable进行采样。第二个Observable通过参数传递给`sample`。
+
+`sample`的这个变体默认不在任何特定的调度器上执行。
+
+* Javadoc: [sample(Observable)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#sample(rx.Observable))
+
+![throttleFirst](images/operators/throttleFirst.png)
+
+`throttleFirst`与`throttleLast/sample`不同，在每个采样周期内，它总是发送原始Observable的第一项数据，而不是最近的一项。
+
+`throttleFirst`操作符默认在`computation`调度器上执行，但是你可以使用第三个参数指定其它的调度器。
+
+* Javadoc: [throttleFirst(long,TimeUnit)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long,%20java.util.concurrent.TimeUnit))
+* Javadoc: [throttleFirst(long,TimeUnit,Scheduler)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler))
+
+
+## Skip
+
+抑制Observable发送的前N项数据
+
+![skip](images/operators/skip.c.png)
+
+使用`Skip`操作符，你可以忽略Observable'发送的前N项数据，只保留之后的数据。
+
+![skip](images/operators/skip.png)
+
+RxJava中这个操作符叫`skip`。`skip`的这个变体默认不在任何特定的调度器上执行。
+
+* Javadoc: [skip(int)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(int))
+
+![skip](images/operators/skip.t.png)
+
+`skip`的这个变体接受一个时长而不是数量参数。它会丢弃原始Observable开始的那段时间发送的数据，时长和时间单位通过参数指定。
+
+`skip`的这个变体默认在`computation`调度器上执行，但是你可以使用第三个参数指定其它的调度器。
+
+* Javadoc: [skip(long,TimeUnit)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(long,%20java.util.concurrent.TimeUnit))
+* Javadoc: [skip(long,TimeUnit,Scheduler)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler))
+
+
+## SkipLast
+
+抑制Observable发送的后N项数据
+
+![skipLast](images/operators/skipLast.c.png)
+
+使用`Skip`操作符修改原始Observable，你可以忽略Observable'发送的后N项数据，只保留前面的数据。
+
+![skipLast](images/operators/skipLast.png)
+
+使用`SkipLast`操作符，你可以忽略原始Observable发送的后N项数据，只保留之前的数据。注意：这个机制是这样实现的：延迟原始Observable发送的任何数据项，直到它发送了N项数据。
+
+`skipLast`的这个变体默认不在任何特定的调度器上执行。
+
+* Javadoc: [skipLast(int)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipLast(int))
+
+![skipLast](images/operators/skipLast.t.png)
+
+还有一个`skipLast`变体接受一个市场而不是数量参数。它会丢弃在原始Observable的生命周期内最后一段时间内发送的数据。时长和时间单位通过参数指定。
+
+注意：这个机制是这样是西安的：延迟原始Observable发送的任何数据项，直到自这次发送之后过了给定的时长。
+
+`skipLast `的这个变体默认在`computation`调度器上执行，但是你可以使用第三个参数指定其它的调度器。
+
+* Javadoc: [skipLast(long,TimeUnit)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipLast(long,%20java.util.concurrent.TimeUnit))
+* Javadoc: [skipLast(long,TimeUnit,Scheduler)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipLast(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler))
+
+
+## Take
+
+
+
