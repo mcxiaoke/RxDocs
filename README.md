@@ -11,7 +11,9 @@
 * **创建操作**
   * [Create](docs/operators/Create.md) | [Defer](docs/operators/Defer.md) | [Empty](docs/operators/Empty.md) | [From](docs/operators/From.md) | [Interval](docs/operators/Interval.md)
   * [Just](docs/operators/Just.md) | [Range](docs/operators/Range.md) | [Repeat](docs/operators/Repeat.md) | [Start](docs/operators/Start.md) | [Timer](docs/operators/Timer.md)
-* [变换操作](docs/Transforming-Operators.md)
+* **变换操作**
+  * [Buffer](docs/operators/Buffer.md) | [FlatMap](docs/operators/FlatMap.md) | [GroupBy](docs/operators/GroupBy.md)
+  * [Map](docs/operators/Map.md) | [Scan](docs/operators/Scan.md) | [Window](docs/operators/Window.md)
 * [过滤操作](docs/Filtering-Operators.md)
 * [结合操作](docs/Combining-Operators.md)
 * [条件和布尔操作](docs/Conditional-Operators.md)
