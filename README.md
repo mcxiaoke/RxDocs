@@ -10,6 +10,8 @@
 * [Scheduler](docs/Scheduler.md)
 * [创建操作](docs/Creating-Operators.md)
 * [变换操作](docs/Transforming-Operators.md)
+* [过滤操作](docs/Filtering-Operators.md)
+* [结合操作](docs/Combining-Operators.md)
 
 ## RxJava中文文档
 
