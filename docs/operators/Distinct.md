@@ -62,13 +62,13 @@ Sequence complete.
 
 ### distinctUntilChanged
 
-![distinctUntilChanged](images/operators/distinctUntilChanged.png)
+![distinctUntilChanged](../images/operators/distinctUntilChanged.png)
 
 RxJava还是实现了一个`distinctUntilChanged`操作符。它只判定一个数据和它的直接前驱是否是不同的。
 
 ### distinctUntilChanged(Func1)
 
-![distinctUntilChanged.key](images/operators/distinctUntilChanged.key.png)
+![distinctUntilChanged.key](../images/operators/distinctUntilChanged.key.png)
 
 和`distinct(Func1)`一样，根据一个函数产生的Key判定两个相邻的数据项是不是不同的。
 

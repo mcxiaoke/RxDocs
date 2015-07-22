@@ -30,7 +30,7 @@ RxJava将这个操作符实现为`sample`和`throttleLast`。
 
 * Javadoc: [sample(Observable)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#sample(rx.Observable))
 
-![throttleFirst](images/operators/throttleFirst.png)
+![throttleFirst](../images/operators/throttleFirst.png)
 
 `throttleFirst`与`throttleLast/sample`不同，在每个采样周期内，它总是发送原始Observable的第一项数据，而不是最近的一项。
 

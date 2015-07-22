@@ -54,7 +54,7 @@ Sequence complete.
 
 * Javadoc: [scan(Func2)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#scan(rx.functions.Func2))
 
-![scanSeed](images/operators/scanSeed.png)
+![scanSeed](../images/operators/scanSeed.png)
 
 有一个`scan`操作符的变体，你可以传递一个种子值给累加器函数的第一次调用（Observable发送的第一项数据）。如果你使用这个版本，`scan`将发送种子值作为自己的第一项数据。注意：传递`null`作为种子值与不传递是不同的，`null`种子值是合法的。
 

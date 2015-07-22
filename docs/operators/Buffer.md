@@ -4,7 +4,7 @@
 
 定期收集来自一个Observable的数据放进一个数据包裹，然后发送这些数据包裹，而不是一次发送一个值。
 
-![buffer](../images/operators/Buffer.png)
+![buffer](../images/operators/buffer.png)
 
 `Buffer`操作符将一个Observable变换为另一个，原来的Observable正常发送数据，变换产生的Observable发送这些数据的缓存集合。`Buffer`操作符在很多语言特定的实现中有很多种变体，它们在如何缓存这个问题上存在区别。
 

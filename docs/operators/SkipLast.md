@@ -8,7 +8,7 @@
 
 使用`SkipLast `操作符修改原始Observable，你可以忽略Observable'发送的后N项数据，只保留前面的数据。
 
-![skipLast](images/operators/skipLast.png)
+![skipLast](../images/operators/skipLast.png)
 
 使用`SkipLast`操作符，你可以忽略原始Observable发送的后N项数据，只保留之前的数据。注意：这个机制是这样实现的：延迟原始Observable发送的任何数据项，直到它发送了N项数据。
 

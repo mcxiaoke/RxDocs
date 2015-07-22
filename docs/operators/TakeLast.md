@@ -30,7 +30,7 @@
 
 ### takeLastBuffer
 
-![takeLast](images/operators/takeLastBuffer.png)
+![takeLast](../images/operators/takeLastBuffer.png)
 
 还有一个操作符叫`takeLastBuffer`，它和`takeLast`类似，，唯一的不同是它把所有的数据项收集到一个`List`再发送，而不是依次发送一个。
 
