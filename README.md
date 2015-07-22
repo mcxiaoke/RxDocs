@@ -18,7 +18,9 @@
   * [Debounce](docs/operators/Debounce.md) | [Distinct](docs/operators/Distinct.md) | [ElementAt](docs/operators/ElementAt.md) | [Filter](docs/operators/Filter.md) 
   * [First](docs/operators/First.md) | [IgnoreElements](docs/operators/IgnoreElements.md) | [Last](docs/operators/Last.md) | [Sample](docs/operators/Sample.md) 
   * [Skip](docs/operators/Skip.md) | [SkipLast](docs/operators/SkipLast.md) | [Take](docs/operators/Take.md) | [TakeLast](docs/operators/TakeLast.md) 
-* [结合操作](docs/Combining-Operators.md)
+* **结合操作**
+  * [And/Then/When](docs/operators/And.md) | [CombineLatest](docs/operators/CombineLatest.md) | [Join](docs/operators/Join.md)
+  * [Merge](docs/operators/Merge.md) | [StartWith](docs/operators/StartWith.md) | [Switch](docs/operators/Switch.md) | [Zip](docs/operators/Zip.md) 
 * [条件和布尔操作](docs/Conditional-Operators.md)
 * [算术和聚合操作](docs/Mathematical-Operators.md)
 
