@@ -482,7 +482,7 @@ RxJava中这个操作符叫`skip`。`skip`的这个变体默认不在任何特�
 
 ![skipLast](images/operators/skipLast.c.png)
 
-使用`Skip`操作符修改原始Observable，你可以忽略Observable'发送的后N项数据，只保留前面的数据。
+使用`SkipLast `操作符修改原始Observable，你可以忽略Observable'发送的后N项数据，只保留前面的数据。
 
 ![skipLast](images/operators/skipLast.png)
 
@@ -494,9 +494,9 @@ RxJava中这个操作符叫`skip`。`skip`的这个变体默认不在任何特�
 
 ![skipLast](images/operators/skipLast.t.png)
 
-还有一个`skipLast`变体接受一个市场而不是数量参数。它会丢弃在原始Observable的生命周期内最后一段时间内发送的数据。时长和时间单位通过参数指定。
+还有一个`skipLast`变体接受一个时长而不是数量参数。它会丢弃在原始Observable的生命周期内最后一段时间内发送的数据。时长和时间单位通过参数指定。
 
-注意：这个机制是这样是西安的：延迟原始Observable发送的任何数据项，直到自这次发送之后过了给定的时长。
+注意：这个机制是这样实现的：延迟原始Observable发送的任何数据项，直到自这次发送之后过了给定的时长。
 
 `skipLast `的这个变体默认在`computation`调度器上执行，但是你可以使用第三个参数指定其它的调度器。
 
@@ -506,5 +506,104 @@ RxJava中这个操作符叫`skip`。`skip`的这个变体默认不在任何特�
 
 ## Take
 
+只发送前面的N项数据
+
+![take](images/operators/take.c.png)
+
+使用`Take`操作符让你可以修改Observable的行为，只返回前面的N项数据，然后发送完成通知，忽略剩余的数据。
+
+![take](images/operators/take.png)
+
+RxJava将这个操作符实现为`take`函数。
+
+如果你对一个Observable使用`take(n)`（或它的同义词`limit(n)`）操作符，而那个Observable发送的数据少于N项，那么`take`操作生成的Observable不会抛异常或发送`onError`通知，在完成前它只会发送相同的少量数据。
+
+示例代码
+
+```java
+Observable.just(1, 2, 3, 4, 5, 6, 7, 8)
+          .take(4)
+          .subscribe(new Subscriber<Integer>() {
+        @Override
+        public void onNext(Integer item) {
+            System.out.println("Next: " + item);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            System.err.println("Error: " + error.getMessage());
+        }
+
+        @Override
+        public void onCompleted() {
+            System.out.println("Sequence complete.");
+        }
+    });
+```
+
+输出
+
+```
+Next: 1
+Next: 2
+Next: 3
+Next: 4
+Sequence complete.
+```
+
+`take(int)`默认不任何特定的调度器上执行。
+
+* Javadoc: [take(int)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(int))
+
+![take](images/operators/take.t.png)
+
+`take`的这个变体接受一个时长而不是数量参数。它会丢发送Observable开始的那段时间发送的数据，时长和时间单位通过参数指定。
+
+`take`的这个变体默认在`computation`调度器上执行，但是你可以使用第三个参数指定其它的调度器。
+
+* Javadoc: [take(long,TimeUnit)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(long,%20java.util.concurrent.TimeUnit))
+* Javadoc: [take(long,TimeUnit,Scheduler)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler))
+
+
+
+## TakeLast
+
+发送Observable发送的最后N项数据
+
+![takeLast](images/operators/takeLast.c.png)
+
+使用`TakeLast `操作符修改原始Observable，你可以只发送Observable'发送的后N项数据，忽略前面的数据。
+
+### taskLast.n
+
+![takeLast](images/operators/takeLast.n.png)
+
+使用`takeLast `操作符，你可以只发送原始Observable发送的后N项数据，忽略之前的数据。注意：这会延迟原始Observable发送的任何数据项，直到它全部完成。
+
+`takeLast `的这个变体默认不在任何特定的调度器上执行。
+
+* Javadoc: [takeLast(int)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int))
+
+### takeLast.t
+
+![takeLast](images/operators/takeLast.t.png)
+
+还有一个`takeLast `变体接受一个时长而不是数量参数。它会发送在原始Observable的生命周期内最后一段时间内发送的数据。时长和时间单位通过参数指定。
+
+注意：这会延迟原始Observable发送的任何数据项，直到它全部完成。
+
+`skipLast `的这个变体默认在`computation`调度器上执行，但是你可以使用第三个参数指定其它的调度器。
+
+### takeLastBuffer
+
+![takeLast](images/operators/takeLastBuffer.png)
+
+还有一个操作符叫`takeLastBuffer`，它和`takeLast`类似，，唯一的不同是它把所有的数据项收集到一个`List`再发送，而不是依次发送一个。
+
+* Javadoc: [takeLastBuffer(int)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int))
+* Javadoc: [takeLastBuffer(long,TimeUnit)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long,%20java.util.concurrent.TimeUnit))
+* Javadoc: [takeLastBuffer(long,TimeUnit,Scheduler)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler))
+* Javadoc: [takeLastBuffer(int,long,TimeUnit)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int,%20long,%20java.util.concurrent.TimeUnit))
+* Javadoc: [takeLastBuffer(int,long,TimeUnit,Scheduler)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int,%20long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler))
 
 
