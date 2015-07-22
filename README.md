@@ -14,7 +14,10 @@
 * **变换操作**
   * [Buffer](docs/operators/Buffer.md) | [FlatMap](docs/operators/FlatMap.md) | [GroupBy](docs/operators/GroupBy.md)
   * [Map](docs/operators/Map.md) | [Scan](docs/operators/Scan.md) | [Window](docs/operators/Window.md)
-* [过滤操作](docs/Filtering-Operators.md)
+* **过滤操作**
+  * [Debounce](docs/operators/Debounce.md) | [Distinct](docs/operators/Distinct.md) | [ElementAt](docs/operators/ElementAt.md) | [Filter](docs/operators/Filter.md) 
+  * [First](docs/operators/First.md) | [IgnoreElements](docs/operators/IgnoreElements.md) | [Last](docs/operators/Last.md) | [Sample](docs/operators/Sample.md) 
+  * [Skip](docs/operators/Skip.md) | [SkipLast](docs/operators/SkipLast.md) | [Take](docs/operators/Take.md) | [TakeLast](docs/operators/TakeLast.md) 
 * [结合操作](docs/Combining-Operators.md)
 * [条件和布尔操作](docs/Conditional-Operators.md)
 * [算术和聚合操作](docs/Mathematical-Operators.md)
