@@ -12,6 +12,8 @@
 * [变换操作](docs/Transforming-Operators.md)
 * [过滤操作](docs/Filtering-Operators.md)
 * [结合操作](docs/Combining-Operators.md)
+* [条件和布尔操作](docs/Conditional-Operators.md)
+* [算术和聚合操作](docs/Mathematical-Operators.md)
 
 ## RxJava中文文档
 
