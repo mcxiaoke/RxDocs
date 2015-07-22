@@ -4,10 +4,10 @@
 
 * [什么是Rx](docs/Intro.md)
 * [Observables](docs/Observables.md)
-* [Operators](docs/Operators.md)
 * [Single](docs/Single.md)
 * [Subject](docs/Subject.md)
 * [Scheduler](docs/Scheduler.md)
+* [操作符的分类列表](docs/Operators.md)
 * **创建操作**
   * [Create](docs/operators/Create.md) | [Defer](docs/operators/Defer.md) | [Empty](docs/operators/Empty.md) | [From](docs/operators/From.md) | [Interval](docs/operators/Interval.md)
   * [Just](docs/operators/Just.md) | [Range](docs/operators/Range.md) | [Repeat](docs/operators/Repeat.md) | [Start](docs/operators/Start.md) | [Timer](docs/operators/Timer.md)
@@ -21,9 +21,14 @@
 * **结合操作**
   * [And/Then/When](docs/operators/And.md) | [CombineLatest](docs/operators/CombineLatest.md) | [Join](docs/operators/Join.md)
   * [Merge](docs/operators/Merge.md) | [StartWith](docs/operators/StartWith.md) | [Switch](docs/operators/Switch.md) | [Zip](docs/operators/Zip.md) 
-* [条件和布尔操作](docs/Conditional-Operators.md)
-* [算术和聚合操作](docs/Mathematical-Operators.md)
-
+* **条件和布尔操作**
+  * [All](docs/operators/Conditional.md) | [Amb](docs/operators/Conditional.md) | [Contains](docs/operators/Conditional.md)
+  * [DefaultIfEmpty](docs/operators/Conditional.md) | [SequenceEqual](docs/operators/Conditional.md) | [SkipUntil](docs/operators/Conditional.md)
+  * [SkipWhile](docs/operators/Conditional.md) | [TakeUntil](docs/operators/Conditional.md) | [TakeWhile](docs/operators/Conditional.md)
+* **算术和聚合操作**
+  * [Average](docs/operators/Mathematical.md) | [Concat](docs/operators/Mathematical.md) | [Count](docs/operators/Mathematical.md)
+  * [Max](docs/operators/Mathematical.md) | [Min](docs/operators/Mathematical.md) | [Reduce](docs/operators/Mathematical.md) | [Sum](docs/operators/Mathematical.md)
+  
 ## RxJava中文文档
 
 *（以下文档是对 [RxJava Wiki](https://github.com/ReactiveX/rxjava/wiki) 的翻译）*
