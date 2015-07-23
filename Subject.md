@@ -45,4 +45,11 @@ ReplaySubject会发送所有来自原始Observable的数据给观察者，无论
 
 假设你有一个Subject，你想把它传递给其它的代理或者暴露它的Subscriber接口，你可以调用它的asObservable方法，这个方法返回一个Observable。具体使用方法可以参考Javadoc文档。
 
+### 串行化
+如果你把 `Subject` 当作一个 `Subscriber ` 使用，注意不要从多个线程中调用它的onNext方法（包括其它的on系列方法），这可能导致同时（非顺序）调用，这会违反Observable协议，给Subject的结果增加了不确定性。
 
+要避免此类问题，你可以将 `Subject` 转换为一个 [`SerializedSubject`](http://reactivex.io/RxJava/javadoc/rx/subjects/SerializedSubject.html) ，类似于这样：
+
+```java
+mySafeSubject = new SerializedSubject( myUnsafeSubject );
+```
