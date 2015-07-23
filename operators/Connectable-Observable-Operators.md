@@ -1,13 +1,13 @@
 这一节解释[`ConnectableObservable`](http://reactivex.io/RxJava/javadoc/rx/observables/ConnectableObservable.html) 和它的子类以及它们的操作符：
 
-* [**`ConnectableObservable.connect( )`**](http://reactivex.io/documentation/operators/connect.html) — 指示一个可连接的Observable开始发送数据
-* [**`Observable.publish( )`**](http://reactivex.io/documentation/operators/publish.html) — 将一个Observable转换为一个可连接的Observable
-* [**`Observable.replay( )`**](http://reactivex.io/documentation/operators/replay.html) — 确保所有的订阅者看到相同的数据序列，即使它们在Observable开始发送数据之后才订阅
-* [**`ConnectableObservable.refCount( )`**](http://reactivex.io/documentation/operators/refcount.html) — 让一个可连接的Observable表现得像一个普通的Observable
+* [**`ConnectableObservable.connect( )`**](Connect.md) — 指示一个可连接的Observable开始发送数据
+* [**`Observable.publish( )`**](Publish.md) — 将一个Observable转换为一个可连接的Observable
+* [**`Observable.replay( )`**](Replay.md) — 确保所有的订阅者看到相同的数据序列，即使它们在Observable开始发送数据之后才订阅
+* [**`ConnectableObservable.refCount( )`**](Refcount.md) — 让一个可连接的Observable表现得像一个普通的Observable
 
 一个可连接的Observable与普通的Observable差不多，除了这一点：可连接的Observable在被订阅时并不开始发送数据，只有在它的`connect()`被调用时才开始。用这种方法，你可以等所有的潜在订阅者都订阅了这个Observable之后才开始发送数据。
 
-![publishConnect](images/rx-operators/publishConnect.png)
+![publishConnect](../images/rx-operators/publishConnect.png)
 
 The following example code shows two Subscribers subscribing to the same Observable. In the first case, they subscribe to an ordinary Observable; in the second case, they subscribe to a Connectable Observable that only connects after both Subscribers subscribe. Note the difference in the output:
 下面的示例代码展示了两个订阅者订阅同一个Observable的情况。第一种情形，它们订阅一个普通的Observable；第二种情形，它们订阅一个可连接的Observable，并且在两个都订阅后再连接。注意输出的不同：

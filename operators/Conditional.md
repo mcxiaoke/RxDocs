@@ -156,5 +156,3 @@ RxJava中的`takeWhile`操作符返回一个镜像原始Observable行为的Obser
 `takeWhile`默认不在任何特定的调度器上执行。
 
 * Javadoc: [takeWhile(Func1)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeWhile(rx.functions.Func1))
-
-
