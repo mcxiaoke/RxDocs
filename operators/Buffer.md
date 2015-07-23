@@ -76,7 +76,7 @@
 ### buffer(timespan, timeshift, unit[, scheduler])
 
 ![buffer7](../images/operators/buffer7.png)
- 
+
 `buffer(timespan, timeshift, unit)`在每一个`timeshift`时期内都创建一个新的`List`,然后用原来Observable发送的每一项数据填充这个列表（在把这个`List`当做自己的数据发送前，从创建时开始，直到过了`timespan`这么长的时间）。如果`timespan`长于`timeshift`，它发送的数据包将会重叠，因此可能包含重复的数据项。
 
 还有另一个版本的`buffer`接受一个`Scheduler`参数，默认情况下会使用`computation`调度器。
@@ -98,7 +98,7 @@ Buffer操作符可以将大量的数据序列缩减为较少的数据缓存序�
 Observable<List<Integer>> burstyBuffered = bursty.buffer(500, TimeUnit.MILLISECONDS);
 ```
 
-![bp.buffer1](images/operators/bp.buffer1.png)
+![bp.buffer1](../images/operators/bp.buffer1.png)
 
 或者，如果你想更进一步，可以在爆发期将数据收集到缓存，然后在爆发期结束时发送这些数据，使用 [`Debounce`](Filtering-Operators#Debounce) 操作符给`buffer`操作符发送一个缓存关闭指示器(`buffer closing indicator`)可以做到这一点。
 
@@ -118,4 +118,4 @@ Observable<List<Integer>> burstyBuffered = burstyMulticast.buffer(burstyDebounce
 
 ### 参见
 
-* [DebouncedBuffer With RxJava by Gopal Kaushik](http://nerds.weddingpartyapp.com/tech/2015/01/05/debouncedbuffer-used-in-rxbus-example/) 
+* [DebouncedBuffer With RxJava by Gopal Kaushik](http://nerds.weddingpartyapp.com/tech/2015/01/05/debouncedbuffer-used-in-rxbus-example/)

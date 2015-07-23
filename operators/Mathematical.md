@@ -25,7 +25,7 @@
 
 RxJava中，`min`属于`rxjava-math`模块。
 
-![min](images/operators/min.png)
+![min](../images/operators/min.png)
 
 `min`接受一个可选参数，用于比较两项数据的大小，如果最小值的数据超过一项，`min`会发射原始Observable最近发送的那一项。
 
@@ -159,5 +159,3 @@ RxJava中的实现叫`concat`。
 `collect`默认不在任何特定的调度器上执行。
 
 * Javadoc: [collect(Func0,Action2)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect(rx.functions.Func0,%20rx.functions.Action2))
-
-

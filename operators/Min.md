@@ -8,7 +8,7 @@
 
 RxJava中，`min`属于`rxjava-math`模块。
 
-![min](images/operators/min.png)
+![min](../images/operators/min.png)
 
 `min`接受一个可选参数，用于比较两项数据的大小，如果最小值的数据超过一项，`min`会发射原始Observable最近发送的那一项。
 

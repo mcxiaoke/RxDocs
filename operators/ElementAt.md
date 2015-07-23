@@ -6,7 +6,7 @@
 
 `ElementAt`操作符获取原始Observable发送的数据序列指定索引位置的数据项，然后当做自己的唯一数据发送。
 
-![elementAt](images/operators/elementAt.png)
+![elementAt](../images/operators/elementAt.png)
 
 RxJava将这个操作符实现为`elementAt`，给它传递一个基于0的索引值，它会发送原始Observable数据序列对应索引位置的值，如果你传递给`elementAt`的值为5，那么它会发送第六项的数据。
 
