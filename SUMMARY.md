@@ -1,5 +1,5 @@
-* [ReactiveX编程模式](Intro.md)
-* [Observables介绍](Observables.md)
+* [ReactiveX](Intro.md)
+* [Observables](Observables.md)
 * [Single](Single.md)
 * [Subject](Subject.md)
 * [Scheduler](Scheduler.md)
