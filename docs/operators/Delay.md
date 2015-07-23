@@ -29,7 +29,7 @@ RxJava的实现是 `delay`和`delaySubscription`。
 
 ![delay](../images/operators/delay.oo.png)
 
-The variant of delay that uses a per-item Observable to set the `delay` has a variant that allows you to pass in a function that returns an Observable that acts as a delay timer for the subscription to the source Observable (in the absence of this, `delay` subscribes to the source Observable as soon as an observer subscribes to the Observable returned by `delay`).
+这个版本的`delay`对每一项数据使用一个Observable作为原始Observable的延时定时器。
 
 这种`delay`默认不在任何特定的调度器上执行。
 
@@ -37,7 +37,7 @@ The variant of delay that uses a per-item Observable to set the `delay` has a va
 
 ![delay](../images/operators/delaySubscription.png)
 
-There is also an operator with which you can delay the subscription to the source Observable: `delaySubscription`. It accepts parameters that define the amount of time to delay (a quantity of time, and a TimeUnit that this quantity is denominated in).
+还有一个操作符`delaySubscription`让你你可以延迟订阅原始Observable。它结合搜一个定义延时的参数。
 
 `delaySubscription`默认在`computation`调度器上执行，你可以通过参数指定使用其它的调度器。
 
@@ -46,7 +46,7 @@ There is also an operator with which you can delay the subscription to the sourc
 
 ![delay](../images/operators/delaySubscription.o.png)
 
-And there is a variant of `delaySubscription` that uses an Observable (returned by a function you supply) rather than a fixed duration in order to set the subscription delay.
+还有一个版本的`delaySubscription`使用一个Obseable而不是一个固定的时长来设置订阅延时。 
 
 这种`delaySubscription `默认不在任何特定的调度器上执行。
 

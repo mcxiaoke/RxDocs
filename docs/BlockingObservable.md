@@ -90,7 +90,13 @@
 
 * Javadoc: [mostRecent(T)](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#mostRecent(T))
 
+### forEach
 
+`BlockingObservable`类中也有一个类似的叫作`forEach`的方法。要使用这个方法，你首先需要使用`BlockingObservable.from`方法或`Observable.toBlocking`操作符将原始Observable转换为一个`BlockingObservable`。
+
+`BlockingObservable.forEach`接受单个函数作为参数，这个函数的作用类似于普通Observable订阅中的`onNext`函数。`forEach`自身会阻塞知道`BlockingObservable`完成，当它不阻塞时就是完成了，不是通过调用一个回调方法表示它完成了。如果遇到了错误它将抛出一个`RuntimeException`（而不是调用一个类似于`onError`的回调方法）。
+
+* Javadoc: [BlockingObservable.forEach(Action1)](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#forEach(rx.functions.Action1))
 
 
 
