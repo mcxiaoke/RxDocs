@@ -6,7 +6,7 @@
 
 ## 阅读地址
 
-**<http://mcxiaoke.gitbooks.io/rxdocs/content/>**
+* [ReactiveX文档中文翻译](http://mcxiaoke.gitbooks.io/rxdocs/content/)
 
 ## 版本历史
 
