@@ -3,11 +3,15 @@
 ## 说明
 
 * 大部分是翻译自 [ReactiveX.io](http://reactivex.io/) 和 [RxJava Wiki](https://github.com/ReactiveX/rxjava/wiki)，修正了原文的一些错误，补充了详细的说明和示例
-* 文档使用GitBook发布，阅读地址是： **<http://mcxiaoke.gitbooks.io/rxdocs/content/>**
+
+## 阅读地址
+
+**<http://mcxiaoke.gitbooks.io/rxdocs/content/>**
 
 ## 版本历史
 
-* 0.5.0 -2015.07.23 完成绝大部分文档的翻译，使用GitBook发布初始版本
+* 0.6.0 - 2015.07.24 完成全部文档的初译，调整了目录的部分链接和文本
+* 0.5.0 - 2015.07.22 完成绝大部分文档的翻译，使用GitBook发布初始版本
 
 ## 目录
 
