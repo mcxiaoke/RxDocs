@@ -1,12 +1,12 @@
-# Hello World!
+# 第一个例子
 
-The following sample implementations of “Hello World” in Java, Groovy, Clojure, and Scala create an Observable from a list of Strings, and then subscribe to this Observable with a method that prints “Hello _String_!” for each string emitted by the Observable.
+你可以在这里找到JVM平台几种语言的例子 [language adaptor](https://github.com/ReactiveX/):
 
-You can find additional code examples in the `/src/examples` folders of each [language adaptor](https://github.com/ReactiveX/):
+* [RxGroovy 示例](https://github.com/ReactiveX/RxGroovy/tree/1.x/src/examples/groovy/rx/lang/groovy/examples)
+* [RxClojure 示例](https://github.com/ReactiveX/RxClojure/tree/0.x/src/examples/clojure/rx/lang/clojure/examples)
+* [RxScala 示例](https://github.com/ReactiveX/RxScala/tree/0.x/examples/src/main/scala)
 
-* [RxGroovy examples](https://github.com/ReactiveX/RxGroovy/tree/1.x/src/examples/groovy/rx/lang/groovy/examples)
-* [RxClojure examples](https://github.com/ReactiveX/RxClojure/tree/0.x/src/examples/clojure/rx/lang/clojure/examples)
-* [RxScala examples](https://github.com/ReactiveX/RxScala/tree/0.x/examples/src/main/scala)
+下面的示例从一个字符串列表创建一个Observable，然后使用一个方法订阅这个Observable。
 
 ### Java
 
@@ -75,19 +75,19 @@ Hello Ben!
 Hello George!
 ```
 
-# How to Design Using RxJava
+# 如何使用RxJava
 
-To use RxJava you create Observables (which emit data items), transform those Observables in various ways to get the precise data items that interest you (by using Observable operators), and then observe and react to these sequences of interesting items (by implementing Observers or Subscribers and then subscribing them to the resulting transformed Observables).
+要使用RxJava，首先你需要创建Observable（它们发射数据序列），使用Observable操作符变换那些Observables，获取严格符合你要求的数据，然后观察并处理对这些数据序列（通过实现观察者或订阅者，然后订阅变换后的Observable）。
 
-## Creating Observables
+## 创建Observables
 
-To create an Observable, you can either implement the Observable's behavior manually by passing a function to [`create( )`](http://reactivex.io/documentation/operators/create.html) that exhibits Observable behavior, or you can convert an existing data structure into an Observable by using [some of the Observable operators that are designed for this purpose](Creating-Observables).
+要创建Observable，你可以手动实现Observable的行为，也可以传递一个函数给[`create( )`](../operators/Create.md)，还可以使用这些 [创建操作符](../operators/Creating-Observables.md) 将一个已有的数据结构转换为Observable。
 
-### Creating an Observable from an Existing Data Structure
+### 已有的数据结构创建Observable
 
-You use the Observable [`just( )`](http://reactivex.io/documentation/operators/just.html) and [`from( )`](http://reactivex.io/documentation/operators/from.html) methods to convert objects, lists, or arrays of objects into Observables that emit those objects:
+你可以使用[`just( )`](../operators/Just.md) 和[`from( )`](../operators/From.md) 方法将对象，列表，对象属猪转换为发射那些对象的Observable：
 
-```groovy
+```java
 Observable<String> o = Observable.from("a", "b", "c");
 
 def list = [5, 6, 7, 8]
@@ -96,18 +96,17 @@ Observable<Integer> o = Observable.from(list);
 Observable<String> o = Observable.just("one object");
 ```
 
-These converted Observables will synchronously invoke the [`onNext( )`](Observable#onnext-oncompleted-and-onerror) method of any subscriber that subscribes to them, for each item to be emitted by the Observable, and will then invoke the subscriber’s [`onCompleted( )`](Observable#onnext-oncompleted-and-onerror) method.
+转换后的Observable每发射一项数据，会同步地调用任何订阅者的[`onNext()`](../Observables.md#回调方法)方法，最后会调用订阅者的[`onCompleted()`](../Observables.md#回调方法)方法。
 
-### Creating an Observable via the `create( )` method
+### 使用`create( )`创建一个Observable
 
-You can implement asynchronous i/o, computational operations, or even “infinite” streams of data by designing your own Observable and implementing it with the [`create( )`](http://reactivex.io/documentation/operators/create.html) method.
+使用 [`create( )`](../operators/Create.md) 方法，你可以创建你自己的Observable，可以实现异步I/O，计算操作，甚至是无限的数据流。
 
-#### Synchronous Observable Example
+#### 同步的Observable示例
 
 ```groovy
 /**
- * This example shows a custom Observable that blocks 
- * when subscribed to (does not spawn an extra thread).
+ * 这个例子展示了一个自定义的Observable，当有订阅时他会阻塞当前线程。
  */
 def customObservableBlocking() {
     return Observable.create { aSubscriber ->
@@ -127,11 +126,12 @@ def customObservableBlocking() {
 customObservableBlocking().subscribe { println(it) }
 ```
 
-#### Asynchronous Observable Example
+#### 异步的Observable示例
 
 The following example uses Groovy to create an Observable that emits 75 strings.
+下面的例子使用`Groovy`创建了一个发射75个字符串的Observable。
 
-It is written verbosely, with static typing and implementation of the `Func1` anonymous inner class, to make the example more clear:
+为了让它更清楚，例子很详细，使用静态类型和匿名内部类`Func1`：
 
 ```groovy
 /**
@@ -159,7 +159,7 @@ def customObservableNonBlocking() {
 customObservableNonBlocking().subscribe { println(it) }
 ```
 
-Here is the same code in Clojure that uses a Future (instead of raw thread) and is implemented more consisely:
+这是一个用`Clojure`写的例子，使用Future（而不是直接用线程），实现很简洁：
 
 ```clojure
 (defn customObservableNonBlocking []
@@ -182,7 +182,7 @@ Here is the same code in Clojure that uses a Future (instead of raw thread) and 
 (.subscribe (customObservableNonBlocking) #(println %))
 ```
 
-Here is an example that fetches articles from Wikipedia and invokes onNext with each one:
+这个例子从维基百科网站抓取文章，每抓取一篇会调用一次`onNext`：
 
 ```clojure
 (defn fetchWikipediaArticleAsynchronously [wikipediaArticleNames]
@@ -204,7 +204,7 @@ Here is an example that fetches articles from Wikipedia and invokes onNext with 
   (.subscribe #(println "--- Article ---\n" (subs (:body %) 0 125) "...")))
 ```
 
-Back to Groovy, the same Wikipedia functionality but using closures instead of anonymous inner classes:
+回到`Groovy`，同样是从维基百科抓取文章，这儿使用闭包代替匿名内部类：
 
 ```groovy
 /*
@@ -231,7 +231,7 @@ fetchWikipediaArticleAsynchronously("Tiger", "Elephant")
     .subscribe { println "--- Article ---\n${it.substring(0, 125)}" }
 ```
 
-Results:
+结果：
 
 ```text
 --- Article ---
@@ -250,11 +250,17 @@ Note that all of the above examples ignore error handling, for brevity. See belo
 
 More information can be found on the [[Observable]] and [[Creating Observables|Creating-Observables]] pages.
 
-## Transforming Observables with Operators
+注意：为了简洁，上面的所有例子都忽略了错误处理，查看下面包含错误处理的例子。
 
-RxJava allows you to chain _operators_ together to transform and compose Observables.
+更多的信息可以在这里找到：[`Observable`](Observables.md) 和 [`Creating Observables`](../operators/Creating-Observables.md)。
+
+## 使用变换操作
+
+RxJava让你可以链式使用`操作符`用来转换和组合多个Observables。
 
 The following example, in Groovy, uses a previously defined, asynchronous Observable that emits 75 items, skips over the first 10 of these ([`skip(10)`](http://reactivex.io/documentation/operators/skip.html)), then takes the next 5 ([`take(5)`](http://reactivex.io/documentation/operators/take.html)), and transforms them ([`map(...)`](http://reactivex.io/documentation/operators/map.html)) before subscribing and printing the items:
+
+下面是一个`Groovy`的例子，使用之前的定义，它会异步发射75个字符串，跳过最开始的10个（([`skip(10)`](../operators/Skip.md)），然后获取接下来的5个（[`take(5)`](../operators/Taks.md)），在订阅之前使用[`map()`](../operators/Map.md)转换它们，然后打印结果字符串。
 
 ```groovy
 /**
@@ -268,7 +274,7 @@ def simpleComposition() {
 }
 ```
 
-This results in:
+输出结果
 
 ```text
 onNext => value_10_xform
@@ -278,11 +284,11 @@ onNext => value_13_xform
 onNext => value_14_xform
 ```
 
-Here is a marble diagram that illustrates this transformation:
+这里有一个图例解释了转换过程：
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/Composition.1.png" width="640" height="536" />
+<img src="../images/operators/Composition.1.png" width="640" height="536" />
 
-This next example, in Clojure, consumes three asynchronous Observables, including a dependency from one to another, and emits a single response item by combining the items emitted by each of the three Observables with the [`zip`](http://reactivex.io/documentation/operators/zip.html) operator and then transforming the result with [`map`](http://reactivex.io/documentation/operators/map.html):
+这一个例子使用`Clojure`，使用了三个异步的Observable，其中一个依赖另一个，使用[`zip`](../operators/Zip.md)组合这三个发射的数据项为一个单个数据项，最后使用[`map()`](../operators/Map.md)转换这个结果：
 
 ```clojure
 (defn getVideoForUser [userId videoId]
@@ -317,7 +323,7 @@ This next example, in Clojure, consumes three asynchronous Observables, includin
                   })))))
 ```
 
-The response looks like this:
+输出是这样的：
 
 ```clojure
 {:video-id 78965, 
@@ -326,11 +332,13 @@ The response looks like this:
  :user-id 12345, :language es-us, :bookmark 0}
 ```
 
-And here is a marble diagram that illustrates how that code produces that response:
+这里有一个图例解释了这个过程：
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/Composition.2.png" width="640" height="742" />
+<img src="../images/operators/Composition.2.png" width="640" height="742" />
 
 The following example, in Groovy, comes from [Ben Christensen’s QCon presentation on the evolution of the Netflix API](https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013). It combines two Observables with the [`merge`](http://reactivex.io/documentation/operators/merge.html) operator, then uses the [`reduce`](http://reactivex.io/documentation/operators/reduce.html) operator to construct a single item out of the resulting sequence, then transforms that item with [`map`](http://reactivex.io/documentation/operators/map.html) before emitting it:
+
+下面的例子使用`Groovy`，来自这里 [Ben Christensen’s QCon presentation on the evolution of the Netflix API](https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013)，它使用[`merge`](../operators/Merge.md)操作结合两个Observables，使用[`reduce`](../operators/Reduce.md)操作符从结果序列构建一个单独的结果数据项，然后在发射之前，使用[`map()`](../operators/Map.md)变换那个结果。
 
 ```groovy
 public Observable getVideoSummary(APIVideo video) {
@@ -343,13 +351,13 @@ public Observable getVideoSummary(APIVideo video) {
 }
 ```
 
-And here is a marble diagram that illustrates how that code uses the [`reduce`](http://reactivex.io/documentation/operators/reduce.html) operator to bring the results from multiple Observables together in one structure:
+这里也有一个图例解释[`reduce`](../operators/Reduce.md)从多个Observable的结果构建一个单一结构的过程：
 
-<img src="/Netflix/RxJava/wiki/images/rx-operators/Composition.3.png" width="640" height="640" />
+<img src="../images/operators/Composition.3.png" width="640" height="640" />
 
-## Error Handling
+## 错误处理
 
-Here is a version of the Wikipedia example from above revised to include error handling:
+这里是另一个版本的维基百科的例子，包含错误处理代码：
 
 ```groovy
 /*
@@ -379,7 +387,7 @@ def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArti
 }
 ```
 
-Notice how it now invokes [`onError(Throwable t)`](Observable#onnext-oncompleted-and-onerror) if an error occurs and note that the following code passes [`subscribe()`](http://reactivex.io/documentation/operators/subscribe.html) a second method that handles `onError`:
+下面的例子使用`Groovy`，注意错误发生时现在是如何调用[`onError(Throwable t)`](Observables.md#回调函数)的，下面的代码传递给[`subscribe()`](../operators/Subscribe.md)第二个方法用户处理`onError`通知：
 
 ```groovy
 fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle", "Elephant")
@@ -388,9 +396,10 @@ fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle"
         { println "--- Error ---\n" + it.getMessage() })
 ```
 
-See the [Error-Handling-Operators](Error-Handling-Operators) page for more information on specialized error handling techniques in RxJava, including methods like [`onErrorResumeNext()`](http://reactivex.io/documentation/operators/catch.html) and [`onErrorReturn()`](http://reactivex.io/documentation/operators/catch.html) that allow Observables to continue with fallbacks in the event that they encounter errors.
 
-Here is an example of how you can use such a method to pass along custom information about any exceptions you encounter. Imagine you have an Observable or cascade of Observables — `myObservable` — and you want to intercept any exceptions that would normally pass through to an Subscriber’s `onError` method, replacing these with a customized Throwable of your own design. You could do this by modifying `myObservable` with the [`onErrorResumeNext()`](http://reactivex.io/documentation/operators/catch.html) method, and passing into that method an Observable that calls `onError` with your customized Throwable (a utility method called [`error()`](http://reactivex.io/documentation/operators/empty-never-throw.html) will generate such an Observable for you):
+查看 [`错误处理操作符`](../operators/Error-Handling-Operators.md) 这一夜了解更多RxJava中的错误处理技术，包括使用 [`onErrorResumeNext()`和`onErrorReturn()`](../operators/Catch.md)等方法，它们让你可以从错误中恢复。
+
+这里是一个`Groovy`的例子：
 
 ```groovy
 myModifiedObservable = myObservable.onErrorResumeNext({ t ->
