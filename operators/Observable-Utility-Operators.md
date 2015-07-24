@@ -20,3 +20,4 @@
 * [**`using( )`**](Using.md) — 创建一个只在Observable生命周期存在的资源
 * [**`single( )`**](First.md) — 强制返回单个数据，否则抛出异常
 * [**`singleOrDefault( )`**](First.md) — 如果Observable完成时返回了单个数据，就返回它，否则返回默认数据
+* [**`toFuture( )`**, **`toIterable( )`**, **`toList( )`**](To.md) — 将Observable转换为其它对象或数据结构
