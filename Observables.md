@@ -3,7 +3,7 @@ Observable
 
 ## 简要介绍
 
-在ReactiveX中，一个观察者(Observer)订阅一个可观察对象(Observable)。然后观察者针对Observable发出的数据或数据序列作出响应。。这种模式简化了并发操作，因为它不需要在等待Observable发射数据时阻塞，而是以观察者的形式创建了一个处于待命状态的哨兵，哨兵适当地响应未来某个时间Observable要做的事。
+在ReactiveX中，一个观察者(Observer)订阅一个可观察对象(Observable)。然后观察者针对Observable发射的数据或数据序列作出响应。。这种模式简化了并发操作，因为它不需要在等待Observable发射数据时阻塞，而是以观察者的形式创建了一个处于待命状态的哨兵，哨兵适当地响应未来某个时间Observable要做的事。
 
 这篇文章会解释什么是响应式编程模式(reactive pattern)，以及什么是可观察对象(Observables)和观察者(observers)，其它的文章展示如何用操作符组合和改变Observable的行为。
 
@@ -11,7 +11,7 @@ Observable
 
 #### 参考：
 
-* Single - 一个特殊的Observable，只发出单个数据。
+* Single - 一个特殊的Observable，只发射单个数据。
 
 
 ## 背景知识
