@@ -10,7 +10,7 @@
 
 ## 版本历史
 
-* 0.8.0 - 2015.07.27 完成全部文档的初步审校，修正了部分用词不当的地方 
+* 0.8.0 - 2015.07.27 完成全部文档的初步审校，修正了部分用词不当的地方
 * 0.7.0 - 2015.07.24 完成全部文档的初译，调整了目录的部分链接和文本
 * 0.6.0 - 2015.07.22 完成绝大部分文档的翻译，使用GitBook发布初始版本
 
@@ -23,19 +23,19 @@
 * [Scheduler](Scheduler.md) - 介绍了各种异步任务调度和默认调度器
 * [All Operators List](All-Operators-List.md) - 按字母顺序的全部操作符列表
 * [Operators Categories](Operators.md) - 按目录分类的主要操作符列表
-  * [Creating 创建操作](operators/Creating-Observables.md) - Create/Defer/From/Just/Start/Repeat/Range
-  * [Transforming 变换操作](operators/Transforming-Observables.md) - Buffer/Window/Map/FlatMap/GroupBy/Scan
-  * [Filtering 过滤操作](operators/Filtering-Observables.md) - Debounce/Distinct/Filter/Sample/Skip/Take
-  * [Combining 结合操作](operators/Combining-Observables.md) - And/StartWith/Join/Merge/Switch/Zip
-  * [Error Handling 错误处理](operators/Error-Handling-Operators.md) - Catch/Retry
-  * [Utility 辅助操作](operators/Observable-Utility-Operators.md) - Delay/Do/ObserveOn/SubscribeOn/Subscribe
-  * [Conditional 条件和布尔操作](operators/Conditional-and-Boolean-Operators.md) - All/Amb/Contains/SkipUntil/TakeUtil
-  * [Mathematical 算术和聚合操作](operators/Mathematical-and-Aggregate-Operators.md) - Average/Concat/Count/Max/Min/Sum/Reduce
-  * [Async 异步操作](operators/Async-Operators.md) - start/toAsync/startFuture/fromAction/fromCallable/runAsync
-  * [Connect 连接操作](operators/Connectable-Observable-Operators.md) - Connect/Publish/RefCount/Replay
-  * [Convert 转换操作](operators/To.md) - ToFuture/ToList/ToIterable/ToMap/toMultiMap
-  * [Blocking 阻塞操作](operators/Blocking-Observable-Operators.md) - forEach/First/Last/mostRecent/next/single/latest
-  * [String 字符串操作](operators/String-Observables.md) - byLine/decode/encode/from/join/split/stringConcat
+  * [Creating 创建操作](operators/Creating-Observables.md) - `Create`/`Defer`/`From`/`Just`/`Start`/`Repeat`/`Range`
+  * [Transforming 变换操作](operators/Transforming-Observables.md) - `Buffer`/`Window`/`Map`/`FlatMap`/`GroupBy`/`Scan`
+  * [Filtering 过滤操作](operators/Filtering-Observables.md) - `Debounce`/`Distinct`/`Filter`/`Sample`/`Skip`/`Take`
+  * [Combining 结合操作](operators/Combining-Observables.md) - `And`/S`tartWith`/`Join`/`Merge`/`Switch`/`Zip`
+  * [Error Handling 错误处理](operators/Error-Handling-Operators.md) - `Catch`/`Retry`
+  * [Utility 辅助操作](operators/Observable-Utility-Operators.md) - `Delay`/`Do`/`ObserveOn`/`SubscribeOn`/`Subscribe`
+  * [Conditional 条件和布尔操作](operators/Conditional-and-Boolean-Operators.md) - `All`/`Amb`/`Contains`/`SkipUntil`/`TakeUtil`
+  * [Mathematical 算术和聚合操作](operators/Mathematical-and-Aggregate-Operators.md) - `Average`/`Concat`/`Count`/`Max`/`Min`/`Sum`/`Reduce`
+  * [Async 异步操作](operators/Async-Operators.md) - `start`/`toAsync`/`startFuture`/`fromAction`/`fromCallable`/`runAsync`
+  * [Connect 连接操作](operators/Connectable-Observable-Operators.md) - `Connect`/`Publish`/`RefCount`/`Replay`
+  * [Convert 转换操作](operators/To.md) - `ToFuture`/`ToList`/`ToIterable`/`ToMap`/`toMultiMap`
+  * [Blocking 阻塞操作](operators/Blocking-Observable-Operators.md) - `forEach`/`First`/`Last`/`mostRecent`/`next`/`single`/`latest`
+  * [String 字符串操作](operators/String-Observables.md) - `byLine`/`decode`/`encode`/`from`/`join`/`split`/`stringConcat`
 * [RxJava文档和教程](Topics.md)
   * [RxJava入门指南](topics/Getting-Started.md)
   * [RxJava使用示例](topics/How-To-Use-RxJava.md)
