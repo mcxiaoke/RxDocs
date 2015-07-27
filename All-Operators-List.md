@@ -1,4 +1,4 @@
-### 字母顺序的操作符列表
+## 按字母顺序排列的全部操作符列表
 
 * **`aggregate( )`** — _see [**`reduce( )`**](operators/Mathematical-and-Aggregate-Operators.md#reduce)_
 * [**`all( )`**](operators/Conditional-and-Boolean-Operators.md#all) — determine whether all items emitted by an Observable meet some criteria
@@ -249,4 +249,4 @@
 * **`++`** (scala) — _see [**`concat( )`**](operators/Mathematical-and-Aggregate-Operators.md#concat)_
 * **`+:`** (scala) — _see [**`startWith( )`**](operators/Combining-Observables#startwith)_
 
-(⁇) — 表示这个操作符不是RxJava 1.0的组成部分
+(⁇) — 表示这个操作符不是RxJava 1.0.0核心模块的组成部分
