@@ -25,6 +25,6 @@ RxJava将这个操作符实现为`throttleWithTimeout`和`debounce`。
 
 ![debounce](../images/operators/debounce.f.png)
 
-`debounce`操作符的一个变体通过对原始Observable的每一项应用一个函数进行限流，这个函数返回一个Observable。如果原始Observable在这个新生成的Observable结束之前发射了另一个数据，`debounce`会抑制(suppress)这个数据项。
+`debounce`操作符的一个变体通过对原始Observable的每一项应用一个函数进行限流，这个函数返回一个Observable。如果原始Observable在这个新生成的Observable终止之前发射了另一个数据，`debounce`会抑制(suppress)这个数据项。
 
 `debounce`的这个变体默认不在任何特定的调度器上执行。

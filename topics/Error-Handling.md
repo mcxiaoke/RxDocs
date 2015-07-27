@@ -1,4 +1,4 @@
-一般来说，Observable不会抛异常。它会调用 `onError` 结束Observable序列，以此通知所有的观察者发生了一个不可恢复的错误。
+一般来说，Observable不会抛异常。它会调用 `onError` 终止Observable序列，以此通知所有的观察者发生了一个不可恢复的错误。
 但是，也存在一些异常。例如，如果 `onError` 调用失败了，Observable不会尝试再次调用 `onError` 去通知观察者，它会抛出 `RuntimeException`，`OnErrorFailedException` 或者 `OnErrorNotImplementedException`。
 
 # 从错误中恢复的技术

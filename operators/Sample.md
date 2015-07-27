@@ -24,7 +24,7 @@ RxJava将这个操作符实现为`sample`和`throttleLast`。
 
 ![sample](../images/operators/sample.o.png)
 
-`sample`的这个变体每当第二个Observable发射一个数据（或者当它结束）时就对原始Observable进行采样。第二个Observable通过参数传递给`sample`。
+`sample`的这个变体每当第二个Observable发射一个数据（或者当它终止）时就对原始Observable进行采样。第二个Observable通过参数传递给`sample`。
 
 `sample`的这个变体默认不在任何特定的调度器上执行。
 

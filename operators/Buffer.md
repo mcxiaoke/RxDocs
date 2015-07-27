@@ -100,7 +100,7 @@ Observable<List<Integer>> burstyBuffered = bursty.buffer(500, TimeUnit.MILLISECO
 
 ![bp.buffer1](../images/operators/bp.buffer1.png)
 
-或者，如果你想更进一步，可以在爆发期将数据收集到缓存，然后在爆发期结束时发射这些数据，使用 [`Debounce`](Filtering-Operators#Debounce) 操作符给`buffer`操作符发射一个缓存关闭指示器(`buffer closing indicator`)可以做到这一点。
+或者，如果你想更进一步，可以在爆发期将数据收集到缓存，然后在爆发期终止时发射这些数据，使用 [`Debounce`](Filtering-Operators#Debounce) 操作符给`buffer`操作符发射一个缓存关闭指示器(`buffer closing indicator`)可以做到这一点。
 
 代码示例：
 

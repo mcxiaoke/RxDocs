@@ -6,7 +6,7 @@
 
 ![all](../images/operators/all.c.png)
 
-传递一个谓词函数给`All`操作符，这个函数接受原始Observable发射的数据，根据计算返回一个布尔值。`All`返回一个只发射一个单个布尔值的Observable，如果原始Observable正常结束并且每一项数据都满足条件，就返回true；如果原始Observable的任何一项数据不满足条件就返回False。
+传递一个谓词函数给`All`操作符，这个函数接受原始Observable发射的数据，根据计算返回一个布尔值。`All`返回一个只发射一个单个布尔值的Observable，如果原始Observable正常终止并且每一项数据都满足条件，就返回true；如果原始Observable的任何一项数据不满足条件就返回False。
 
 ![all](../images/operators/all.png)
 

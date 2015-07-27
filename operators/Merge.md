@@ -10,7 +10,7 @@
 
 `Merge`可能会让合并的Observables发射的数据交错（有一个类似的操作符`Concat`不会让数据交错，它会按顺序一个接着一个发射多个Observables的发射物）。
 
-正如图例上展示的，任何一个原始Observable的`onError`通知会被立即传递给观察者，而且会结束合并后的Observable。
+正如图例上展示的，任何一个原始Observable的`onError`通知会被立即传递给观察者，而且会终止合并后的Observable。
 
 ![mergeDelayError](../images/operators/mergeDelayError.C.png)
 

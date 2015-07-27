@@ -10,7 +10,7 @@
 
 在某些实现中，`First`没有实现为一个返回Observable的过滤操作符，而是实现为一个在当时就发射原始Observable指定数据项的阻塞函数。在这些实现中，如果你想要的是一个过滤操作符，最好使用` Take(1)`或者`ElementAt(0)`。
 
-在一些实现中还有一个`Single`操作符。它的行为与`First`类似，但为了确保只发射单个值，它会等待原始Observable结束（否则，不是发射那个值，而是以一个错误通知结束）。你可以使用它从原始Observable获取第一项数据，而且也确保只发射一项数据。
+在一些实现中还有一个`Single`操作符。它的行为与`First`类似，但为了确保只发射单个值，它会等待原始Observable终止（否则，不是发射那个值，而是以一个错误通知终止）。你可以使用它从原始Observable获取第一项数据，而且也确保只发射一项数据。
 
 在RxJava中，这个操作符被实现为`first`，`firstOrDefault`和`takeFirst`。
 
@@ -100,7 +100,7 @@ Sequence complete.
 
 ![single](../images/operators/single.p.png)
 
-`single`的变体接受一个谓词函数，发射满足条件的单个值，如果不是正好只有一个数据项满足条件，会以错误通知结束。
+`single`的变体接受一个谓词函数，发射满足条件的单个值，如果不是正好只有一个数据项满足条件，会以错误通知终止。
 
 * Javadoc: [single(Func1)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#single(rx.functions.Func1))
 
@@ -108,7 +108,7 @@ Sequence complete.
 
 ![single](../images/operators/singleOrDefault.png)
 
-和`firstOrDefault`类似，但是如果原始Observable发射超过一个的数据，会以错误通知结束。
+和`firstOrDefault`类似，但是如果原始Observable发射超过一个的数据，会以错误通知终止。
 
 * Javadoc: [singleOrDefault(T)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#singleOrDefault(T))
 
@@ -116,7 +116,7 @@ Sequence complete.
 
 ![single](../images/operators/singleOrDefault.p.png)
 
-和`firstOrDefault(T, Func1)`类似，如果没有数据满足条件，返回默认值；如果有多个数据满足条件，以错误通知结束。
+和`firstOrDefault(T, Func1)`类似，如果没有数据满足条件，返回默认值；如果有多个数据满足条件，以错误通知终止。
 
 * Javadoc: [singleOrDefault(Func1,T)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#singleOrDefault(rx.functions.Func1,%20T))
 

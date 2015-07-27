@@ -14,7 +14,7 @@ RxJava实现了`groupBy`操作符。它返回Observable的一个特殊子类`Gro
 
 注意：`groupBy`将原始Observable分解为一个发射多个`GroupedObservable`的Observable，一旦有订阅，每个`GroupedObservable`就开始缓存数据。因此，如果你忽略这些`GroupedObservable`中的任何一个，这个缓存可能形成一个潜在的内存泄露。因此，如果你不想观察，也不要忽略`GroupedObservable`。你应该使用像`take(0)`这样会丢弃自己的缓存的操作符。
 
-如果你取消订阅一个`GroupedObservable`，那个Observable将会结束。如果之后原始的Observable又发射了一个与这个Observable的Key匹配的数据，`groupBy`将会为这个Key创建一个新的`GroupedObservable`。
+如果你取消订阅一个`GroupedObservable`，那个Observable将会终止。如果之后原始的Observable又发射了一个与这个Observable的Key匹配的数据，`groupBy`将会为这个Key创建一个新的`GroupedObservable`。
 
 `groupBy`默认不在任何特定的调度器上执行。
 

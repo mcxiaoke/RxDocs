@@ -25,7 +25,7 @@ Javadoc: [repeat(long,Scheduler)](http://reactivex.io/RxJava/javadoc/rx/Observab
 
 还有一个叫做`repeatWhen`的操作符，它不是缓存和重放原Observable的数据序列，而是有条件的重新订阅和反射原来的Observable。
 
-将原Observable的结束通知（完成或错误）当做一个`void`数据传递给一个通知处理器，它以此来决定是否要重新订阅和反射原来的Observable。这个通知处理器就像一个Observable操作符，接受一个发射`void`通知的Observable为输入，返回一个发射`void`数据（意思是，重新订阅和反射原Observable）或者直接结束（意思是，使用`repeatWhen`结束发射数据）的Observable。
+将原Observable的终止通知（完成或错误）当做一个`void`数据传递给一个通知处理器，它以此来决定是否要重新订阅和反射原来的Observable。这个通知处理器就像一个Observable操作符，接受一个发射`void`通知的Observable为输入，返回一个发射`void`数据（意思是，重新订阅和反射原Observable）或者直接终止（意思是，使用`repeatWhen`终止发射数据）的Observable。
 
 `repeatWhen`操作符默认在`trampoline`调度器上执行。有一个变体可以通过可选参数指定Scheduler。
 

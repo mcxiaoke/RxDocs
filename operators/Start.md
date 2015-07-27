@@ -19,7 +19,7 @@
 
 `rxjava-async`模块还包含这几个操作符：`toAsync`, `asyncAction`, 和`asyncFunc`。它们接受一个函数或一个Action作为参数。
 
-对于函数(functions)，这个操作符调用这个函数获取一个值，然后返回一个会发射这个值给后续观察者的Observable（和`start`一样）。对于动作(Action)，过程类似，但是没有返回值，在这种情况下，这个操作符在结束前会发射一个`null`值。
+对于函数(functions)，这个操作符调用这个函数获取一个值，然后返回一个会发射这个值给后续观察者的Observable（和`start`一样）。对于动作(Action)，过程类似，但是没有返回值，在这种情况下，这个操作符在终止前会发射一个`null`值。
 
 注意：这个函数或动作只会被执行一次，即使多个观察者订阅这个返回的Observable。
 
@@ -41,7 +41,7 @@
 
 ![fromAction](../images/operators/fromCallable.png)
 
-`rxjava-async`模块还包含一个`fromAction`操作符，它接受一个`Action`作为参数，返回一个Observable，一旦Action结束，它发射这个你传递给`fromAction`的数据。
+`rxjava-async`模块还包含一个`fromAction`操作符，它接受一个`Action`作为参数，返回一个Observable，一旦Action终止，它发射这个你传递给`fromAction`的数据。
 
 ### fromCallable
 
@@ -53,7 +53,7 @@
 
 ![fromRunnable](../images/operators/fromRunnable.png)
 
-`rxjava-async`模块还包含一个`fromRunnable`操作符，它接受一个`Runnable `作为参数，返回一个Observable，一旦Runnable结束，它发射这个你传递给`fromRunnable`的数据。
+`rxjava-async`模块还包含一个`fromRunnable`操作符，它接受一个`Runnable `作为参数，返回一个Observable，一旦Runnable终止，它发射这个你传递给`fromRunnable`的数据。
 
 ### forEachFuture
 
