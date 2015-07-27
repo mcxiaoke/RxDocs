@@ -1,20 +1,20 @@
-这一节解释 [`BlockingObservable`](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html) 的子类. 一个阻塞的Observable 继承普通的Observable类，增加了一些可用于阻塞Observable发送的数据的操作符。
+这一节解释 [`BlockingObservable`](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html) 的子类. 一个阻塞的Observable 继承普通的Observable类，增加了一些可用于阻塞Observable发射的数据的操作符。
 
 要将一个普通的`Observable` 转换为 `BlockingObservable`，可以使用 [`Observable.toBlocking( )`](http://reactivex.io/RxJava/javadoc/rx/Observable.html#toBlocking()) 方法或者[`BlockingObservable.from( )`](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable)) 方法。
 
-* [**`forEach( )`**](Subscribe.md) — 对Observable发送的每一项数据调用一个方法，会阻塞直到Observable完成
-* [**`first( )`**](First.md) — 阻塞直到Observable发送了一个数据，然后返回第一项数据
-* [**`firstOrDefault( )`**](First.md) — 阻塞直到Observable发送了一个数据或者完成，返回第一项数据，或者返回默认值
+* [**`forEach( )`**](Subscribe.md) — 对Observable发射的每一项数据调用一个方法，会阻塞直到Observable完成
+* [**`first( )`**](First.md) — 阻塞直到Observable发射了一个数据，然后返回第一项数据
+* [**`firstOrDefault( )`**](First.md) — 阻塞直到Observable发射了一个数据或者完成，返回第一项数据，或者返回默认值
 * [**`last( )`**](Last.md) — 阻塞直到Observable完成，然后返回最后一项数据
 * [**`lastOrDefault( )`**](Last.md) — 阻塞直到Observable完成，然后返回最后一项的数据，或者返回默认值
-* [**`mostRecent( )`**](First.md) — 返回一个总是返回Observable最近发送的数据的iterable
-* [**`next( )`**](TakeLast.md) — 返回一个iterable，会阻塞直到Observable发送了另一个值，然后返回那个值
-* [**`latest( )`**](First.md) — 返回一个iterable，会阻塞直到或者除非Observable发送了一个iterable没有返回的值，然后返回这个值
-* [**`single( )`**](First.md) — 如果Observable完成时只发送了一个值，返回那个值，否则抛出异常
-* [**`singleOrDefault( )`**](First.md) — 如果Observable完成时只发送了一个值，返回那个值，否则否好默认值
+* [**`mostRecent( )`**](First.md) — 返回一个总是返回Observable最近发射的数据的iterable
+* [**`next( )`**](TakeLast.md) — 返回一个iterable，会阻塞直到Observable发射了另一个值，然后返回那个值
+* [**`latest( )`**](First.md) — 返回一个iterable，会阻塞直到或者除非Observable发射了一个iterable没有返回的值，然后返回这个值
+* [**`single( )`**](First.md) — 如果Observable完成时只发射了一个值，返回那个值，否则抛出异常
+* [**`singleOrDefault( )`**](First.md) — 如果Observable完成时只发射了一个值，返回那个值，否则否好默认值
 * [**`toFuture( )`**](To.md) — 将Observable转换为一个Future
-* [**`toIterable( )`**](To.md) — 将一个发送数据序列的Observable转换为一个Iterable
-* [**`getIterator( )`**](To.md) — 将一个发送数据序列的Observable转换为一个Iterator
+* [**`toIterable( )`**](To.md) — 将一个发射数据序列的Observable转换为一个Iterable
+* [**`getIterator( )`**](To.md) — 将一个发射数据序列的Observable转换为一个Iterator
 
 > 伴随这个解释还有一个修改版的弹珠图，这里就是表示阻塞Observable的弹珠图：
 
@@ -22,7 +22,7 @@
 
 ## BlockingObservable的方法
 
-`BlockingObservable`的方法不是将一个Observable变换为另一个，也不是过滤Observables，它们会打断Observable的调用链，会阻塞等待直到Observable发送了它们想要的数据，然后返回这个数据（而不是一个Observable）。
+`BlockingObservable`的方法不是将一个Observable变换为另一个，也不是过滤Observables，它们会打断Observable的调用链，会阻塞等待直到Observable发射了它们想要的数据，然后返回这个数据（而不是一个Observable）。
 
 要将一个Observable转换为一个`BlockingObservable`，你可以使用这些方法，使用`Observable.toBlocking`或`BlockingObservable.from`方法。
 
@@ -65,7 +65,7 @@
 
 ![single](../images/operators/B.single.png)
 
-`single`和`first`类似，但是如果不是正好发送一个数据，会抛出异常`NoSuchElementException`。其它几个变体的功能也是类似的。
+`single`和`first`类似，但是如果不是正好发射一个数据，会抛出异常`NoSuchElementException`。其它几个变体的功能也是类似的。
 
 * Javadoc: [single()](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#single())
 
@@ -97,9 +97,9 @@
 
 ![next](../images/operators/B.next.png)
 
-`next`操作符会阻塞直到`BlockingObservable`返回另外一个值，然后它返回那个值。你可以重复调用这个方法从`BlockingObservable`获取后续的数据项。以阻塞的方式高效的迭代获取它的发送物。
+`next`操作符会阻塞直到`BlockingObservable`返回另外一个值，然后它返回那个值。你可以重复调用这个方法从`BlockingObservable`获取后续的数据项。以阻塞的方式高效的迭代获取它的发射物。
 
-`latest`操作符也是类似的，但是它不会阻塞等待下一个值，它立即返回最近发送的数据项，只在Observable还没有发送任何数据时会阻塞。
+`latest`操作符也是类似的，但是它不会阻塞等待下一个值，它立即返回最近发射的数据项，只在Observable还没有发射任何数据时会阻塞。
 
 * Javadoc: [next()](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#next())
 * Javadoc: [latest()](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#latest())
@@ -108,7 +108,7 @@
 
 ![mostRecent](../images/operators/B.mostRecent.png)
 
-`mostRecent`操作符让你可以用类似的方式迭代一个`BlockingObservable`，但是它总是立即返回一个值，或者是默认值（如果`BlockingObservable`还没有发送任何数据），或者是`BlockingObservable`最近发送的数据项。
+`mostRecent`操作符让你可以用类似的方式迭代一个`BlockingObservable`，但是它总是立即返回一个值，或者是默认值（如果`BlockingObservable`还没有发射任何数据），或者是`BlockingObservable`最近发射的数据项。
 
 * Javadoc: [mostRecent(T)](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#mostRecent(T))
 
@@ -131,7 +131,7 @@
 <table>
  <thead>
   <tr><th rowspan="2">操作符</th><th colspan="3">执行结果</th><th rowspan="2">Rx.NET等价操作</th></tr>
-  <tr><th>发送多个数据的Observable</th><th>发送单个数据的Observable</th><th>不发送数据的Observable</th></tr>
+  <tr><th>发射多个数据的Observable</th><th>发射单个数据的Observable</th><th>不发射数据的Observable</th></tr>
  </thead>
  <tbody>
   <tr><td><code>Observable.first</code></td><td> 第一项</td><td>单个数据</td><td><i>该元素不存在</i></td><td><code>firstAsync</code></td></tr>

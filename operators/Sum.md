@@ -1,7 +1,7 @@
 
 ## Sum
 
-计算Observable发射的数值的和并发送这个和
+计算Observable发射的数值的和并发射这个和
 
 ![sum](../images/operators/sum.c.png)
 
@@ -13,8 +13,8 @@ RxJava的实现是`sumDouble`, `sumFloat`, `sumInteger`, `sumLong`，它们不�
 
 你可以使用一个函数，计算Observable每一项数据的函数返回值的和。
 
-在`StringObservable`类（这个类不是RxJava核心模块的一部分）中有一个`stringConcat`操作符，它将一个发送字符串序列的Observable转换为一个发送单个字符串的Observable，后者这个字符串表示的是前者所有字符串的连接。
+在`StringObservable`类（这个类不是RxJava核心模块的一部分）中有一个`stringConcat`操作符，它将一个发射字符串序列的Observable转换为一个发射单个字符串的Observable，后者这个字符串表示的是前者所有字符串的连接。
 
 ![St.join](../images/operators/St.join.png)
 
-`StringObservable`类还有一个`join`操作符，它将一个发送字符串序列的Observable转换为一个发送单个字符串的Observable，后者这个字符串表示的是前者所有字符串以你指定的分界符连接的结果。
+`StringObservable`类还有一个`join`操作符，它将一个发射字符串序列的Observable转换为一个发射单个字符串的Observable，后者这个字符串表示的是前者所有字符串以你指定的分界符连接的结果。

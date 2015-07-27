@@ -6,7 +6,7 @@
 
 `TakeWhile`反射原始Observable，直到你指定的某个条件不成立的那一刻，它停止反射原始Observable，并终止自己的Observable。
 
-RxJava中的`takeWhile`操作符返回一个镜像原始Observable行为的Observable，直到某一项数据你指定的函数返回`false`那一刻，这个新的Observable发送`onCompleted`终止通知。
+RxJava中的`takeWhile`操作符返回一个镜像原始Observable行为的Observable，直到某一项数据你指定的函数返回`false`那一刻，这个新的Observable发射`onCompleted`终止通知。
 
 `takeWhile`默认不在任何特定的调度器上执行。
 

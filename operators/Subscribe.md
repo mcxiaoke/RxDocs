@@ -8,7 +8,7 @@
 
 **`onNext`**
 
-每当Observable发送了一项数据它就会调用这个方法。这个方法的参数是这个Observable发射的数据项。
+每当Observable发射了一项数据它就会调用这个方法。这个方法的参数是这个Observable发射的数据项。
 
 **`onError`**
 
@@ -18,7 +18,7 @@ Observable调用这个方法表示它无法生成期待的数据或者遇到了�
 
 如果没有遇到任何错误，Observable在最后一次调用`onCompleted`之后会调用这个方法。
 
-如果一个Observable直到有一个观察者订阅它才开始发射数据项，就称之为"冷"的Observable；如果一个Observable可能在任何时刻开始发送数据，就称之为"热"的Observable，一个订阅者可能从开始之后的某个时刻开始观察它发射的数据序列，它可能会错过在订阅之前发射的数据。
+如果一个Observable直到有一个观察者订阅它才开始发射数据项，就称之为"冷"的Observable；如果一个Observable可能在任何时刻开始发射数据，就称之为"热"的Observable，一个订阅者可能从开始之后的某个时刻开始观察它发射的数据序列，它可能会错过在订阅之前发射的数据。
 
 RxJava中的实现是`subscribe`方法。
 

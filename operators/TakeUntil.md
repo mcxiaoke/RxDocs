@@ -4,7 +4,7 @@
 
 ![takeUtil](../images/operators/takeUtil.c.png)
 
-`TakeUntil`订阅并开始反射原始Observable，它还监视你提供的第二个Observable。如果第二个Observable发射了一项数据或者发送了一个终止通知，`TakeUtil`返回的Observable会停止反射原始Observable并终止。
+`TakeUntil`订阅并开始反射原始Observable，它还监视你提供的第二个Observable。如果第二个Observable发射了一项数据或者发射了一个终止通知，`TakeUtil`返回的Observable会停止反射原始Observable并终止。
 
 ![takeUtil](../images/operators/takeUtil.png)
 

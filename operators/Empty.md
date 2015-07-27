@@ -3,13 +3,13 @@
 ## Empty/Never/Throw
 
 ### Empty
-创建一个不发送任何数据但是正常结束的Observable
+创建一个不发射任何数据但是正常结束的Observable
 
 ### Never
-创建一个不发送数据也不结束的Observable
+创建一个不发射数据也不结束的Observable
 
 ### Throw
-创建一个不发送数据以一个错误结束的Observable
+创建一个不发射数据以一个错误结束的Observable
 
 这三个操作符生成的Observable行为非常特殊和受限。测试的时候很有用，有时候也用于结合其它的Observables，或者作为其它需要Observable的操作符的参数。
 

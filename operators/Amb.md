@@ -4,7 +4,7 @@
 
 ![amb](../images/operators/amb.c.png)
 
-当你传递多个Observable给`Amb`时，它只发送其中一个Observable的数据和通知：首先发送通知给`Amb`的那个，不管发送的是一项数据还是一个`onError`或`onCompleted`通知。`Amb`将忽略和丢弃其它所有Observables的发射物。
+当你传递多个Observable给`Amb`时，它只发射其中一个Observable的数据和通知：首先发送通知给`Amb`的那个，不管发射的是一项数据还是一个`onError`或`onCompleted`通知。`Amb`将忽略和丢弃其它所有Observables的发射物。
 
 ![amb](../images/operators/amb.png)
 

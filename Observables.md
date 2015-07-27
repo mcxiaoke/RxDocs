@@ -3,7 +3,7 @@ Observable
 
 ## 简要介绍
 
-在ReactiveX中，一个观察者(Observer)订阅一个可观察对象(Observable)。然后观察者针对Observable发出的数据或数据序列作出响应。。这种模式简化了并发操作，因为它不需要在等待Observable发送数据时阻塞，而是以观察者的形式创建了一个处于待命状态的哨兵，哨兵适当地响应未来某个时间Observable要做的事。
+在ReactiveX中，一个观察者(Observer)订阅一个可观察对象(Observable)。然后观察者针对Observable发出的数据或数据序列作出响应。。这种模式简化了并发操作，因为它不需要在等待Observable发射数据时阻塞，而是以观察者的形式创建了一个处于待命状态的哨兵，哨兵适当地响应未来某个时间Observable要做的事。
 
 这篇文章会解释什么是响应式编程模式(reactive pattern)，以及什么是可观察对象(Observables)和观察者(observers)，其它的文章展示如何用操作符组合和改变Observable的行为。
 
@@ -20,7 +20,7 @@ Observable
 
 这种方法的优点是，当你有大量的任务要处理时，它们互相之间没有依赖关系。你可以同时开始执行它们，不用等待一个完成再开始下一个（用这种方式，你的整个任务包能耗费的最长时间，不会超过任务里耗费时间最长的那个）。
 
-有很多种术语可用于描述这种异步编程和设计模式，在这里我们使用这些术语：**一个观察者订阅一个可观察对象** (*An observer subscribes to an Observable*)。通过调用观察者们的方法，一个可观察对象发送数据或通知给它的观察者们。
+有很多种术语可用于描述这种异步编程和设计模式，在这里我们使用这些术语：**一个观察者订阅一个可观察对象** (*An observer subscribes to an Observable*)。通过调用观察者们的方法，一个可观察对象发射数据或通知给它的观察者们。
 
 在其它的文档和场景里，我们叫做**Observer**的东西有时也被叫做*Subscriber*，*Watcher*，*Reactor*。通常这个模型被称作*Reactor模式*。
 
@@ -50,7 +50,7 @@ returnVal = someMethod(itsParameters);
 1. 定义一个方法，它完成某些任务，然后从异步调用中返回一个值，这个方法是观察者的一部分
 2. 将这个异步调用本身定义为一个Observable
 3. 通过订阅它，将观察者关联到那个Observable
-4. 继续你的业务逻辑，无论何时只要调用返回了，Observable会发送结果，观察者的方法会开始处理结果或结果集
+4. 继续你的业务逻辑，无论何时只要调用返回了，Observable会发射结果，观察者的方法会开始处理结果或结果集
 
 用代码描述就是：
 
@@ -74,7 +74,7 @@ subscribe方法用于将观察者连接到Observable，你的观察者需要实�
 
 * **onNext(T item)**
 
-	无论何时，只要Observable发送了一个结果就会调用这个方法，这个方法的参数就是Observable发送的结果，这个方法可能会被调用多次，取决于你的具体实现。
+	无论何时，只要Observable发射了一个结果就会调用这个方法，这个方法的参数就是Observable发射的结果，这个方法可能会被调用多次，取决于你的具体实现。
 
 * **onError(Exception ex)**
 
@@ -101,9 +101,9 @@ myObservable.subscribe(myOnNext, myError, myComplete);
 
 ### 取消订阅 (Unsubscribing)
 
-在一些ReactiveX实现中，有一个特殊的观察者接口*Subscriber*，它有一个*unsubscribe*方法。调用这个方法表明你对当前订阅的Observable没有兴趣了，因此Observable可以选择停止发送新的数据项（如果没有其它观察者订阅）。
+在一些ReactiveX实现中，有一个特殊的观察者接口*Subscriber*，它有一个*unsubscribe*方法。调用这个方法表明你对当前订阅的Observable没有兴趣了，因此Observable可以选择停止发射新的数据项（如果没有其它观察者订阅）。
 
-这个取消订阅的结果会串行地传递给应用到这个Observable的操作符链，而且会导致这个链条上的每个环节都停止发送数据项。这些并不保证会立即发生，然而，对一个Observable来说，即使没有观察者了，它也可以在一个while循环中继续生成并尝试发送数据项。
+这个取消订阅的结果会串行地传递给应用到这个Observable的操作符链，而且会导致这个链条上的每个环节都停止发射数据项。这些并不保证会立即发生，然而，对一个Observable来说，即使没有观察者了，它也可以在一个while循环中继续生成并尝试发射数据项。
 
 ### 关于命名约定
 
@@ -116,15 +116,15 @@ ReactiveX的每种特定语言的实现都有自己的命名喜好，虽然不�
 
 ## Observables的"热"和"冷"
 
-Observable什么时候开始发送数据序列？这取决于Observable的实现，一个"热"的Observable可能一创建完就开始发送数据，因此所有后续订阅它的观察者可能从序列中间的某个位置开始观察。从另一方面说，一个"冷"的Observable会一直等待知道有观察者订阅它才开始发送数据，因此这个观察者可以确保会收到整个数据序列。
+Observable什么时候开始发射数据序列？这取决于Observable的实现，一个"热"的Observable可能一创建完就开始发射数据，因此所有后续订阅它的观察者可能从序列中间的某个位置开始观察。从另一方面说，一个"冷"的Observable会一直等待知道有观察者订阅它才开始发射数据，因此这个观察者可以确保会收到整个数据序列。
 
-在一些ReactiveX实现里，还存在一种被称作*Connectable*的Observable，不管有没有观察者订阅它，这种Observable都不会开始发送数据，除非Connect方法被调用。
+在一些ReactiveX实现里，还存在一种被称作*Connectable*的Observable，不管有没有观察者订阅它，这种Observable都不会开始发射数据，除非Connect方法被调用。
 
 ## 用操作符组合Observable
 
 对于ReactiveX来说，Observable和观察者仅仅是个开始，它们本身不过是标准观察者模式的一些轻量级扩展，目的是为了更好的处理事件序列。
 
-ReactiveX真正强大的地方在于它的操作符，操作符让你可以变换、组合、操纵和处理Observable发送的数据。
+ReactiveX真正强大的地方在于它的操作符，操作符让你可以变换、组合、操纵和处理Observable发射的数据。
 
 Rx的操作符让你可以用声明式的风格组合异步序列，它拥有Callback的所有效率优势，同时又避免了典型的异步系统中嵌套Callback的缺点。
 
@@ -146,4 +146,4 @@ Rx的操作符让你可以用声明式的风格组合异步序列，它拥有Cal
 
 ## RxJava
 
-在RxJava中，一个实现了_Observer_接口的对象可以订阅(_subscribes_)一个_Observable_ 类的实例。然后，订阅者(subscriber)对Observable发送(_emit_)的任何数据或数据序列作出响应。这种模式简化了并发操作，因为它不需要在等待Observable发送数据时阻塞，而是以观察者的形式创建了一个处于待命状态的哨兵，哨兵适当地响应未来某个时间Observable要做的事。
+在RxJava中，一个实现了_Observer_接口的对象可以订阅(_subscribes_)一个_Observable_ 类的实例。然后，订阅者(subscriber)对Observable发射(_emit_)的任何数据或数据序列作出响应。这种模式简化了并发操作，因为它不需要在等待Observable发射数据时阻塞，而是以观察者的形式创建了一个处于待命状态的哨兵，哨兵适当地响应未来某个时间Observable要做的事。

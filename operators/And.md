@@ -2,7 +2,7 @@
 
 ## And/Then/When
 
-使用Pattern和Plan作为中介，将两个或多个Observables发送的数据集组合到一起
+使用Pattern和Plan作为中介，将两个或多个Observables发射的数据集组合到一起
 
 ![and/then/when](../images/operators/and_then_when.C.png)
 

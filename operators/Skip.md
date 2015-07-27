@@ -2,11 +2,11 @@
 
 ## Skip
 
-抑制Observable发送的前N项数据
+抑制Observable发射的前N项数据
 
 ![skip](../images/operators/skip.c.png)
 
-使用`Skip`操作符，你可以忽略Observable'发送的前N项数据，只保留之后的数据。
+使用`Skip`操作符，你可以忽略Observable'发射的前N项数据，只保留之后的数据。
 
 ![skip](images/operators/skip.png)
 
@@ -16,7 +16,7 @@ RxJava中这个操作符叫`skip`。`skip`的这个变体默认不在任何特�
 
 ![skip](../images/operators/skip.t.png)
 
-`skip`的这个变体接受一个时长而不是数量参数。它会丢弃原始Observable开始的那段时间发送的数据，时长和时间单位通过参数指定。
+`skip`的这个变体接受一个时长而不是数量参数。它会丢弃原始Observable开始的那段时间发射的数据，时长和时间单位通过参数指定。
 
 `skip`的这个变体默认在`computation`调度器上执行，但是你可以使用第三个参数指定其它的调度器。
 

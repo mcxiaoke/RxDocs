@@ -6,7 +6,7 @@
 
 ![distinct](../images/operators/distinct.c.png)
 
-`Distinct`的过滤规则是：只允许还没有发送过的数据项通过。
+`Distinct`的过滤规则是：只允许还没有发射过的数据项通过。
 
 在某些实现中，有一些变体允许你调整判定两个数据不同(`distinct`)的标准。还有一些实现只比较一项数据和它的直接前驱，因此只会从序列中过滤掉连续重复的数据。
 
@@ -56,7 +56,7 @@ Sequence complete.
 
 ![distinct](../images/operators/distinct.key.png)
 
-这个操作符有一个变体接受一个函数函数。这个函数根据原始Observable发送的数据项产生一个Key，然后，比较这些Key而不是数据本身，来判定两个数据是否是不同的。
+这个操作符有一个变体接受一个函数函数。这个函数根据原始Observable发射的数据项产生一个Key，然后，比较这些Key而不是数据本身，来判定两个数据是否是不同的。
 
 * Javadoc: [distinct(Func1)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinct(rx.functions.Func1))
 

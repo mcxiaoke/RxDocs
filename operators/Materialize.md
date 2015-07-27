@@ -7,7 +7,7 @@
 
 一个合法的有限的Obversable将调用它的观察者的`onNext`方法零次或多次，然后调用观察者的`onCompleted`或`onError`正好一次。`Materialize`操作符将这一系列调用，包括原来的`onNext`通知和终止通知`onCompleted`或`onError`都转换为一个Observable发射的数据序列。
 
-RxJava的`materialize`将来自原始Observable的通知转换为`Notification`对象，然后它返回的Observable会发送这些数据。
+RxJava的`materialize`将来自原始Observable的通知转换为`Notification`对象，然后它返回的Observable会发射这些数据。
 
 `materialize`默认不在任何特定的调度器 ([`Scheduler`](Scheduler.md)) 上执行。
 

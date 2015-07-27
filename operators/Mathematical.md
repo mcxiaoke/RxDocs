@@ -12,7 +12,7 @@
 
 ![average](../images/operators/average.f.png)
 
-如果原始Observable不发送任何数据，这个操作符会抛异常：`IllegalArgumentException `。
+如果原始Observable不发射任何数据，这个操作符会抛异常：`IllegalArgumentException `。
 
 
 ## Min
@@ -27,15 +27,15 @@ RxJava中，`min`属于`rxjava-math`模块。
 
 ![min](../images/operators/min.png)
 
-`min`接受一个可选参数，用于比较两项数据的大小，如果最小值的数据超过一项，`min`会发射原始Observable最近发送的那一项。
+`min`接受一个可选参数，用于比较两项数据的大小，如果最小值的数据超过一项，`min`会发射原始Observable最近发射的那一项。
 
 ![minBy](../images/operators/minBy.png)
 
-`minBy`类似于`min`，但是它发送的不是最小值，而是发送Key最小的项，Key由你指定的一个函数生成。
+`minBy`类似于`min`，但是它发射的不是最小值，而是发射Key最小的项，Key由你指定的一个函数生成。
 
 ## Max
 
-发送原始Observable的最大值
+发射原始Observable的最大值
 
 ![max](../images/operators/max.c.png)
 
@@ -45,11 +45,11 @@ RxJava中，`max`属于`rxjava-math`模块。
 
 ![max](../images/operators/max.png)
 
-`max `接受一个可选参数，用于比较两项数据的大小，如果最大值的数据超过一项，`max `会发射原始Observable最近发送的那一项。
+`max `接受一个可选参数，用于比较两项数据的大小，如果最大值的数据超过一项，`max `会发射原始Observable最近发射的那一项。
 
 ![maxBy](../images/operators/maxBy.png)
 
-`maxBy `类似于`max`，但是它发送的不是最大值，而是发送Key最大的项，Key由你指定的一个函数生成。
+`maxBy `类似于`max`，但是它发射的不是最大值，而是发射Key最大的项，Key由你指定的一个函数生成。
 
 ## Count
 
@@ -78,7 +78,7 @@ assertEquals( new Integer(3), Observable.from(items).count().toBlocking().single
 
 ## Sum
 
-计算Observable发射的数值的和并发送这个和
+计算Observable发射的数值的和并发射这个和
 
 ![sum](../images/operators/sum.c.png)
 
@@ -90,22 +90,22 @@ RxJava的实现是`sumDouble`, `sumFloat`, `sumInteger`, `sumLong`，它们不�
 
 你可以使用一个函数，计算Observable每一项数据的函数返回值的和。
 
-在`StringObservable`类（这个类不是RxJava核心模块的一部分）中有一个`stringConcat`操作符，它将一个发送字符串序列的Observable转换为一个发送单个字符串的Observable，后者这个字符串表示的是前者所有字符串的连接。
+在`StringObservable`类（这个类不是RxJava核心模块的一部分）中有一个`stringConcat`操作符，它将一个发射字符串序列的Observable转换为一个发射单个字符串的Observable，后者这个字符串表示的是前者所有字符串的连接。
 
 ![St.join](../images/operators/St.join.png)
 
-`StringObservable`类还有一个`join`操作符，它将一个发送字符串序列的Observable转换为一个发送单个字符串的Observable，后者这个字符串表示的是前者所有字符串以你指定的分界符连接的结果。
+`StringObservable`类还有一个`join`操作符，它将一个发射字符串序列的Observable转换为一个发射单个字符串的Observable，后者这个字符串表示的是前者所有字符串以你指定的分界符连接的结果。
 
 
 ## Concat
 
-不交错的发送两个或多个Observable的发射物
+不交错的发射两个或多个Observable的发射物
 
 ![concat](../images/operators/concat.c.png)
 
 `Concat`操作符连接多个Observable的输出，就好像它们是一个Observable，第一个Observable发射的所有数据在第二个Observable发射的任何数据前面，以此类推。
 
-直到前面一个Observable终止，`Concat`才会订阅额外的一个Observable。注意：因此，如果你尝试连接一个"热"Observable（这种Observable在创建后立即开始发射数据，即使没有订阅者），`Concat`将不会看到也不会发送它之前发射的任何数据。
+直到前面一个Observable终止，`Concat`才会订阅额外的一个Observable。注意：因此，如果你尝试连接一个"热"Observable（这种Observable在创建后立即开始发射数据，即使没有订阅者），`Concat`将不会看到也不会发射它之前发射的任何数据。
 
 在ReactiveX的某些实现中有一种`ConcatMap`操作符（名字可能叫`concat_all`, `concat_map`, `concatMapObserver`, `for`, `forIn/for_in`, `mapcat`, `selectConcat`或`selectConcatObserver`），他会变换原始Observable发射的数据到一个对应的Observable，然后再按观察和变换的顺序进行连接操作。
 
@@ -125,7 +125,7 @@ RxJava中的实现叫`concat`。
 
 ## Reduce
 
-按顺序对Observable发射的每项数据应用一个函数并发送最终的值
+按顺序对Observable发射的每项数据应用一个函数并发射最终的值
 
 ![reduce](../images/operators/reduce.c.png)
 
@@ -151,7 +151,7 @@ RxJava中的实现叫`concat`。
 
 ![collect](../images/operators/collect.png)
 
-`collect`与`reduce`类似，但它的目的是收集原始Observable发射的所有数据到一个可变的数据结构，`collect`生成的这个Observable会发送这项数据。它需要两个参数：
+`collect`与`reduce`类似，但它的目的是收集原始Observable发射的所有数据到一个可变的数据结构，`collect`生成的这个Observable会发射这项数据。它需要两个参数：
 
 1. 一个函数返回可变数据结构
 2. 另一个函数，当传递给它这个数据结构和原始Observable发射的数据项时，适当地修改数据结构。

@@ -4,7 +4,7 @@
 
 ![Timeout](../images/operators/timeout.c.png)
 
-如果原始Observable过了指定的一段时长没有发送任何数据，`Timeout`操作符会以一个`onError`通知终止这个Observable。
+如果原始Observable过了指定的一段时长没有发射任何数据，`Timeout`操作符会以一个`onError`通知终止这个Observable。
 
 RxJava中的实现为`timeout`，但是有好几个变体。
 

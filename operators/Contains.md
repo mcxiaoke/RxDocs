@@ -1,6 +1,6 @@
 ## Contains
 
-判定一个Observable是否发送一个特定的值
+判定一个Observable是否发射一个特定的值
 
 ![contains](../images/operators/contains.c.png)
 

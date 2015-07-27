@@ -11,4 +11,4 @@
 
 ![average](../images/operators/average.f.png)
 
-如果原始Observable不发送任何数据，这个操作符会抛异常：`IllegalArgumentException `。
+如果原始Observable不发射任何数据，这个操作符会抛异常：`IllegalArgumentException `。

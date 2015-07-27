@@ -12,7 +12,7 @@ RxJava实现了很多`Do`操作符的变体。
 
 ![doOnEach](../images/operators/doOnEach.png)
 
-`doOnEach`操作符让你可以注册一个回调，它产生的Observable每发送一项数据就会调用它一次。你可以以`Action`的形式传递参数给它，这个Action接受一个`onNext`的变体`Notification`作为它的唯一参数，你也可以传递一个Observable给`doOnEach`，这个Observable的`onNext`会被调用，就好像它订阅了原始的Observable一样。
+`doOnEach`操作符让你可以注册一个回调，它产生的Observable每发射一项数据就会调用它一次。你可以以`Action`的形式传递参数给它，这个Action接受一个`onNext`的变体`Notification`作为它的唯一参数，你也可以传递一个Observable给`doOnEach`，这个Observable的`onNext`会被调用，就好像它订阅了原始的Observable一样。
 
 * Javadoc: [doOnEach(Action1)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#doOnEach(rx.functions.Action1))
 * Javadoc: [doOnEach(Observer)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#doOnEach(rx.Observer))

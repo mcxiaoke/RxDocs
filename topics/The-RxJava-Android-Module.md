@@ -48,7 +48,7 @@ public void onCreate(Bundle savedInstanceState) {
 }
 ```
  
-这个例子中，Observable在一个新的线程执行，结果通过 `onNext` 在主线程发送。
+这个例子中，Observable在一个新的线程执行，结果通过 `onNext` 在主线程发射。
 
 ## 在任意线程观察(Observing)
 
@@ -69,7 +69,7 @@ new Thread(new Runnable() {
 }, "custom-thread-1").start();
 ```
 
-这个例子中，Observable在一个新的线程执行，结果通过 `onNext` 在 `custom-thread-1` 线程上发送。（这个例子不太自然，因为你可以调用`observeOn(Schedulers.currentThread())`，但是它说清楚了这个想法。）
+这个例子中，Observable在一个新的线程执行，结果通过 `onNext` 在 `custom-thread-1` 线程上发射。（这个例子不太自然，因为你可以调用`observeOn(Schedulers.currentThread())`，但是它说清楚了这个想法。）
 
 ## Fragment和Activity生命周期
 
@@ -94,9 +94,9 @@ protected void onDestroy() {
 ```
 
 
-这样确保所有指向订阅者(这个`Activity`)的引用尽快释放，不会再有通知通过 `onNext` 发送给这个订阅者。
+这样确保所有指向订阅者(这个`Activity`)的引用尽快释放，不会再有通知通过 `onNext` 发射给这个订阅者。
 
-有一个问题，如果由于屏幕方向的变化导致这个 `Activity` 被销毁，在 `onCreate` 中这个Observable会再次启动。你可以使用 `cache` 或 `replay` 操作符阻止它发生，这些操作符保证Observable在 `Activity` 的生命周期内存在（你可以在一个全局的缓存中保存它，比如放在Fragment中。）你可以使用任何操作符，只要能保证：当订阅者订阅一个已经在运行的Observable时，在它与`Activity` 解除关联的这段时间里发送的数据都会被`回放`，并且来自这个Observable的任何离线通知都会正常分发。
+有一个问题，如果由于屏幕方向的变化导致这个 `Activity` 被销毁，在 `onCreate` 中这个Observable会再次启动。你可以使用 `cache` 或 `replay` 操作符阻止它发生，这些操作符保证Observable在 `Activity` 的生命周期内存在（你可以在一个全局的缓存中保存它，比如放在Fragment中。）你可以使用任何操作符，只要能保证：当订阅者订阅一个已经在运行的Observable时，在它与`Activity` 解除关联的这段时间里发射的数据都会被`回放`，并且来自这个Observable的任何离线通知都会正常分发。
 
 # 参考资料
 * [How the New York Times is building its Android app with Groovy/RxJava](http://open.blogs.nytimes.com/2014/08/18/getting-groovy-with-reactive-android/?_php=true&_type=blogs&_php=true&_type=blogs&_r=1&) by Mohit Pandey

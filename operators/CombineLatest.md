@@ -2,7 +2,7 @@
 
 ## CombineLatest
 
-当两个Observables中的任何一个发射了数据时，使用一个函数结合每个Observable发送的最近数据项，并且基于这个函数的结果发射数据。
+当两个Observables中的任何一个发射了数据时，使用一个函数结合每个Observable发射的最近数据项，并且基于这个函数的结果发射数据。
 
 ![combineLatest](../images/operators/combineLatest.c.png)
 

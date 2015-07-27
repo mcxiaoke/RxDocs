@@ -17,7 +17,7 @@
 
 * [ReactiveX](Intro.md) - 什么是Rx，Rx的理念和优势
 * [Observables](Observables.md) - 简要介绍Observable的观察者模型
-* [Single](Single.md) - 一种特殊的只发送单个值的Observable
+* [Single](Single.md) - 一种特殊的只发射单个值的Observable
 * [Subject](Subject.md) - Observable和Observer的复合体，也是二者的桥梁
 * [Scheduler](Scheduler.md) - 介绍了各种异步任务调度和默认调度器
 * [All Operators List](All-Operators-List.md) - 按字母顺序的全部操作符列表

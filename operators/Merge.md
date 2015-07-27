@@ -8,13 +8,13 @@
 
 使用`Merge`操作符你可以将多个Observables的输出合并，就好像它们是一个单个的Observable一样。
 
-`Merge`可能会让合并的Observables发射的数据交错（有一个类似的操作符`Concat`不会让数据交错，它会按顺序一个接着一个发送多个Observables的发射物）。
+`Merge`可能会让合并的Observables发射的数据交错（有一个类似的操作符`Concat`不会让数据交错，它会按顺序一个接着一个发射多个Observables的发射物）。
 
 正如图例上展示的，任何一个原始Observable的`onError`通知会被立即传递给观察者，而且会结束合并后的Observable。
 
 ![mergeDelayError](../images/operators/mergeDelayError.C.png)
 
-在很多ReactiveX实现中还有一个叫`MergeDelayError`的操作符，它的行为有一点不同，它会保留`onError`通知直到合并后的Observable所有的数据发送完成，在那时它才会把`onError`传递给观察者。
+在很多ReactiveX实现中还有一个叫`MergeDelayError`的操作符，它的行为有一点不同，它会保留`onError`通知直到合并后的Observable所有的数据发射完成，在那时它才会把`onError`传递给观察者。
 
 RxJava将它实现为`merge`, `mergeWith`和`mergeDelayError`。
 

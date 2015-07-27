@@ -4,7 +4,7 @@
 
 如果你的操作符是被用于*创造*一个Observable，而不是变换或者响应一个Observable，使用 [`create( )`](http://reactivex.io/documentation/operators/create.html) 方法，不要试图手动实现 `Observable`。另外，你可以按照下面的用法说明创建一个自定义的操作符。
 
-如果你的操作符是用于Observable发送的单独的数据项，按照下面的说明做：[_Sequence Operators_](Implementing-Your-Own-Operators#序列操作符) 。如果你的操作符是用于变换Observable发送的整个数据序列，按照这个说明做：[_Transformational Operators_](Implementing-Your-Own-Operators#变换操作符) 。
+如果你的操作符是用于Observable发射的单独的数据项，按照下面的说明做：[_Sequence Operators_](Implementing-Your-Own-Operators#序列操作符) 。如果你的操作符是用于变换Observable发射的整个数据序列，按照这个说明做：[_Transformational Operators_](Implementing-Your-Own-Operators#变换操作符) 。
 
 **提示：** 在一个类似于Groovy的语言Xtend中，你可以以 _extension methods_ 的方式实现你自己的操作符 ,不使用本文的方法，它们也可以链式调用。详情参见 [RxJava and Xtend](http://mnmlst-dvlpr.blogspot.de/2014/07/rxjava-and-xtend.html)
 
@@ -62,7 +62,7 @@ public class MyOperator<T> implements Operator<T> {
 
 # 变换操作符
 
-下面的例子向你展示了怎样使用 `compose( )` 操作符将你得自定义操作符（在这个例子中，是一个名叫`myTransformer`的操作符，它将一个发送整数的Observable转换为发送字符串的）与标准的RxJava操作符（如`ofType`和`map`）一起使用：
+下面的例子向你展示了怎样使用 `compose( )` 操作符将你得自定义操作符（在这个例子中，是一个名叫`myTransformer`的操作符，它将一个发射整数的Observable转换为发射字符串的）与标准的RxJava操作符（如`ofType`和`map`）一起使用：
 
 ```groovy
 fooObservable = barObservable.ofType(Integer).map({it*2}).compose(new MyTransformer<Integer,String>()).map({"transformed by myOperator: " + it});
@@ -84,7 +84,7 @@ public class MyTransformer<Integer,String> implements Transformer<Integer,String
   public Observable<String> call(Observable<Integer> source) {
     /* 
      * 这个简单的例子Transformer应用一个map操作，
-     * 这个map操作将发送整数变换为发送整数的字符串表示。
+     * 这个map操作将发射整数变换为发射整数的字符串表示。
      */
     return source.map( new Func1<Integer,String>() {
       @Override
@@ -102,7 +102,7 @@ public class MyTransformer<Integer,String> implements Transformer<Integer,String
 
 # 其它需要考虑的
 
-* 在发送任何数据（或者通知）给订阅者之前，你的序列操作符可能需要检查它的 [`Subscriber.isUnsubscribed( )`](Observable#unsubscribing) 状态，如果没有订阅者了，没必要浪费时间生成数据项。
+* 在发射任何数据（或者通知）给订阅者之前，你的序列操作符可能需要检查它的 [`Subscriber.isUnsubscribed( )`](Observable#unsubscribing) 状态，如果没有订阅者了，没必要浪费时间生成数据项。
 * 请注意：你的序列操作符必须复合Observable协议的核心原则：
   * 它可能调用订阅者的 [`onNext( )`](Observable#onnext-oncompleted-and-onerror) 方法任意次，但是这些调用必须是不重叠的。
   * 它只能调用订阅者的 [`onCompleted( )`](Observable#onnext-oncompleted-and-onerror) 或 [`onError( )`](Observable#onnext-oncompleted-and-onerror) 正好一次，但不能都调用，而且不能在这之后调用订阅者的 [`onNext( )`](Observable#onnext-oncompleted-and-onerror) 方法。
@@ -115,7 +115,7 @@ public class MyTransformer<Integer,String> implements Transformer<Integer,String
   * [`ignoreElements( )`](http://reactivex.io/documentation/operators/ignoreelements.html) 被定义为 <tt>[filter(alwaysFalse( ))](http://reactivex.io/documentation/operators/filter.html)</tt>
   * [`reduce(a)`](http://reactivex.io/documentation/operators/reduce.html) 被定义为 <tt>[scan(a)](http://reactivex.io/documentation/operators/scan.html).[last( )](http://reactivex.io/documentation/operators/last.html)</tt>
 * 如果你的操作符使用了函数或者lambda表达式作为参数，请注意它们可能是异常的来源，而且要准备好捕获这些异常，并且使用 `onError()` 通知订阅者。
-  * 某些异常被认为是致命的，对它们来说，调用 `onError()`毫无意义，那样或者是无用的，或者只是对问题的妥协。你可以使用 `Exceptions.throwIfFatal(throwable)` 方法过滤掉这些知名的异常，并重新抛出它们，而不是试图发送关于它们的通知。
-* 一般说来，一旦发生错误应立即通知订阅者，而不是首先尝试发送更多的数据。
-* 请注意 `null` 可能是Observable发送的一个合法数据。频繁发生错误的一个来源是：测试一些变量并且将持有一个非 `null` 值作为是否发送了数据的替代。一个值为 `null` 的数据仍然是一个发送数据项，它与没有发送任何东西是不能等同的。
+  * 某些异常被认为是致命的，对它们来说，调用 `onError()`毫无意义，那样或者是无用的，或者只是对问题的妥协。你可以使用 `Exceptions.throwIfFatal(throwable)` 方法过滤掉这些知名的异常，并重新抛出它们，而不是试图发射关于它们的通知。
+* 一般说来，一旦发生错误应立即通知订阅者，而不是首先尝试发射更多的数据。
+* 请注意 `null` 可能是Observable发射的一个合法数据。频繁发生错误的一个来源是：测试一些变量并且将持有一个非 `null` 值作为是否发射了数据的替代。一个值为 `null` 的数据仍然是一个发射数据项，它与没有发射任何东西是不能等同的。
 * 想让你的操作符在反压(*backpressure*)场景中变得得好可能会非常棘手。可以参考Dávid Karnok的博客 [Advanced RxJava](http://akarnokd.blogspot.hu/)，这里有一个涉及到的各种因素和怎样处理它们的很值得看的讨论。

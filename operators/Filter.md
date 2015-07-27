@@ -2,11 +2,11 @@
 
 ## Filter
 
-只发送通过了谓词测试的数据项
+只发射通过了谓词测试的数据项
 
 ![filter](../images/operators/filter.c.png)
 
-`Filter`操作符使用你指定的一个谓词函数测试数据项，只有通过测试的数据才会被发送。
+`Filter`操作符使用你指定的一个谓词函数测试数据项，只有通过测试的数据才会被发射。
 
 ![filter](../images/operators/filter.png)
 

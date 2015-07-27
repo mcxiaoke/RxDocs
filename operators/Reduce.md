@@ -1,7 +1,7 @@
 
 ## Reduce
 
-按顺序对Observable发射的每项数据应用一个函数并发送最终的值
+按顺序对Observable发射的每项数据应用一个函数并发射最终的值
 
 ![reduce](../images/operators/reduce.c.png)
 
@@ -27,7 +27,7 @@
 
 ![collect](../images/operators/collect.png)
 
-`collect`与`reduce`类似，但它的目的是收集原始Observable发射的所有数据到一个可变的数据结构，`collect`生成的这个Observable会发送这项数据。它需要两个参数：
+`collect`与`reduce`类似，但它的目的是收集原始Observable发射的所有数据到一个可变的数据结构，`collect`生成的这个Observable会发射这项数据。它需要两个参数：
 
 1. 一个函数返回可变数据结构
 2. 另一个函数，当传递给它这个数据结构和原始Observable发射的数据项时，适当地修改数据结构。

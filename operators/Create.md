@@ -14,7 +14,7 @@
 
 RxJava将这个操作符实现为 `create` 方法。
 
-建议你在传递给`create`方法的函数中检查观察者的`isUnsubscribed`状态，以便在没有观察者的时候，让你的Observable停止发送数据或者做昂贵的运算。
+建议你在传递给`create`方法的函数中检查观察者的`isUnsubscribed`状态，以便在没有观察者的时候，让你的Observable停止发射数据或者做昂贵的运算。
 
 示例代码：
 

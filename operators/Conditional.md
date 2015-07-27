@@ -20,7 +20,7 @@ RxJava将这个操作符实现为`all`，它默认不在任何特定的调度器
 
 ![amb](../images/operators/amb.c.png)
 
-当你传递多个Observable给`Amb`时，它只发送其中一个Observable的数据和通知：首先发送通知给`Amb`的那个，不管发送的是一项数据还是一个`onError`或`onCompleted`通知。`Amb`将忽略和丢弃其它所有Observables的发射物。
+当你传递多个Observable给`Amb`时，它只发射其中一个Observable的数据和通知：首先发送通知给`Amb`的那个，不管发射的是一项数据还是一个`onError`或`onCompleted`通知。`Amb`将忽略和丢弃其它所有Observables的发射物。
 
 ![amb](../images/operators/amb.png)
 
@@ -31,7 +31,7 @@ RxJava的实现是`amb`，有一个类似的对象方法`ambWith`。例如，`Ob
 
 ## Contains
 
-判定一个Observable是否发送一个特定的值
+判定一个Observable是否发射一个特定的值
 
 ![contains](../images/operators/contains.c.png)
 
@@ -62,12 +62,12 @@ RxJava中还有一个`exists`操作符，它通过一个谓词函数测试原始
 
 ## DefaultIfEmpty
 
-发送来自原始Observable的值，如果原始Observable没有发送任何值，就发送一个默认值
+发射来自原始Observable的值，如果原始Observable没有发射任何值，就发射一个默认值
 
 
 ![defaultIfEmtpy](../images/operators/defaultIfEmpty.c.png)
 
-`DefaultIfEmpty`简单的精确地反射原始Observable的值，如果原始Observable美欧发送任何数据正常终止（以`onCompleted`d的形式），`DefaultIfEmpty`返回的Observable就发送一个你提供的默认值。
+`DefaultIfEmpty`简单的精确地反射原始Observable的值，如果原始Observable美欧发射任何数据正常终止（以`onCompleted`d的形式），`DefaultIfEmpty`返回的Observable就发射一个你提供的默认值。
 
 RxJava将这个操作符实现为`defaultIfEmpty`。它默认不在任何特定的调度器上执行。
 
@@ -126,7 +126,7 @@ RxJava中对应的是`skipUntil`，它默认不在任何特定的调度器上执
 
 ![takeUtil](../images/operators/takeUtil.c.png)
 
-`TakeUntil`订阅并开始反射原始Observable，它还监视你提供的第二个Observable。如果第二个Observable发射了一项数据或者发送了一个终止通知，`TakeUtil`返回的Observable会停止反射原始Observable并终止。
+`TakeUntil`订阅并开始反射原始Observable，它还监视你提供的第二个Observable。如果第二个Observable发射了一项数据或者发射了一个终止通知，`TakeUtil`返回的Observable会停止反射原始Observable并终止。
 
 ![takeUtil](../images/operators/takeUtil.png)
 
@@ -151,7 +151,7 @@ RxJava中的实现是`takeUntil`。注意：第二个Observable反射一项数�
 
 `TakeWhile`反射原始Observable，直到你指定的某个条件不成立的那一刻，它停止反射原始Observable，并终止自己的Observable。
 
-RxJava中的`takeWhile`操作符返回一个镜像原始Observable行为的Observable，直到某一项数据你指定的函数返回`false`那一刻，这个新的Observable发送`onCompleted`终止通知。
+RxJava中的`takeWhile`操作符返回一个镜像原始Observable行为的Observable，直到某一项数据你指定的函数返回`false`那一刻，这个新的Observable发射`onCompleted`终止通知。
 
 `takeWhile`默认不在任何特定的调度器上执行。
 

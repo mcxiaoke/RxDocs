@@ -4,10 +4,10 @@
 # 从错误中恢复的技术
 
 So rather than _catch_ exceptions, your observer or operator should more typically respond to `onError` notifications of exceptions. There are also a variety of Observable operators that you can use to react to or recover from `onError` notifications from Observables. For example, you might use an operator to:
-因此，你的观察者或者操作符应该对异常发生时的 `onError` 通知做出合适的响应，而不是*捕获*(_catch_)异常。很多操作符可用于对Observable发送的`onError`通知做出响应或者从错误中恢复，例如，你可以：
+因此，你的观察者或者操作符应该对异常发生时的 `onError` 通知做出合适的响应，而不是*捕获*(_catch_)异常。很多操作符可用于对Observable发射的`onError`通知做出响应或者从错误中恢复，例如，你可以：
 
-1. 吞掉这个错误，切换到一个备用的Observable继续发送数据
-2. 吞掉这个错误然后发送默认值
+1. 吞掉这个错误，切换到一个备用的Observable继续发射数据
+2. 吞掉这个错误然后发射默认值
 3. 吞掉这个错误并立即尝试重启这个Observable
 4. 吞掉这个错误，在一些回退间隔后重启这个Observable
 

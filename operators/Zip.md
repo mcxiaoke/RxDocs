@@ -5,13 +5,13 @@
 
 ![zip](../images/operators/zip.c.png)
 
-`Zip`操作符返回一个Obversable，它使用这个函数按顺序结合两个或多个Observables发送的数据项，然后它发射这个函数返回的结果。它按照严格的顺序应用这个函数。它只发送与发送数据项最少的那个Observable一样多的数据。
+`Zip`操作符返回一个Obversable，它使用这个函数按顺序结合两个或多个Observables发射的数据项，然后它发射这个函数返回的结果。它按照严格的顺序应用这个函数。它只发射与发射数据项最少的那个Observable一样多的数据。
 
 RxJava将这个操作符实现为`zip`和`zipWith`。
 
 ![zip](../images/operators/zip.o.png)
 
-`zip`的最后一个参数接受每个Observable发送的一项数据，返回被压缩后的数据，它可以接受一到九个参数：一个Observable序列，或者一些发射Observable的Observables。
+`zip`的最后一个参数接受每个Observable发射的一项数据，返回被压缩后的数据，它可以接受一到九个参数：一个Observable序列，或者一些发射Observable的Observables。
 
 * Javadoc: [zip(Iterable<Observable>,FuncN)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#zip(java.lang.Iterable,%20rx.functions.FuncN))
 * Javadoc: [zip(Observable<Observable>,FuncN)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#zip(rx.Observable,%20rx.functions.FuncN))
