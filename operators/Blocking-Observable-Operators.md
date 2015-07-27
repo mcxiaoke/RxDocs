@@ -1,30 +1,30 @@
 这一节解释 [`BlockingObservable`](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html) 的子类. 一个阻塞的Observable 继承普通的Observable类，增加了一些可用于阻塞Observable发射的数据的操作符。
 
-要将一个普通的`Observable` 转换为 `BlockingObservable`，可以使用 [`Observable.toBlocking( )`](http://reactivex.io/RxJava/javadoc/rx/Observable.html#toBlocking()) 方法或者[`BlockingObservable.from( )`](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable)) 方法。
+要将普通的`Observable` 转换为 `BlockingObservable`，可以使用 [`Observable.toBlocking( )`](http://reactivex.io/RxJava/javadoc/rx/Observable.html#toBlocking()) 方法或者[`BlockingObservable.from( )`](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable)) 方法。
 
 * [**`forEach( )`**](Subscribe.md) — 对Observable发射的每一项数据调用一个方法，会阻塞直到Observable完成
 * [**`first( )`**](First.md) — 阻塞直到Observable发射了一个数据，然后返回第一项数据
-* [**`firstOrDefault( )`**](First.md) — 阻塞直到Observable发射了一个数据或者完成，返回第一项数据，或者返回默认值
-* [**`last( )`**](Last.md) — 阻塞直到Observable完成，然后返回最后一项数据
-* [**`lastOrDefault( )`**](Last.md) — 阻塞直到Observable完成，然后返回最后一项的数据，或者返回默认值
+* [**`firstOrDefault( )`**](First.md) — 阻塞直到Observable发射了一个数据或者终止，返回第一项数据，或者返回默认值
+* [**`last( )`**](Last.md) — 阻塞直到Observable终止，然后返回最后一项数据
+* [**`lastOrDefault( )`**](Last.md) — 阻塞直到Observable终止，然后返回最后一项的数据，或者返回默认值
 * [**`mostRecent( )`**](First.md) — 返回一个总是返回Observable最近发射的数据的iterable
-* [**`next( )`**](TakeLast.md) — 返回一个iterable，会阻塞直到Observable发射了另一个值，然后返回那个值
+* [**`next( )`**](TakeLast.md) — 返回一个Iterable，会阻塞直到Observable发射了另一个值，然后返回那个值
 * [**`latest( )`**](First.md) — 返回一个iterable，会阻塞直到或者除非Observable发射了一个iterable没有返回的值，然后返回这个值
-* [**`single( )`**](First.md) — 如果Observable完成时只发射了一个值，返回那个值，否则抛出异常
-* [**`singleOrDefault( )`**](First.md) — 如果Observable完成时只发射了一个值，返回那个值，否则否好默认值
+* [**`single( )`**](First.md) — 如果Observable终止时只发射了一个值，返回那个值，否则抛出异常
+* [**`singleOrDefault( )`**](First.md) — 如果Observable终止时只发射了一个值，返回那个值，否则否好默认值
 * [**`toFuture( )`**](To.md) — 将Observable转换为一个Future
 * [**`toIterable( )`**](To.md) — 将一个发射数据序列的Observable转换为一个Iterable
 * [**`getIterator( )`**](To.md) — 将一个发射数据序列的Observable转换为一个Iterator
 
-> 伴随这个解释还有一个修改版的弹珠图，这里就是表示阻塞Observable的弹珠图：
+> 伴随这个解释还有一个修改版的弹珠图，表示阻塞Observable的弹珠图：
 
 ![BlockingObservables](../images/rx-operators/B.legend.png)
 
 ## BlockingObservable的方法
 
-`BlockingObservable`的方法不是将一个Observable变换为另一个，也不是过滤Observables，它们会打断Observable的调用链，会阻塞等待直到Observable发射了它们想要的数据，然后返回这个数据（而不是一个Observable）。
+`BlockingObservable`的方法不是将一个Observable变换为另一个，也不是过滤Observables，它们会打断Observable的调用链，会阻塞等待直到Observable发射了想要的数据，然后返回这个数据（而不是一个Observable）。
 
-要将一个Observable转换为一个`BlockingObservable`，你可以使用这些方法，使用`Observable.toBlocking`或`BlockingObservable.from`方法。
+要将一个Observable转换为一个`BlockingObservable`，你可以使用`Observable.toBlocking`或`BlockingObservable.from`方法。
 
 * Javadoc: [Observable.toBlocking()](http://reactivex.io/RxJava/javadoc/rx/Observable.html#toBlocking())
 * Javadoc: [BlockingObservable.from(Observable)](http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable))

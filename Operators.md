@@ -27,10 +27,10 @@ ReactiveX的每种编程语言的实现都实现了一组操作符的集合。�
 
 * [Buffer](operators/Buffer.md) — 缓存，可以简单的理解为缓存，它定期从Observable收集数据到一个集合，然后把这些数据集合打包发射，而不是一次发射一个
 * [FlatMap](operators/FlatMap.md) — 扁平映射，将Observable发射的数据变换为Observables集合，然后将这些Observable发射的数据平坦化的放进一个单独的Observable，可以认为是一个将嵌套的数据结构展开的过程。
-* [GroupBy](operators/GroupBy.md) — 分组，将原来的Observable分拆为Observable集合，将原来Observable发射的数据按Key分组，每一个Observable发射一组不同的数据
+* [GroupBy](operators/GroupBy.md) — 分组，将原来的Observable分拆为Observable集合，将原始Observable发射的数据按Key分组，每一个Observable发射一组不同的数据
 * [Map](operators/Map.md) — 映射，通过对序列的每一项都应用一个函数变换Observable发射的数据，实质是对序列中的每一项执行一个函数，函数的参数就是这个数据项
 * [Scan](operators/Scan.md) — 扫描，对Observable发射的每一项数据应用一个函数，然后按顺序依次发射这些值
-* [Window](operators/Window.md) — 窗口，定期将来自Observable的数据分拆成一些Observable窗口，然后发射这些窗口，而不是每次发射一项。类似于Buffer，但Buffer发射的是数据，Window发射的是Observable，每一个Observable发射原来Observable的数据的一个子集
+* [Window](operators/Window.md) — 窗口，定期将来自Observable的数据分拆成一些Observable窗口，然后发射这些窗口，而不是每次发射一项。类似于Buffer，但Buffer发射的是数据，Window发射的是Observable，每一个Observable发射原始Observable的数据的一个子集
 
 ## 过滤操作
 
@@ -92,12 +92,12 @@ ReactiveX的每种编程语言的实现都实现了一组操作符的集合。�
 * [All](operators/Conditional.md#All) — 判断Observable发射的所有的数据项是否都满足某个条件
 * [Amb](operators/Conditional.md#Amb) — 给定多个Observable，只让第一个发射数据的Observable发射全部数据
 * [Contains](operators/Conditional.md#Contains) — 判断Observable是否会发射一个指定的数据项
-* [DefaultIfEmpty](operators/Conditional.md#DefaultIfEmpty) — 发射来自原Observable的数据，如果原Observable没有发射数据，就发射一个默认数据
+* [DefaultIfEmpty](operators/Conditional.md#DefaultIfEmpty) — 发射来自原始Observable的数据，如果原始Observable没有发射数据，就发射一个默认数据
 * [SequenceEqual](operators/Conditional.md#SequenceEqual) — 判断两个Observable是否按相同的数据序列
-* [SkipUntil](operators/Conditional.md#SkipUntil) — 丢弃原Observable发射的数据，直到第二个Observable发射了一个数据，然后发射原Observable的剩余数据
-* [SkipWhile](operators/Conditional.md#SkipWhile) — 丢弃原Observable发射的数据，直到一个特定的条件为假，然后发射原Observable剩余的数据
-* [TakeUntil](operators/Conditional.md#TakeUntil) — 发射来自原Observable的数据，直到第二个Observable发射了一个数据或一个通知
-* [TakeWhile](operators/Conditional.md#TakeWhile) — 发射原Observable的数据，直到一个特定的条件为真，然后跳过剩余的数据
+* [SkipUntil](operators/Conditional.md#SkipUntil) — 丢弃原始Observable发射的数据，直到第二个Observable发射了一个数据，然后发射原始Observable的剩余数据
+* [SkipWhile](operators/Conditional.md#SkipWhile) — 丢弃原始Observable发射的数据，直到一个特定的条件为假，然后发射原始Observable剩余的数据
+* [TakeUntil](operators/Conditional.md#TakeUntil) — 发射来自原始Observable的数据，直到第二个Observable发射了一个数据或一个通知
+* [TakeWhile](operators/Conditional.md#TakeWhile) — 发射原始Observable的数据，直到一个特定的条件为真，然后跳过剩余的数据
 
 ## 算术和聚合操作
 
@@ -131,7 +131,7 @@ ReactiveX的每种编程语言的实现都实现了一组操作符的集合。�
 
 * 直接创建一个Observable（创建操作）
 * 组合多个Observable（组合操作）
-* 对Observable发射的数据执行变换操作（变换操作）
+* 对Observable发射的数据���行变换操作（变换操作）
 * 从Observable发射的数据中取特定的值（过滤操作）
 * 转发Observable的部分值（条件/布尔/过滤操作）
 * 对Observable发射的数据序列求值（算术/聚合操作）

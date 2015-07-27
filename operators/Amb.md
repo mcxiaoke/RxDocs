@@ -1,10 +1,10 @@
 ## Amb
 
-给定两个或多个Observables，它只发射首先发射数据或通知的那个Observable的所有数据
+给定两个或多个Observable，它只发射最先发射数据或通知的那个Observable的所有数据
 
 ![amb](../images/operators/amb.c.png)
 
-当你传递多个Observable给`Amb`时，它只发射其中一个Observable的数据和通知：首先发送通知给`Amb`的那个，不管发射的是一项数据还是一个`onError`或`onCompleted`通知。`Amb`将忽略和丢弃其它所有Observables的发射物。
+传递多个Observable给`Amb`时，它只发射其中一个Observable的数据和通知：最先发送通知给`Amb`的那个，不管发射的是一项数据还是一个`onError`或`onCompleted`通知。`Amb`将忽略和丢弃其它所有Observables的发射物。
 
 ![amb](../images/operators/amb.png)
 

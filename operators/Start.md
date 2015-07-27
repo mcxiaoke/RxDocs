@@ -59,7 +59,7 @@
 
 ![forEachFuture](../images/operators/forEachFuture.png)
 
-`rxjava-async`模块还包含一个`forEachFuture`操作符。它其实不算`Start`操作符的一个变体，而是有一些自己的特点。你传递一些典型的观察者方法（如onNext, onError和onCompleted）给它，Observable会以通常的方式调用它。但是`forEachFuture`自己返回一个`Future`并且在`get()`方法处阻塞，直到原Observable执行完成，然后它返回，完成还是错误依赖于原Observable是完成还是错误。
+`rxjava-async`模块还包含一个`forEachFuture`操作符。它其实不算`Start`操作符的一个变体，而是有一些自己的特点。你传递一些典型的观察者方法（如onNext, onError和onCompleted）给它，Observable会以通常的方式调用它。但是`forEachFuture`自己返回一个`Future`并且在`get()`方法处阻塞，直到原始Observable执行完成，然后它返回，完成还是错误依赖于原始Observable是完成还是错误。
 
 如果你想要一个函数阻塞直到Observable执行完成，可以使用这个操作符。
 

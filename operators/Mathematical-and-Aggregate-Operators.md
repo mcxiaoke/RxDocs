@@ -18,8 +18,8 @@
 * [**`concat( )`**](Mathematical.md#Concat) — 顺序连接多个Observables
 * [**`count( )` and `countLong( )`**](Mathematical.md#Count) — 计算数据项的个数并发射结果
 * [**`reduce( )`**](Mathematical.md#Reduce) — 对序列使用reduce()函数并发射对吼的结果
-* [**`collect( )`**](Mathematical.md#Reduce) — 将原Observable发射的数据放到一个单一的可变的数据结构中，然后返回一个发射这个数据结构的Observable
-* [**`toList( )`**](To.md) — 收集原Observable发射的所有数据到一个列表，然后返回这个列表
-* [**`toSortedList( )`**](To.md) — 收集原Observable发射的所有数据到一个有序列表，然后返回这个列表
+* [**`collect( )`**](Mathematical.md#Reduce) — 将原始Observable发射的数据放到一个单一的可变的数据结构中，然后返回一个发射这个数据结构的Observable
+* [**`toList( )`**](To.md) — 收集原始Observable发射的所有数据到一个列表，然后返回这个列表
+* [**`toSortedList( )`**](To.md) — 收集原始Observable发射的所有数据到一个有序列表，然后返回这个列表
 * [**`toMap( )`**](To.md) — 将序列数据转换为一个Map，Map的key是根据一个函数计算的
 * [**`toMultiMap( )`**](To.md) — 将序列数据转换为一个列表，同时也是一个Map，Map的key是根据一个函数计算的
