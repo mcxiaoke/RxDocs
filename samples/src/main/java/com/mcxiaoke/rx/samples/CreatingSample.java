@@ -46,25 +46,24 @@ public class CreatingSample {
     // <T> Observable<T> from(T[] array)
     public static void from1() {
         Integer[] data = new Integer[]{1, 2, 3, 4, 5};
-        Observable.from(data)
-                .subscribe(
-                        new Observer<Integer>() {
-                            @Override
-                            public void onCompleted() {
-                                System.out.println("onCompleted");
-                            }
+        Observable.from(data).subscribe(
+                new Observer<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        System.out.println("onCompleted");
+                    }
 
-                            @Override
-                            public void onError(final Throwable e) {
-                                System.err.println("onError: " + e);
-                            }
+                    @Override
+                    public void onError(final Throwable e) {
+                        System.err.println("onError: " + e);
+                    }
 
-                            @Override
-                            public void onNext(final Integer s) {
-                                System.out.println("onNext: " + s);
-                            }
-                        }
-                );
+                    @Override
+                    public void onNext(final Integer s) {
+                        System.out.println("onNext: " + s);
+                    }
+                }
+        );
     }
 
     // <T> Observable<T> from(Iterable<? extends T> iterable)
@@ -73,25 +72,24 @@ public class CreatingSample {
         for (int i = 0; i < 5; i++) {
             list.add("List Item " + i);
         }
-        Observable.from(list)
-                .subscribe(
-                        new Observer<String>() {
-                            @Override
-                            public void onCompleted() {
-                                System.out.println("onCompleted");
-                            }
+        Observable.from(list).subscribe(
+                new Observer<String>() {
+                    @Override
+                    public void onCompleted() {
+                        System.out.println("onCompleted");
+                    }
 
-                            @Override
-                            public void onError(final Throwable e) {
-                                System.err.println("onError: " + e);
-                            }
+                    @Override
+                    public void onError(final Throwable e) {
+                        System.err.println("onError: " + e);
+                    }
 
-                            @Override
-                            public void onNext(final String s) {
-                                System.out.println("onNext: " + s);
-                            }
-                        }
-                );
+                    @Override
+                    public void onNext(final String s) {
+                        System.out.println("onNext: " + s);
+                    }
+                }
+        );
     }
 
     // <T> Observable<T> from(Future<? extends T> future)
@@ -105,25 +103,24 @@ public class CreatingSample {
             }
         };
         final Future<String> future = executor.submit(callable);
-        Observable.from(future)
-                .subscribe(
-                        new Observer<String>() {
-                            @Override
-                            public void onCompleted() {
-                                System.out.println("onCompleted");
-                            }
+        Observable.from(future).subscribe(
+                new Observer<String>() {
+                    @Override
+                    public void onCompleted() {
+                        System.out.println("onCompleted");
+                    }
 
-                            @Override
-                            public void onError(final Throwable e) {
-                                System.err.println("onError: " + e);
-                            }
+                    @Override
+                    public void onError(final Throwable e) {
+                        System.err.println("onError: " + e);
+                    }
 
-                            @Override
-                            public void onNext(final String s) {
-                                System.out.println("onNext: " + s);
-                            }
-                        }
-                );
+                    @Override
+                    public void onNext(final String s) {
+                        System.out.println("onNext: " + s);
+                    }
+                }
+        );
     }
 
     // Observable<T> repeat(long count)
