@@ -23,7 +23,7 @@ RxJava将这个操作符实现为`flatMap`函数。
 这个操作符有一个接受额外的`int`参数的一个变体。这个参数设置`flatMap`从原来的Observable映射Observables的最大同时订阅数。当达到这个限制时，它会等待其中一个终止然后再订阅另一个。
 
 * Javadoc: [flatMap(Func1)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1))
-* Javadoc: [flatMap(Func1,int)(http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1,%20int))
+* Javadoc: [flatMap(Func1,int)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1,%20int))
 
 ![mergeMap.nce](../images/operators/mergeMap.nce.png)
 

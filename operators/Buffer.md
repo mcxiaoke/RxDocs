@@ -26,7 +26,7 @@
 
 ![buffer4](../images/operators/buffer4.png)
 
-`buffer(count, skip)`从原始Observable的第一项数据开始创建新的缓存，此后每当收到`skip`项数据，用`count`项数据填充缓存：开头的一项和后续的`count-1`项，它以列表(List)的形式发射缓存，取决于`count`和`skip`的值，这些缓存可能会有重叠部分（比如skip<count时），也可能会有间隙（比如skip>count时）。
+`buffer(count, skip)`从原始Observable的第一项数据开始创建新的缓存，此后每当收到`skip`项数据，用`count`项数据填充缓存：开头的一项和后续的`count-1`项，它以列表(List)的形式发射缓存，取决于`count`和`skip`的值，这些缓存可能会有重叠部分（比如skip < count时），也可能会有间隙（比如skip > count时）。
 
 * Javadoc: [buffer(int,int)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(int,%20int))
 
