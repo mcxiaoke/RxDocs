@@ -115,7 +115,7 @@ ReactiveX的每种特定语言的实现都有自己的命名偏好，虽然不�
 
 Observable什么时候开始发射数据序列？这取决于Observable的实现，一个"热"的Observable可能一创建完就开始发射数据，因此所有后续订阅它的观察者可能从序列中间的某个位置开始接受数据。一个"冷"的Observable会一直等待，直到有观察者订阅它才开始发射数据，因此这个观察者可以确保会收到整个数据序列。
 
-在一些ReactiveX实现里，还存在一种被称作*Connectable*的Observable，不管有没有观察者订阅它，这种Observable都不会开始发射数据，除非调用Connect方法被。
+在一些ReactiveX实现里，还存在一种被称作*Connectable*的Observable，不管有没有观察者订阅它，这种Observable都不会开始发射数据，除非Connect方法被调用。
 
 ## 用操作符组合Observable
 
