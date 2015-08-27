@@ -2,22 +2,22 @@
 
 ## 概述
 
-在ReactiveX中，一个观察者(Observer)订阅一个可观察对象(Observable)。观察者对Observable发射的数据或数据序列作出响应。这种模式简化了并发操作，因为不需要阻塞等待Observable发射数据，而是创建了一个处于待命状态的观察者哨兵，在未来某个时间响应Observable的通知。
+在ReactiveX中，一个观察者(Observer)订阅一个可观察对象(Observable)。观察者对Observable发射的数据或数据序列作出响应。这种模式可以极大地简化并发操作，因为它创建了一个处于待命状态的观察者哨兵，在未来某个时刻响应Observable的通知，不需要阻塞等待Observable发射数据。
 
-这篇文章会解释什么是响应式编程模式(reactive pattern)，以及什么是可观察对象(Observables)和观察者(observers)，其它的文章展示如何用操作符组合和改变Observable的行为。
+这篇文章会解释什么是响应式编程模式(reactive pattern)，以及什么是可观察对象(Observables)和观察者(observers)，其它几篇文章会展示如何用操作符组合和改变Observable的行为。
 
 ![Observable](images/legend.png)
 
-#### 参考：
+#### 相关参考：
 
 * [Single](Single.md) - 一个特殊的Observable，只发射单个数据。
 
 
 ## 背景知识
 
-在很多软件编程任务中，或多或少你都会期望你写的代码能按照编写的顺序，一次一个的顺序执行和完成。但是在ReactiveX中，很多指令可能是并行执行的，之后他们的执行结果才会被观察者捕获，顺序是不确定的。为此，你定义一种获取和变换数据的机制，而不是调用一个方法。在这种机制下，存在一个可观察对象(Observable)，观察者(Observer)订阅(Subscribe)它，当数据准备好了时，之前定义的机制就会分发数据给一直处于等待状态的观察者哨兵。
+在很多软件编程任务中，或多或少你都会期望你写的代码能按照编写的顺序，一次一个的顺序执行和完成。但是在ReactiveX中，很多指令可能是并行执行的，之后他们的执行结果才会被观察者捕获，顺序是不确定的。为达到这个目的，你定义一种获取和变换数据的机制，而不是调用一个方法。在这种机制下，存在一个可观察对象(Observable)，观察者(Observer)订阅(Subscribe)它，当数据就绪时，之前定义的机制就会分发数据给一直处于等待状态的观察者哨兵。
 
-这种方法的优点是，当你有大量的任务要处理时，它们互相之间没有依赖关系。你可以同时开始执行它们，不用等待一个完成再开始下一个（用这种方式，你的整个任务队列能耗费的最长时间，不会超过任务里最耗时的那个）。
+这种方法的优点是，如果你有大量的任务要处理，它们互相之间没有依赖关系。你可以同时开始执行它们，不用等待一个完成再开始下一个（用这种方式，你的整个任务队列能耗费的最长时间，不会超过任务里最耗时的那个）。
 
 有很术语可用于描述这种异步编程和设计模式，在在本文里我们使用这些术语：**一个观察者订阅一个可观察对象** (*An observer subscribes to an Observable*)。通过调用观察者的方法，Observable发射数据或通知给它的观察者。
 
@@ -46,7 +46,7 @@ returnVal = someMethod(itsParameters);
 
 1. 定义一个方法，它完成某些任务，然后从异步调用中返回一个值，这个方法是观察者的一部分
 2. 将这个异步调用本身定义为一个Observable
-3. 通过订阅它，将观察者关联到那个Observable
+3. 观察者通过订阅(Subscribe)操作关联到那个Observable
 4. 继续你的业务逻辑，等方法返回时，Observable会发射结果，观察者的方法会开始处理结果或结果集
 
 用代码描述就是：
@@ -67,21 +67,21 @@ myObservable.subscribe(myOnNext);
 
 ### 回调方法 (onNext, onCompleted, onError)
 
-subscribe方法用于将观察者连接到Observable，你的观察者需要实现以下方法的一个子集：
+Subscribe方法用于将观察者连接到Observable，你的观察者需要实现以下方法的一个子集：
 
 * **onNext(T item)**
 
-	只要Observable调用这个方法发射数据，这个方法的参数就是Observable发射的数据，这个方法可能会被调用多次，取决于你的实现。
+    Observable调用这个方法发射数据，方法的参数就是Observable发射的数据，这个方法可能会被调用多次，取决于你的实现。
 
 * **onError(Exception ex)**
 
-	当Observable遇到错误或者无法返回期望的数据时会调用这个方法，这个调用会终止Observable，后续不会再调用onNext和onCompleted，onError方法的参数是抛出的异常。
+    当Observable遇到错误或者无法返回期望的数据时会调用这个方法，这个调用会终止Observable，后续不会再调用onNext和onCompleted，onError方法的参数是抛出的异常。
 
 * **onComplete**
 
-	正常终止，如果没有遇到错误，Observable在最后一次调用onNext之后调用此方法。
+    正常终止，如果没有遇到错误，Observable在最后一次调用onNext之后调用此方法。
 
-根据Observable协议的定义，onNext可能会被调用零次或者很多次，最后可能会有一次onCompleted或onError调用（不会同时），传递给onNext通常被称作发射，onCompleted和onError被称作通知。
+根据Observable协议的定义，onNext可能会被调用零次或者很多次，最后会有一次onCompleted或onError调用（不会同时），传递数据给onNext通常被称作发射，onCompleted和onError被称作通知。
 
 下面是一个更完整的例子：
 
@@ -106,20 +106,20 @@ myObservable.subscribe(myOnNext, myError, myComplete);
 
 ReactiveX的每种特定语言的实现都有自己的命名偏好，虽然不同的实现之间有很多共同点，但并不存在一个统一的命名标准。
 
-此外，在其它的场景中，一些名字有不同的隐含意义，或者在某些语言看来比较怪异。
+而且，在某些场景中，一些名字有不同的隐含意义，或者在某些语言看来比较怪异。
 
-例如，有一个*onEvent*命名模式(onNext, onCompleted, onError)，在一些场景中，这些名字可能意味着事件处理器已经注册。然而在ReactiveX里，他们是事件处理起的名字。
+例如，有一个*onEvent*命名模式(onNext, onCompleted, onError)，在一些场景中，这些名字可能意味着事件处理器已经注册。然而在ReactiveX里，他们是事件处理器的名字。
 
 
 ## Observables的"热"和"冷"
 
-Observable什么时候开始发射数据序列？这取决于Observable的实现，一个"热"的Observable可能一创建完就开始发射数据，因此所有后续订阅它的观察者可能从序列中间的某个位置开始接受数据。一个"冷"的Observable会一直等待，直到有观察者订阅它才开始发射数据，因此这个观察者可以确保会收到整个数据序列。
+Observable什么时候开始发射数据序列？这取决于Observable的实现，一个"热"的Observable可能一创建完就开始发射数据，因此所有后续订阅它的观察者可能从序列中间的某个位置开始接受数据（有一些数据错过了）。一个"冷"的Observable会一直等待，直到有观察者订阅它才开始发射数据，因此这个观察者可以确保会收到整个数据序列。
 
-在一些ReactiveX实现里，还存在一种被称作*Connectable*的Observable，不管有没有观察者订阅它，这种Observable都不会开始发射数据，除非调用Connect方法被。
+在一些ReactiveX实现里，还存在一种被称作*Connectable*的Observable，不管有没有观察者订阅它，这种Observable都不会开始发射数据，除非Connect方法被调用。
 
 ## 用操作符组合Observable
 
-对于ReactiveX来说，Observable和观察者仅仅是个开始，它们本身不过是标准观察者模式的一些轻量级扩展，目的是为了更好的处理事件序列。
+对于ReactiveX来说，Observable和Observer仅仅是个开始，它们本身不过是标准观察者模式的一些轻量级扩展，目的是为了更好的处理事件序列。
 
 ReactiveX真正强大的地方在于它的操作符，操作符让你可以变换、组合、操纵和处理Observable发射的数据。
 
