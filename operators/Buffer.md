@@ -86,7 +86,7 @@
 
 ### buffer-backpressure
 
-你可以使用`Buffer`操作符实现反压`backpressure`（意思是，处理这样一个Observable：它产生数据的数据可能比它的观察者消费数据的数据快）。
+你可以使用`Buffer`操作符实现反压`backpressure`（意思是，处理这样一个Observable：它产生数据的速度可能比它的观察者消费数据的速度快）。
 
 ![bp.buffer2](../images/operators/bp.buffer2.png)
 
