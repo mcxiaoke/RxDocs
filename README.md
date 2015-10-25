@@ -29,7 +29,7 @@
   * [Combining 结合操作](operators/Combining-Observables.md) - `And`/S`tartWith`/`Join`/`Merge`/`Switch`/`Zip`
   * [Error Handling 错误处理](operators/Error-Handling-Operators.md) - `Catch`/`Retry`
   * [Utility 辅助操作](operators/Observable-Utility-Operators.md) - `Delay`/`Do`/`ObserveOn`/`SubscribeOn`/`Subscribe`
-  * [Conditional 条件和布尔操作](operators/Conditional-and-Boolean-Operators.md) - `All`/`Amb`/`Contains`/`SkipUntil`/`TakeUtil`
+  * [Conditional 条件和布尔操作](operators/Conditional-and-Boolean-Operators.md) - `All`/`Amb`/`Contains`/`SkipUntil`/`TakeUntil`
   * [Mathematical 算术和聚合操作](operators/Mathematical-and-Aggregate-Operators.md) - `Average`/`Concat`/`Count`/`Max`/`Min`/`Sum`/`Reduce`
   * [Async 异步操作](operators/Async-Operators.md) - `start`/`toAsync`/`startFuture`/`fromAction`/`fromCallable`/`runAsync`
   * [Connect 连接操作](operators/Connectable-Observable-Operators.md) - `Connect`/`Publish`/`RefCount`/`Replay`
