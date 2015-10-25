@@ -1,6 +1,6 @@
 ## Using
 
-穿件一个只在Observable生命周期内存在的一次性资源
+创建一个只在Observable生命周期内存在的一次性资源
 
 ![using](../images/operators/using.c.png)
 

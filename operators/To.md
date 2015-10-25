@@ -91,4 +91,4 @@ ReactiveX的很多语言特定实现都有一种操作符让你可以将Observab
 
 ![nest](../images/operators/nest.png)
 
-`nest`操作符有一个特殊的用途：讲一个Observable转换为一个发射这个Observable的Observable。
+`nest`操作符有一个特殊的用途：将一个Observable转换为一个发射这个Observable的Observable。
