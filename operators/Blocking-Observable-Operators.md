@@ -18,7 +18,7 @@
 
 > 伴随这个解释还有一个修改版的弹珠图，表示阻塞Observable的弹珠图：
 
-![BlockingObservables](../images/rx-operators/B.legend.png)
+![BlockingObservables](../images/operators/B.legend.png)
 
 ## BlockingObservable的方法
 

@@ -1,8 +1,8 @@
-## SkipUtil
+## skipUntil
 
 丢弃原始Observable发射的数据，直到第二个Observable发射了一项数据
 
-![skipUtil](../images/operators/skipUtil.c.png)
+![skipUntil](../images/operators/skipUntil.c.png)
 
 `SkipUntil`订阅原始的Observable，但是忽略它的发射物，直到第二个Observable发射了一项数据那一刻，它开始反射原始Observable。
 

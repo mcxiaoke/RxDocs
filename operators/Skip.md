@@ -8,7 +8,7 @@
 
 使用`Skip`操作符，你可以忽略Observable'发射的前N项数据，只保留之后的数据。
 
-![skip](images/operators/skip.png)
+![skip](../images/operators/skip.png)
 
 RxJava中这个操作符叫`skip`。`skip`的这个变体默认不在任何特定的调度器上执行。
 
