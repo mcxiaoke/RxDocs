@@ -4,7 +4,7 @@
 
 ![skipWhile](../images/operators/skipWhile.c.png)
 
-`SkipWhile`订阅原始的Observable，但是忽略它的发射物，直到你指定的某个天剑变为false的那一刻，它开始反射原始Observable。
+`SkipWhile`订阅原始的Observable，但是忽略它的发射物，直到你指定的某个天剑变为false的那一刻，它开始发射原始Observable。
 
 `skipWhile`默认不在任何特定的调度器上执行。
 
