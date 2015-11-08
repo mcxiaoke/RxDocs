@@ -26,16 +26,16 @@
   * [Creating 创建操作](operators/Creating-Observables.md) - `Create`/`Defer`/`From`/`Just`/`Start`/`Repeat`/`Range`
   * [Transforming 变换操作](operators/Transforming-Observables.md) - `Buffer`/`Window`/`Map`/`FlatMap`/`GroupBy`/`Scan`
   * [Filtering 过滤操作](operators/Filtering-Observables.md) - `Debounce`/`Distinct`/`Filter`/`Sample`/`Skip`/`Take`
-  * [Combining 结合操作](operators/Combining-Observables.md) - `And`/S`tartWith`/`Join`/`Merge`/`Switch`/`Zip`
+  * [Combining 结合操作](operators/Combining-Observables.md) - `And`/`StartWith`/`Join`/`Merge`/`Switch`/`Zip`
   * [Error Handling 错误处理](operators/Error-Handling-Operators.md) - `Catch`/`Retry`
   * [Utility 辅助操作](operators/Observable-Utility-Operators.md) - `Delay`/`Do`/`ObserveOn`/`SubscribeOn`/`Subscribe`
   * [Conditional 条件和布尔操作](operators/Conditional-and-Boolean-Operators.md) - `All`/`Amb`/`Contains`/`SkipUntil`/`TakeUntil`
   * [Mathematical 算术和聚合操作](operators/Mathematical-and-Aggregate-Operators.md) - `Average`/`Concat`/`Count`/`Max`/`Min`/`Sum`/`Reduce`
-  * [Async 异步操作](operators/Async-Operators.md) - `start`/`toAsync`/`startFuture`/`fromAction`/`fromCallable`/`runAsync`
+  * [Async 异步操作](operators/Async-Operators.md) - `Start`/`ToAsync`/`StartFuture`/`FromAction`/`FromCallable`/`RunAsync`
   * [Connect 连接操作](operators/Connectable-Observable-Operators.md) - `Connect`/`Publish`/`RefCount`/`Replay`
   * [Convert 转换操作](operators/To.md) - `ToFuture`/`ToList`/`ToIterable`/`ToMap`/`toMultiMap`
-  * [Blocking 阻塞操作](operators/Blocking-Observable-Operators.md) - `forEach`/`First`/`Last`/`mostRecent`/`next`/`single`/`latest`
-  * [String 字符串操作](operators/String-Observables.md) - `byLine`/`decode`/`encode`/`from`/`join`/`split`/`stringConcat`
+  * [Blocking 阻塞操作](operators/Blocking-Observable-Operators.md) - `ForEach`/`First`/`Last`/`MostRecent`/`Next`/`Single`/`Latest`
+  * [String 字符串操作](operators/String-Observables.md) - `ByLine`/`Decode`/`Encode`/`From`/`Join`/`Split`/`StringConcat`
 * [RxJava文档和教程](Topics.md)
   * [RxJava入门指南](topics/Getting-Started.md)
   * [RxJava使用示例](topics/How-To-Use-RxJava.md)

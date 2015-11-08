@@ -8,7 +8,7 @@
 
 RxJava中的实现为`retry`和`retryWhen`。
 
-无论收到多少次`onError`通知，无参数版本的`retry`都会继续订阅并反射原始Observable。
+无论收到多少次`onError`通知，无参数版本的`retry`都会继续订阅并发射原始Observable。
 
 接受单个`count`参数的`retry`会最多重新订阅指定的次数，如果次数超了，它不会尝试再次订阅，它会把最新的一个`onError`通知传递给它的观察者。
 

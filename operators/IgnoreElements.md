@@ -2,7 +2,7 @@
 
 ## IgnoreElements
 
-不发射任何数据，只反射Observable的终止通知
+不发射任何数据，只发射Observable的终止通知
 
 ![ignoreElements](../images/operators/ignoreElements.c.png)
 

@@ -47,7 +47,7 @@ RxJava的实现是`amb`，有一个类似的对象方法`ambWith`。例如，`Ob
 
 ![exists](../images/operators/exists.png)
 
-RxJava中还有一个`exists`操作符，它通过一个谓词函数测试原始Observable反射的数据，只要任何一项满足条件就返回一个发射true的Observable，否则返回一个反射false的Observable。
+RxJava中还有一个`exists`操作符，它通过一个谓词函数测试原始Observable发射的数据，只要任何一项满足条件就返回一个发射true的Observable，否则返回一个发射false的Observable。
 
 `exists`默认不在任何特定的调度器上执行。
 
@@ -67,7 +67,7 @@ RxJava中还有一个`exists`操作符，它通过一个谓词函数测试原始
 
 ![defaultIfEmtpy](../images/operators/defaultIfEmpty.c.png)
 
-`DefaultIfEmpty`简单的精确地反射原始Observable的值，如果原始Observable美欧发射任何数据正常终止（以`onCompleted`d的形式），`DefaultIfEmpty`返回的Observable就发射一个你提供的默认值。
+`DefaultIfEmpty`简单的精确地发射原始Observable的值，如果原始Observable美欧发射任何数据正常终止（以`onCompleted`d的形式），`DefaultIfEmpty`返回的Observable就发射一个你提供的默认值。
 
 RxJava将这个操作符实现为`defaultIfEmpty`。它默认不在任何特定的调度器上执行。
 
@@ -100,7 +100,7 @@ RxJava将这个操作符实现为`defaultIfEmpty`。它默认不在任何特定�
 
 ![skipUntil](../images/operators/skipUntil.c.png)
 
-`SkipUntil`订阅原始的Observable，但是忽略它的发射物，直到第二个Observable发射了一项数据那一刻，它开始反射原始Observable。
+`SkipUntil`订阅原始的Observable，但是忽略它的发射物，直到第二个Observable发射了一项数据那一刻，它开始发射原始Observable。
 
 RxJava中对应的是`skipUntil`，它默认不在任何特定的调度器上执行。
 
@@ -113,7 +113,7 @@ RxJava中对应的是`skipUntil`，它默认不在任何特定的调度器上执
 
 ![skipWhile](../images/operators/skipWhile.c.png)
 
-`SkipWhile`订阅原始的Observable，但是忽略它的发射物，直到你指定的某个天剑变为false的那一刻，它开始反射原始Observable。
+`SkipWhile`订阅原始的Observable，但是忽略它的发射物，直到你指定的某个天剑变为false的那一刻，它开始发射原始Observable。
 
 `skipWhile`默认不在任何特定的调度器上执行。
 
@@ -122,15 +122,15 @@ RxJava中对应的是`skipUntil`，它默认不在任何特定的调度器上执
 
 ## TakeUntil
 
-当第二个Observable反射了一项数据或者终止时，丢弃原始Observable反射的任何数据
+当第二个Observable发射了一项数据或者终止时，丢弃原始Observable发射的任何数据
 
 ![takeUntil](../images/operators/takeUntil.c.png)
 
-`TakeUntil`订阅并开始反射原始Observable，它还监视你提供的第二个Observable。如果第二个Observable发射了一项数据或者发射了一个终止通知，`TakeUntil`返回的Observable会停止反射原始Observable并终止。
+`TakeUntil`订阅并开始发射原始Observable，它还监视你提供的第二个Observable。如果第二个Observable发射了一项数据或者发射了一个终止通知，`TakeUntil`返回的Observable会停止发射原始Observable并终止。
 
 ![takeUntil](../images/operators/takeUntil.png)
 
-RxJava中的实现是`takeUntil`。注意：第二个Observable反射一项数据或一个`onError`通知或一个`onCompleted`通知都会导致`takeUntil`停止发射数据。
+RxJava中的实现是`takeUntil`。注意：第二个Observable发射一项数据或一个`onError`通知或一个`onCompleted`通知都会导致`takeUntil`停止发射数据。
 
 `takeUntil`默认不在任何特定的调度器上执行。
 
@@ -145,11 +145,11 @@ RxJava中的实现是`takeUntil`。注意：第二个Observable反射一项数�
 
 ## TakeWhile
 
-反射Observable发射的数据，直到一个指定的条件不成立
+发射Observable发射的数据，直到一个指定的条件不成立
 
 ![takeWhile](../images/operators/takeWhile.c.png)
 
-`TakeWhile`反射原始Observable，直到你指定的某个条件不成立的那一刻，它停止反射原始Observable，并终止自己的Observable。
+`TakeWhile`发射原始Observable，直到你指定的某个条件不成立的那一刻，它停止发射原始Observable，并终止自己的Observable。
 
 RxJava中的`takeWhile`操作符返回一个镜像原始Observable行为的Observable，直到某一项数据你指定的函数返回`false`那一刻，这个新的Observable发射`onCompleted`终止通知。
 

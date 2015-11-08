@@ -16,7 +16,7 @@
 
 ![exists](../images/operators/exists.png)
 
-RxJava中还有一个`exists`操作符，它通过一个谓词函数测试原始Observable反射的数据，只要任何一项满足条件就返回一个发射true的Observable，否则返回一个反射false的Observable。
+RxJava中还有一个`exists`操作符，它通过一个谓词函数测试原始Observable发射的数据，只要任何一项满足条件就返回一个发射true的Observable，否则返回一个发射false的Observable。
 
 `exists`默认不在任何特定的调度器上执行。
 
