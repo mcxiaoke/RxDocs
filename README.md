@@ -9,7 +9,7 @@
 * [ReactiveX文档中文翻译](http://mcxiaoke.gitbooks.io/rxdocs/content/)
 
 ## 版本历史
-
+* 0.9.0 - 2015.11.25 修正错误和文本润色，感谢@slb1988和@htoooth和@jiyee和@donglua
 * 0.8.0 - 2015.07.27 完成全部文档的初步审校，修正了部分用词不当的地方
 * 0.7.0 - 2015.07.24 完成全部文档的初译，调整了目录的部分链接和文本
 * 0.6.0 - 2015.07.22 完成绝大部分文档的翻译，使用GitBook发布初始版本
@@ -64,13 +64,15 @@
 ## 关于作者
 
 #### 联系方式
+
 * Blog: <http://blog.mcxiaoke.com>
 * Github: <https://github.com/mcxiaoke>
-* Email: [mail@mcxiaoke.com](mailto:mail@mcxiaoke.com)
+* Email: [github@mcxiaoke.com](mailto:github@mcxiaoke.com)
 
 #### 开源项目
 
 * Next公共组件库: <https://github.com/mcxiaoke/Android-Next>
+* PackerNg极速打包工具: <https://github.com/mcxiaoke/packer-ng-plugin>
 * Gradle渠道打包: <https://github.com/mcxiaoke/gradle-packer-plugin>
 * EventBus实现xBus: <https://github.com/mcxiaoke/xBus>
 * Rx文档中文翻译: <https://github.com/mcxiaoke/RxDocs>
@@ -78,5 +80,7 @@
 * 蘑菇饭App: <https://github.com/mcxiaoke/minicat>
 * 饭否客户端: <https://github.com/mcxiaoke/fanfouapp-opensource>
 * Volley镜像: <https://github.com/mcxiaoke/android-volley>
+
+------
 
 
