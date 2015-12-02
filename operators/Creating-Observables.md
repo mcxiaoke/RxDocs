@@ -1,7 +1,7 @@
 这个页面展示了创建Observable的各种方法。
 
 * [**`just( )`**](Just.md) — 将一个或多个对象转换成发射这个或这些对象的一个Observable
-* [**`from( )`**](From.md) — 讲一个Iterable, 一个Future, 或者一个数组转换成一个Observable
+* [**`from( )`**](From.md) — 将一个Iterable, 一个Future, 或者一个数组转换成一个Observable
 * [**`repeat( )`**](Repeat.md) — 创建一个重复发射指定数据或数据序列的Observable
 * [**`repeatWhen( )`**](Repeat.md) — 创建一个重复发射指定数据或数据序列的Observable，它依赖于另一个Observable发射的数据
 * [**`create( )`**](Create.md) — 使用一个函数从头创建一个Observable
