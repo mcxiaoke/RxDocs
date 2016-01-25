@@ -32,7 +32,8 @@ ReactiveX不仅仅是一个编程接口，它是一种编程思想的突破，�
 
 ### 简化代码
 
-* 函数式风格：对可观察数据流使用无副作用的输入输出函数，避免了程序里错综复杂的状态 简化代码：Rx的操作符通通常可以将复杂的难题简化为很少的几行代码
+* 函数式风格：对可观察数据流使用无副作用的输入输出函数，避免了程序里错综复杂的状态
+* 简化代码：Rx的操作符通通常可以将复杂的难题简化为很少的几行代码
 * 异步错误处理：传统的try/catch没办法处理异步计算，Rx提供了合适的错误处理机制
 * 轻松使用并发：Rx的Observables和Schedulers让开发者可以摆脱底层的线程同步和各种并发问题
 
@@ -42,26 +43,29 @@ Rx扩展了观察者模式用于支持数据和事件序列，添加了一些操
 
 Observable通过使用最佳的方式访问异步数据序列填补了这个间隙
 
-			单个数据					多个数据
-	同步 	T getData()					Iterable<T> getData()
-	异步	Future<T> getData()			Observable<T> getData()
+|     |        单个数据       |         多个数据         |
+|-----|---------------------|-------------------------|
+| 同步 | `T getData()`         | `Iterable<T> getData()`   |
+| 异步 | `Future<T> getData()` | `Observable<T> getData()` |
 
 Rx的Observable模型让你可以像使用集合数据一样操作异步事件流，对异步事件流使用各种简单、可组合的操作。
 
 #### Observable可组合
 
-对于单层的异步操作来说，Java中Future对象的处理方式是非常简单有效的，但是一旦涉及到嵌套，它们就开始变得异常繁琐和复杂。使用Future很难很好的组合带条件的异步执行流程（考虑到运行时各种潜在的问题，甚至可以说是不可能的），当然，要想实现还是可以做到的，但是非常困难，或许你可以用Future.get()，但这样做，异步执行的优势就完全没有了。从另一方面说，Rx的Observable一开始就是为组合异步数据流准备的。
+对于单层的异步操作来说，Java中Future对象的处理方式是非常简单有效的，但是一旦涉及到嵌套，它们就开始变得异常繁琐和复杂。使用Future很难很好的组合带条件的异步执行流程（考虑到运行时各种潜在的问题，甚至可以说是不可能的），当然，要想实现还是可以做到的，但是非常困难，或许你可以用`Future.get()`，但这样做，异步执行的优势就完全没有了。从另一方面说，Rx的Observable一开始就是为组合异步数据流准备的。
 
 #### Observable更灵活
 
-Rx的Observable不仅支持处理单独的标量值（就像Future可以做的），也支持数据序列，甚至是无穷的数据流。Observable是一个抽象概念，适用于任何场景。Observable拥有它的近亲Iterable的全部优雅与灵活。
+Rx的Observable不仅支持处理单独的标量值（就像Future可以做的），也支持数据序列，甚至是无穷的数据流。`Observable`是一个抽象概念，适用于任何场景。Observable拥有它的近亲Iterable的全部优雅与灵活。
 
-	Observable是异步的双向push，Iterable是同步的单向pull，对比：
+Observable是异步的双向push，Iterable是同步的单向pull，对比：
 
-	事件			Iterable(pull)			Observable(push)
-	获取数据		T next()					onNext(T)
-	异常处理		throws Exception			onError(Exception)
-	任务完成		!hasNext()				onCompleted()
+
+|   事件  |  Iterable(pull)  |  Observable(push)  |
+|---------|------------------|-------------------|
+| 获取数据 | `T next()`         | `onNext(T)`          |
+| 异常处理 | throws `Exception` | `onError(Exception)` |
+| 任务完成 | `!hasNext()`       | `onCompleted()`      |
 
 #### Observable无偏见
 
@@ -69,7 +73,9 @@ Rx对于对于并发性或异步性没有任何特殊的偏好，Observable可�
 
 **Observable是如何实现的？**
 
-	public Observable<data> getData();
+```java
+public Observable<data> getData();
+```
 
 * 它能与调用者在同一线程同步执行吗？
 * 它能异步地在单独的线程执行吗？
@@ -82,7 +88,7 @@ Rx对于对于并发性或异步性没有任何特殊的偏好，Observable可�
 
 #### 使用回调存在很多问题
 
-回调在不阻塞任何事情的情况下，解决了Future.get()过早阻塞的问题。由于响应结果一旦就绪Callback就会被调用，它们天生就是高效率的。不过，就像使用Future一样，对于单层的异步执行来说，回调很容易使用，对于嵌套的异步组合，它们显得非常笨拙。
+回调在不阻塞任何事情的情况下，解决了`Future.get()`过早阻塞的问题。由于响应结果一旦就绪Callback就会被调用，它们天生就是高效率的。不过，就像使用Future一样，对于单层的异步执行来说，回调很容易使用，对于嵌套的异步组合，它们显得非常笨拙。
 
 #### Rx是一个多语言的实现
 
@@ -114,8 +120,8 @@ getDataFromNetwork()
 
 Observable类型给GOF的观察者模式添加了两种缺少的语义，这样就和Iterable类型中可用的操作一致了：
 
-1. 生产者可以发信号给消费者，通知它没有更多数据可用了（对于Iterable，一个for循环正常完成表示没有数据了；对于Observable，就是调用观察者的onCompleted方法）
-2. 生产者可以发信号给消费者，通知它遇到了一个错误（对于Iterable，迭代过程中发生错误会抛出异常；对于Observable，就是调用观察者(Observer)的onError方法）
+1. 生产者可以发信号给消费者，通知它没有更多数据可用了（对于Iterable，一个for循环正常完成表示没有数据了；对于Observable，就是调用观察者的`onCompleted`方法）
+2. 生产者可以发信号给消费者，通知它遇到了一个错误（对于Iterable，迭代过程中发生错误会抛出异常；对于Observable，就是调用观察者(Observer)的`onError`方法）
 
 有了这两种功能，Rx就能使Observable与Iterable保持一致了，唯一的不同是数据流的方向。任何对Iterable的操作，你都可以对Observable使用。
 
@@ -128,4 +134,4 @@ Observable类型给GOF的观察者模式添加了两种缺少的语义，这样�
 * Observable 可观察对象，在Rx中定义为更强大的Iterable，在观察者模式中是被观察的对象，一旦数据产生或发生变化，会通过某种方式通知观察者或订阅者
 * Observer 观察者对象，监听Observable发射的数据并做出响应，Subscriber是它的一个特殊实现
 *emit 直译为发射，发布，发出，含义是Observable在数据产生或变化时发送通知给Observer，调用Observer对应的方法，文章里一律译为发射
-*items 直译为项目，条目，在Rx里是指Observable发射的数据项，文章里一律译为数据，数据项
+* items 直译为项目，条目，在Rx里是指Observable发射的数据项，文章里一律译为数据，数据项
