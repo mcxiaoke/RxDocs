@@ -1,12 +1,15 @@
 # ReactiveX文档中文翻译
 
-## 说明
-
-* 大部分是翻译自 [ReactiveX.io](http://reactivex.io/) 和 [RxJava Wiki](https://github.com/ReactiveX/rxjava/wiki)，修正了原文的一些错误，补充了详细的说明和示例
+by [mcxiaoke](https://github.com/mcxiaoke)
 
 ## 阅读地址
 
 * [ReactiveX文档中文翻译](http://mcxiaoke.gitbooks.io/rxdocs/content/)
+* [PDF/ePub/Mobi格式下载](https://www.gitbook.com/book/mcxiaoke/rxdocs/details)
+
+## 说明
+
+* 大部分是翻译自 [ReactiveX.io](http://reactivex.io/) 和 [RxJava Wiki](https://github.com/ReactiveX/rxjava/wiki)，修正了原文的一些错误，补充了详细的说明和示例
 
 ## 版本历史
 * 0.9.0 - 2015.11.25 修正错误和文本润色，感谢@slb1988和@htoooth和@jiyee和@donglua
