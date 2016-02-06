@@ -61,26 +61,30 @@
 
 ------
 
-## 关于作者
+## 许可协议
 
-#### 联系方式
+- [署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
+
+------
+
+## 联系方式
 
 * Blog: <http://blog.mcxiaoke.com>
 * Github: <https://github.com/mcxiaoke>
-* Email: [github@mcxiaoke.com](mailto:github@mcxiaoke.com)
+* Email: [github@mcxiaoke.com](mailto:github#mcxiaoke.com)
 
-#### 开源项目
+## 开源项目
 
-* Next公共组件库: <https://github.com/mcxiaoke/Android-Next>
-* PackerNg极速打包工具: <https://github.com/mcxiaoke/packer-ng-plugin>
-* Gradle渠道打包: <https://github.com/mcxiaoke/gradle-packer-plugin>
-* EventBus实现xBus: <https://github.com/mcxiaoke/xBus>
 * Rx文档中文翻译: <https://github.com/mcxiaoke/RxDocs>
 * MQTT协议中文版: <https://github.com/mcxiaoke/mqtt>
+* Awesome-Kotlin:<https://github.com/mcxiaoke/awesome-kotlin>
+* Kotlin-Koi:<https://github.com/mcxiaoke/kotlin-koi>
+* Next公共组件库: <https://github.com/mcxiaoke/Android-Next>
+* PackerNg极速打包: <https://github.com/mcxiaoke/packer-ng-plugin>
+* Gradle渠道打包: <https://github.com/mcxiaoke/gradle-packer-plugin>
+* EventBus实现xBus: <https://github.com/mcxiaoke/xBus>
 * 蘑菇饭App: <https://github.com/mcxiaoke/minicat>
 * 饭否客户端: <https://github.com/mcxiaoke/fanfouapp-opensource>
 * Volley镜像: <https://github.com/mcxiaoke/android-volley>
 
 ------
-
-
