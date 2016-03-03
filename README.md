@@ -2,6 +2,8 @@
 
 by [mcxiaoke](https://github.com/mcxiaoke)
 
+有任何意见或建议，到这里提出 [Create New Issue](https://github.com/mcxiaoke/RxDocs/issues/new)
+
 ## 阅读地址
 
 * [ReactiveX文档中文翻译](http://mcxiaoke.gitbooks.io/rxdocs/content/)
