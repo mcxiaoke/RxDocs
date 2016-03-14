@@ -14,7 +14,9 @@ by [mcxiaoke](https://github.com/mcxiaoke)
 * 大部分是翻译自 [ReactiveX.io](http://reactivex.io/) 和 [RxJava Wiki](https://github.com/ReactiveX/rxjava/wiki)，修正了原文的一些错误，补充了详细的说明和示例
 
 ## 版本历史
-* 0.9.0 - 2015.11.25 修正错误和文本润色，感谢@slb1988和@htoooth和@jiyee和@donglua
+
+* 0.9.5 - 2016.03.14 文本修正和润色，感谢@htoooth/@AlanCheen/@Ydcool/@loshine/@ppoffice帮忙完善
+* 0.9.0 - 2015.11.25 修正错误和文本润色，感谢@slb1988/@htoooth/@jiyee/@donglua帮忙完善
 * 0.8.0 - 2015.07.27 完成全部文档的初步审校，修正了部分用词不当的地方
 * 0.7.0 - 2015.07.24 完成全部文档的初译，调整了目录的部分链接和文本
 * 0.6.0 - 2015.07.22 完成绝大部分文档的翻译，使用GitBook发布初始版本
