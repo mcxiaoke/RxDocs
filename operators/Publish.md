@@ -1,6 +1,6 @@
 ## Publish
 
-将普通的Observable换换为可连接的Observable
+将普通的Observable转换为可连接的Observable
 
 ![publish](../images/operators/publishConnect.c.png)
 
