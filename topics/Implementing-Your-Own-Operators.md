@@ -115,7 +115,7 @@ public class MyTransformer<Integer,String> implements Transformer<Integer,String
   * [`ignoreElements( )`](http://reactivex.io/documentation/operators/ignoreelements.html) 被定义为 <tt>[filter(alwaysFalse( ))](http://reactivex.io/documentation/operators/filter.html)</tt>
   * [`reduce(a)`](http://reactivex.io/documentation/operators/reduce.html) 被定义为 <tt>[scan(a)](http://reactivex.io/documentation/operators/scan.html).[last( )](http://reactivex.io/documentation/operators/last.html)</tt>
 * 如果你的操作符使用了函数或者lambda表达式作为参数，请注意它们可能是异常的来源，而且要准备好捕获这些异常，并且使用 `onError()` 通知订阅者。
-  * 某些异常被认为是致命的，对它们来说，调用 `onError()`毫无意义，那样或者是无用的，或者只是对问题的妥协。你可以使用 `Exceptions.throwIfFatal(throwable)` 方法过滤掉这些知名的异常，并重新抛出它们，而不是试图发射关于它们的通知。
+  * 某些异常被认为是致命的，对它们来说，调用 `onError()`毫无意义，那样或者是无用的，或者只是对问题的妥协。你可以使用 `Exceptions.throwIfFatal(throwable)` 方法过滤掉这些致命的异常，并重新抛出它们，而不是试图发射关于它们的通知。
 * 一般说来，一旦发生错误应立即通知订阅者，而不是首先尝试发射更多的数据。
 * 请注意 `null` 可能是Observable发射的一个合法数据。频繁发生错误的一个来源是：测试一些变量并且将持有一个非 `null` 值作为是否发射了数据的替代。一个值为 `null` 的数据仍然是一个发射数据项，它与没有发射任何东西是不能等同的。
 * 想让你的操作符在反压(*backpressure*)场景中变得得好可能会非常棘手。可以参考Dávid Karnok的博客 [Advanced RxJava](http://akarnokd.blogspot.hu/)，这里有一个涉及到的各种因素和怎样处理它们的很值得看的讨论。
