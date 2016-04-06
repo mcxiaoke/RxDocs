@@ -26,7 +26,7 @@ RxJava将`Catch`实现为三个不同的操作符：
 
 ![onErrorReturn](../images/operators/onErrorReturn.png)
 
-`onErrorReturn`方法返回一个镜像原有Observable行为的新Observable，后者会忽略前者的`onError`调用，不会将错误传递给观察者，作为替代，它会发发射一个特殊的项并调用观察者的`onComleted`方法。
+`onErrorReturn`方法返回一个镜像原有Observable行为的新Observable，后者会忽略前者的`onError`调用，不会将错误传递给观察者，作为替代，它会发发射一个特殊的项并调用观察者的`onCompleted`方法。
 
 * Javadoc: [onErrorReturn(Func1)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#onErrorReturn(rx.functions.Func1))
 
