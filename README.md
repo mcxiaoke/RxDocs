@@ -1,6 +1,6 @@
-# ReactiveX文档中文翻译
+# ReactiveX/RxJava文档中文版
 
-by [mcxiaoke](https://github.com/mcxiaoke)
+**项目地址：<https://github.com/mcxiaoke/RxDocs>，欢迎Star和帮忙改进。**
 
 有任何意见或建议，到这里提出 [Create New Issue](https://github.com/mcxiaoke/RxDocs/issues/new)
 
