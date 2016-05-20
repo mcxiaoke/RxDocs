@@ -13,6 +13,9 @@ code, div.highlight {
   margin-left: 5px;
 }
 
+pre {
+  overflow-x: auto;
+}
 img {
   max-width: 100%;
 }
