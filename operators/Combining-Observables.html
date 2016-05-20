@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Combining-Observables.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<p>这个页面展示的操作符可用于组合多个Observables。</p>
+<ul>
+<li><a href="StartWith.html"><strong><code>startWith( )</code></strong></a> — 在数据序列的开头增加一项数据</li>
+<li><a href="Merge.html"><strong><code>merge( )</code></strong></a> — 将多个Observable合并为一个</li>
+<li><a href="Merge.html"><strong><code>mergeDelayError( )</code></strong></a> — 合并多个Observables，让没有错误的Observable都完成后再发射错误通知</li>
+<li><a href="Zip.html"><strong><code>zip( )</code></strong></a> — 使用一个函数组合多个Observable发射的数据集合，然后再发射这个结果</li>
+<li><a href="And.html"><strong><code>and( )</code>, <code>then( )</code>, and <code>when( )</code></strong></a> — (<code>rxjava-joins</code>) 通过模式和计划组合多个Observables发射的数据集合</li>
+<li><a href="CombineLatest.html"><strong><code>combineLatest( )</code></strong></a> — 当两个Observables中的任何一个发射了一个数据时，通过一个指定的函数组合每个Observable发射的最新数据（一共两个数据），然后发射这个函数的结果</li>
+<li><a href="Join.html"><strong><code>join( )</code> and <code>groupJoin( )</code></strong></a> — 无论何时，如果一个Observable发射了一个数据项，只要在另一个Observable发射的数据项定义的时间窗口内，就将两个Observable发射的数据合并发射</li>
+<li><a href="Switch.html"><strong><code>switchOnNext( )</code></strong></a> — 将一个发射Observables的Observable转换成另一个Observable，后者发射这些Observables最近发射的数据</li>
+</ul>
+<blockquote>
+<p>(<code>rxjava-joins</code>) — 表示这个操作符当前是可选的<code>rxjava-joins</code>包的一部分，还没有包含在标准的RxJava操作符集合里</p>
+</blockquote>
+</body>
+<html>

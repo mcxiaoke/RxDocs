@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File FlatMap.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="flatmap">FlatMap</h2>
+<p><code>FlatMap</code>将一个发射数据的Observable变换为多个Observables，然后将它们发射的数据合并后放进一个单独的Observable</p>
+<p><img src="../images/operators/flatMap.png" alt="flatMap"></p>
+<p><code>FlatMap</code>操作符使用一个指定的函数对原始Observable发射的每一项数据执行变换操作，这个函数返回一个本身也发射数据的Observable，然后<code>FlatMap</code>合并这些Observables发射的数据，最后将合并后的结果当做它自己的数据序列发射。</p>
+<p>这个方法是很有用的，例如，当你有一个这样的Observable：它发射一个数据序列，这些数据本身包含Observable成员或者可以变换为Observable，因此你可以创建一个新的Observable发射这些次级Observable发射的数据的完整集合。</p>
+<p>注意：<code>FlatMap</code>对这些Observables发射的数据做的是合并(<code>merge</code>)操作，因此它们可能是交错的。</p>
+<p>在许多语言特定的实现中，还有一个操作符不会让变换后的Observables发射的数据交错，它按照严格的顺序发射这些数据，这个操作符通常被叫作<code>ConcatMap</code>或者类似的名字。</p>
+<p><img src="../images/operators/mergeMap.png" alt="mergeMap"></p>
+<p>RxJava将这个操作符实现为<code>flatMap</code>函数。</p>
+<p>注意：如果任何一个通过这个<code>flatMap</code>操作产生的单独的Observable调用<code>onError</code>异常终止了，这个Observable自身会立即调用<code>onError</code>并终止。</p>
+<p>这个操作符有一个接受额外的<code>int</code>参数的一个变体。这个参数设置<code>flatMap</code>从原来的Observable映射Observables的最大同时订阅数。当达到这个限制时，它会等待其中一个终止然后再订阅另一个。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1">flatMap(Func1)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1,%20int">flatMap(Func1,int)</a>)</li>
+</ul>
+<p><img src="../images/operators/mergeMap.nce.png" alt="mergeMap.nce"></p>
+<p>还有一个版本的<code>flatMap</code>为原始Observable的每一项数据和每一个通知创建一个新的Observable（并对数据平坦化）。</p>
+<p>它也有一个接受额外<code>int</code>参数的变体。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1,%20rx.functions.Func1,%20rx.functions.Func0">flatMap(Func1,Func1,Func0)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1,%20rx.functions.Func1,%20rx.functions.Func0,%20int">flatMap(Func1,Func1,Func0,int)</a>)</li>
+</ul>
+<p><img src="../images/operators/mergeMap.r.png" alt="mergeMap.r"></p>
+<p>还有一个版本的<code>flatMap</code>会使用原始Observable的数据触发的Observable组合这些数据，然后发射这些数据组合。它也有一个接受额外<code>int</code>参数的版本。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1,%20rx.functions.Func2">flatMap(Func1,Func2)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMap(rx.functions.Func1,%20rx.functions.Func2,%20int">flatMap(Func1,Func2,int)</a>)</li>
+</ul>
+<h3 id="flatmapiterable">flatMapIterable</h3>
+<p><img src="../images/operators/mergeMapIterable.png" alt="mergeMapIterable"></p>
+<p><code>flatMapIterable</code>这个变体成对的打包数据，然后生成Iterable而不是原始数据和生成的Observables，但是处理方式是相同的。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMapIterable(rx.functions.Func1">flatMapIterable(Func1)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#flatMapIterable(rx.functions.Func1,%20rx.functions.Func2">flatMapIterable(Func1,Func2)</a>)</li>
+</ul>
+<h3 id="concatmap">concatMap</h3>
+<p><img src="../images/operators/concatMap.png" alt="concatMap"></p>
+<p>还有一个<code>concatMap</code>操作符，它类似于最简单版本的<code>flatMap</code>，但是它按次序连接而不是合并那些生成的Observables，然后产生自己的数据序列。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#concatMap(rx.functions.Func1">concatMap(Func1)</a>)</li>
+</ul>
+<h3 id="switchmap">switchMap</h3>
+<p><img src="../images/operators/switchMap.png" alt="switchMap"></p>
+<p>RxJava还实现了<code>switchMap</code>操作符。它和<code>flatMap</code>很像，除了一点：当原始Observable发射一个新的数据（Observable）时，它将取消订阅并停止监视产生执之前那个数据的Observable，只监视当前这一个。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#switchMap(rx.functions.Func1">switchMap(Func1)</a>)</li>
+</ul>
+<h3 id="split">split</h3>
+<p><img src="../images/operators/St.split.png" alt="St.split"></p>
+<p>在特殊的<code>StringObservable</code>类（默认没有包含在RxJava中）中还有一个<code>split</code>操作符。它将一个发射字符串的Observable转换为另一个发射字符串的Observable，只不过，后者将原始的数据序列当做一个数据流，使用一个正则表达式边界分割它们，然后合并发射分割的结果。</p>
+</body>
+<html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Last.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="last">Last</h2>
+<p>只发射最后一项（或者满足某个条件的最后一项）数据</p>
+<p><img src="../images/operators/last.c.png" alt="last"></p>
+<p>如果你只对Observable发射的最后一项数据，或者满足某个条件的最后一项数据感兴趣，你可以使用<code>Last</code>操作符。</p>
+<p>在某些实现中，<code>Last</code>没有实现为一个返回Observable的过滤操作符，而是实现为一个在当时就发射原始Observable指定数据项的阻塞函数。在这些实现中，如果你想要的是一个过滤操作符，最好使用<code>TakeLast(1)</code>。</p>
+<p>在RxJava中的实现是<code>last</code>和<code>lastOrDefault</code>。</p>
+<p>可能容易混淆，<code>BlockingObservable</code>也有名叫<code>last</code>和<code>lastOrDefault</code>的操作符，它们会阻塞并返回值，不是立即返回一个Observable。</p>
+<h3 id="-">过滤操作符</h3>
+<p><img src="../images/operators/last.png" alt="last"></p>
+<p>只发射最后一项数据，使用没有参数的<code>last</code>操作符。</p>
+<p>示例代码</p>
+<pre><code class="lang-java">Observable.just(1, 2, 3)
+          .last()
+          .subscribe(new Subscriber&lt;Integer&gt;() {
+        @Override
+        public void onNext(Integer item) {
+            System.out.println(&quot;Next: &quot; + item);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            System.err.println(&quot;Error: &quot; + error.getMessage());
+        }
+
+        @Override
+        public void onCompleted() {
+            System.out.println(&quot;Sequence complete.&quot;);
+        }
+    });
+</code></pre>
+<p>输出</p>
+<pre><code>Next: 3
+Sequence complete.
+</code></pre><ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#last(">last()</a>)</li>
+</ul>
+<p><img src="../images/operators/last.p.png" alt="last"></p>
+<p>这个版本的<code>last</code>也是接受一个谓词函数，返回一个发射原始Observable中满足条件的最后一项数据的Observable。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#last(rx.functions.Func1">last(Func1)</a>)</li>
+</ul>
+<p><img src="../images/operators/lastOrDefault.png" alt="last"></p>
+<p><code>lastOrDefault</code>与<code>last</code>类似，不同的是，如果原始Observable没有发射任何值，它发射你指定的默认值。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T">lastOrDefault(T)</a>)</li>
+</ul>
+<p><img src="../images/operators/lastOrDefault.p.png" alt="last"></p>
+<p>这个版本的<code>lastOrDefault</code>可以接受一个谓词函数，如果有数据满足条件，返回的Observable就发射原始Observable满足条件的最后一项数据，否则发射默认值。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#lastOrDefault(T">lastOrDefault(T)</a>)</li>
+</ul>
+<p><code>last</code>和<code>lastOrDefault</code>默认不在任何特定的调度器上执行。</p>
+</body>
+<html>

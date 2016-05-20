@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Reduce.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="reduce">Reduce</h2>
+<p>按顺序对Observable发射的每项数据应用一个函数并发射最终的值</p>
+<p><img src="../images/operators/reduce.c.png" alt="reduce"></p>
+<p><code>Reduce</code>操作符对原始Observable发射数据的第一项应用一个函数，然后再将这个函数的返回值与第二项数据一起传递给函数，以此类推，持续这个过程知道原始Observable发射它的最后一项数据并终止，此时<code>Reduce</code>返回的Observable发射这个函数返回的最终值。</p>
+<p>在其它场景中，这种操作有时被称为<code>累积</code>，<code>聚集</code>，<code>压缩</code>，<code>折叠</code>，<code>注射</code>等。</p>
+<p><img src="../images/operators/reduce.png" alt="reduce"></p>
+<p>注意如果原始Observable没有发射任何数据，<code>reduce</code>抛出异常<code>IllegalArgumentException</code>。</p>
+<p><code>reduce</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#reduce(rx.functions.Func2">reduce(Func2)</a>)</li>
+</ul>
+<p><img src="../images/operators/reduceSeed.png" alt="reduce"></p>
+<p>还有一个版本的<code>reduce</code>额外接受一个种子参数。注意传递一个值为<code>null</code>的种子是合法的，但是与不传种子参数的行为是不同的。如果你传递了种子参数，并且原始Observable没有发射任何数据，<code>reduce</code>操作符将发射这个种子值然后正常终止，而不是抛异常。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#reduce(R,%20rx.functions.Func2">reduce(R,Func2)</a>)</li>
+</ul>
+<p>提示：不建议使用<code>reduce</code>收集发射的数据到一个可变的数据结构，那种场景你应该使用<code>collect</code>。</p>
+<p><img src="../images/operators/collect.png" alt="collect"></p>
+<p><code>collect</code>与<code>reduce</code>类似，但它的目的是收集原始Observable发射的所有数据到一个可变的数据结构，<code>collect</code>生成的这个Observable会发射这项数据。它需要两个参数：</p>
+<ol>
+<li>一个函数返回可变数据结构</li>
+<li>另一个函数，当传递给它这个数据结构和原始Observable发射的数据项时，适当地修改数据结构。</li>
+</ol>
+<p><code>collect</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#collect(rx.functions.Func0,%20rx.functions.Action2">collect(Func0,Action2)</a>)</li>
+</ul>
+</body>
+<html>

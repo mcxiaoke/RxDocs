@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Debounce.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="debounce">Debounce</h2>
+<p>仅在过了一段指定的时间还没发射数据时才发射一个数据</p>
+<p><img src="../images/operators/debounce.c.png" alt="debounce"></p>
+<p><code>Debounce</code>操作符会过滤掉发射速率过快的数据项。</p>
+<p>RxJava将这个操作符实现为<code>throttleWithTimeout</code>和<code>debounce</code>。</p>
+<p>注意：这个操作符会会接着最后一项数据发射原始Observable的<code>onCompleted</code>通知，即使这个通知发生在你指定的时间窗口内（从最后一项数据的发射算起）。也就是说，<code>onCompleted</code>通知不会触发限流。</p>
+<h3 id="throttlewithtimeout">throttleWithTimeout</h3>
+<p><img src="../images/operators/debounce.png" alt="debounce"></p>
+<p><code>throtleWithTimeout/debounce</code>的一个变体根据你指定的时间间隔进行限流，时间单位通过<code>TimeUnit</code>参数指定。</p>
+<p>这种操作符默认在<code>computation</code>调度器上执行，但是你可以通过第三个参数指定。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleWithTimeout(long,%20java.util.concurrent.TimeUnit">throttleWithTimeout(long,TimeUnit)</a>) and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#debounce(long,%20java.util.concurrent.TimeUnit">debounce(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleWithTimeout(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">throttleWithTimeout(long,TimeUnit,Scheduler)</a>) and <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#debounce(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">debounce(long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+<h3 id="debounce">debounce</h3>
+<p><img src="../images/operators/debounce.f.png" alt="debounce"></p>
+<p><code>debounce</code>操作符的一个变体通过对原始Observable的每一项应用一个函数进行限流，这个函数返回一个Observable。如果原始Observable在这个新生成的Observable终止之前发射了另一个数据，<code>debounce</code>会抑制(suppress)这个数据项。</p>
+<p><code>debounce</code>的这个变体默认不在任何特定的调度器上执行。</p>
+</body>
+<html>

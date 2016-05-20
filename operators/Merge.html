@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Merge.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="merge">Merge</h2>
+<p>合并多个Observables的发射物</p>
+<p><img src="../images/operators/merge.c.png" alt="merge"></p>
+<p>使用<code>Merge</code>操作符你可以将多个Observables的输出合并，就好像它们是一个单个的Observable一样。</p>
+<p><code>Merge</code>可能会让合并的Observables发射的数据交错（有一个类似的操作符<code>Concat</code>不会让数据交错，它会按顺序一个接着一个发射多个Observables的发射物）。</p>
+<p>正如图例上展示的，任何一个原始Observable的<code>onError</code>通知会被立即传递给观察者，而且会终止合并后的Observable。</p>
+<p><img src="../images/operators/mergeDelayError.C.png" alt="mergeDelayError"></p>
+<p>在很多ReactiveX实现中还有一个叫<code>MergeDelayError</code>的操作符，它的行为有一点不同，它会保留<code>onError</code>通知直到合并后的Observable所有的数据发射完成，在那时它才会把<code>onError</code>传递给观察者。</p>
+<p>RxJava将它实现为<code>merge</code>, <code>mergeWith</code>和<code>mergeDelayError</code>。</p>
+<p><img src="../images/operators/merge.png" alt="merge"></p>
+<p>示例代码</p>
+<pre><code class="lang-java">
+Observable&lt;Integer&gt; odds = Observable.just(1, 3, 5).subscribeOn(someScheduler);
+Observable&lt;Integer&gt; evens = Observable.just(2, 4, 6);
+
+Observable.merge(odds, evens)
+          .subscribe(new Subscriber&lt;Integer&gt;() {
+        @Override
+        public void onNext(Integer item) {
+            System.out.println(&quot;Next: &quot; + item);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            System.err.println(&quot;Error: &quot; + error.getMessage());
+        }
+
+        @Override
+        public void onCompleted() {
+            System.out.println(&quot;Sequence complete.&quot;);
+        }
+    });
+</code></pre>
+<p>输出</p>
+<pre><code>Next: 1
+Next: 3
+Next: 5
+Next: 2
+Next: 4
+Next: 6
+Sequence complete.
+</code></pre><ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#merge(java.lang.Iterable">merge(Iterable)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#merge(java.lang.Iterable,%20int">merge(Iterable,int)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable%5B%5D">merge(Observable[])</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable,%20rx.Observable">merge(Observable,Observable)</a>) (接受二到九个Observable)</li>
+</ul>
+<p>除了传递多个Observable给<code>merge</code>，你还可以传递一个Observable列表<code>List</code>，数组，甚至是一个发射Observable序列的Observable，<code>merge</code>将合并它们的输出作为单个Observable的输出：</p>
+<p><img src="../images/operators/merge.io.png" alt="merge"></p>
+<p>如果你传递一个发射Observables序列的Observable，你可以指定<code>merge</code>应该同时订阅的Observable&#39;的最大数量。一旦达到订阅数的限制，它将不再订阅原始Observable发射的任何其它Observable，直到某个已经订阅的Observable发射了<code>onCompleted</code>通知。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable">merge(Observable&lt;Observable&gt;)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#merge(rx.Observable,%20int">merge(Observable&lt;Observable&gt;,int)</a>)</li>
+</ul>
+<p><code>merge</code>是静态方法，<code>mergeWith</code>是对象方法，举个例子，<code>Observable.merge(odds,evens)</code>等价于<code>odds.mergeWith(evens)</code>。</p>
+<p>如果传递给<code>merge</code>的任何一个的Observable发射了<code>onError</code>通知终止了，<code>merge</code>操作符生成的Observable也会立即以<code>onError</code>通知终止。如果你想让它继续发射数据，在最后才报告错误，可以使用<code>mergeDelayError</code>。</p>
+<p><img src="../images/operators/mergeDelayError.png" alt="merge"></p>
+<p><code>mergeDelayError</code> behaves much like <code>merge</code>. The exception is when one of the Observables being merged terminates with an onError notification. If this happens with merge, the merged Observable will immediately issue an <code>onError</code> notification and terminate. <code>mergeDelayError</code>, on the other hand, will hold off on reporting the error until it has given any other non-error-producing Observables that it is merging a chance to finish emitting their items, and it will emit those itself, and will only terminate with an <code>onError</code> notification when all of the other merged Observables have finished.</p>
+<p>Because it is possible that more than one of the merged Observables encountered an error, <code>mergeDelayError</code> may pass information about multiple errors in the onError notification (it will never invoke the observer’s <code>onError</code> method more than once). For this reason, if you want to know the nature of these errors, you should write your observers’ onError methods so that they accept a parameter of the class <code>CompositeException</code>.</p>
+<p><code>mergeDelayError</code> has fewer variants. You cannot pass it an Iterable or Array of Observables, but you can pass it an Observable that emits Observables or between one and nine individual Observables as parameters. There is not an instance method version of <code>mergeDelayError</code> as there is for <code>merge</code>.</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable">mergeDelayError(Observable&lt;Observable&gt;)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#mergeDelayError(rx.Observable,%20rx.Observable">mergeDelayError(Observable,Observable)</a>)</li>
+</ul>
+</body>
+<html>

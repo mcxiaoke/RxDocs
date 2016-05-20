@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Skip.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="skip">Skip</h2>
+<p>抑制Observable发射的前N项数据</p>
+<p><img src="../images/operators/skip.c.png" alt="skip"></p>
+<p>使用<code>Skip</code>操作符，你可以忽略Observable&#39;发射的前N项数据，只保留之后的数据。</p>
+<p><img src="../images/operators/skip.png" alt="skip"></p>
+<p>RxJava中这个操作符叫<code>skip</code>。<code>skip</code>的这个变体默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(int">skip(int)</a>)</li>
+</ul>
+<p><img src="../images/operators/skip.t.png" alt="skip"></p>
+<p><code>skip</code>的这个变体接受一个时长而不是数量参数。它会丢弃原始Observable开始的那段时间发射的数据，时长和时间单位通过参数指定。</p>
+<p><code>skip</code>的这个变体默认在<code>computation</code>调度器上执行，但是你可以使用第三个参数指定其它的调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(long,%20java.util.concurrent.TimeUnit">skip(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skip(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">skip(long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+</body>
+<html>

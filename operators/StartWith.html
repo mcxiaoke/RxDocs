@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File StartWith.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="startwith">StartWith</h2>
+<p>在数据序列的开头插入一条指定的项</p>
+<p><img src="../images/operators/startWith.c.png" alt="startWith"></p>
+<p>如果你想要一个Observable在发射数据之前先发射一个指定的数据序列，可以使用<code>StartWith</code>操作符。（如果你想一个Observable发射的数据末尾追加一个数据序列可以使用<code>Concat</code>操作符。）</p>
+<p><img src="../images/operators/startWith.png" alt="startWith"></p>
+<p>可接受一个Iterable或者多个Observable作为函数的参数。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#startWith(java.lang.Iterable">startWith(Iterable)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#startWith(T">startWith(T)</a>) (最多接受九个参数)</li>
+</ul>
+<p><img src="../images/operators/startWith.o.png" alt="startWith"></p>
+<p>你也可以传递一个Observable给<code>startWith</code>，它会将那个Observable的发射物插在原始Observable发射的数据序列之前，然后把这个当做自己的发射物集合。这可以看作是<code>Concat</code>的反转。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#startWith(rx.Observable">startWith(Observable)</a>)</li>
+</ul>
+</body>
+<html>

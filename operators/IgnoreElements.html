@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File IgnoreElements.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="ignoreelements">IgnoreElements</h2>
+<p>不发射任何数据，只发射Observable的终止通知</p>
+<p><img src="../images/operators/ignoreElements.c.png" alt="ignoreElements"></p>
+<p><code>IgnoreElements</code>操作符抑制原始Observable发射的所有数据，只允许它的终止通知（<code>onError</code>或<code>onCompleted</code>）通过。</p>
+<p>如果你不关心一个Observable发射的数据，但是希望在它完成时或遇到错误终止时收到通知，你可以对Observable使用<code>ignoreElements</code>操作符，它会确保永远不会调用观察者的<code>onNext()</code>方法。</p>
+<p>RxJava将这个操作符实现为<code>ignoreElements</code>。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#ignoreElements(">ignoreElements()</a>)</li>
+</ul>
+<p><code>ignoreElements</code>默认不在任何特定的调度器上执行。</p>
+</body>
+<html>

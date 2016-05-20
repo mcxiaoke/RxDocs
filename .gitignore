@@ -1,3 +1,4 @@
 wiki
 *.plist
 _book
+/node_modules

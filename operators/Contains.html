@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Contains.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="contains">Contains</h2>
+<p>判定一个Observable是否发射一个特定的值</p>
+<p><img src="../images/operators/contains.c.png" alt="contains"></p>
+<p>给<code>Contains</code>传一个指定的值，如果原始Observable发射了那个值，它返回的Observable将发射true，否则发射false。</p>
+<p>相关的一个操作符<code>IsEmpty</code>用于判定原始Observable是否没有发射任何数据。</p>
+<p><img src="../images/operators/contains.png" alt="contains"></p>
+<p><code>contains</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#contains(java.lang.Object">contains(Object)</a>)</li>
+</ul>
+<p><img src="../images/operators/exists.png" alt="exists"></p>
+<p>RxJava中还有一个<code>exists</code>操作符，它通过一个谓词函数测试原始Observable发射的数据，只要任何一项满足条件就返回一个发射true的Observable，否则返回一个发射false的Observable。</p>
+<p><code>exists</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#exists(rx.functions.Func1">exists(Func1)</a>)</li>
+</ul>
+<p><img src="../images/operators/isEmpty.png" alt="isEmpty"></p>
+<p><code>isEmpty</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#isEmpty(">isEmpty()</a>)</li>
+</ul>
+</body>
+<html>

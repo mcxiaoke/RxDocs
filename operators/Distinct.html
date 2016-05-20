@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Distinct.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="distinct">Distinct</h2>
+<p>抑制（过滤掉）重复的数据项</p>
+<p><img src="../images/operators/distinct.c.png" alt="distinct"></p>
+<p><code>Distinct</code>的过滤规则是：只允许还没有发射过的数据项通过。</p>
+<p>在某些实现中，有一些变体允许你调整判定两个数据不同(<code>distinct</code>)的标准。还有一些实现只比较一项数据和它的直接前驱，因此只会从序列中过滤掉连续重复的数据。</p>
+<h3 id="distinct-">distinct()</h3>
+<p><img src="../images/operators/distinct.png" alt="distinct"></p>
+<p>RxJava将这个操作符实现为<code>distinct</code>函数。</p>
+<p>示例代码</p>
+<pre><code class="lang-java">
+Observable.just(1, 2, 1, 1, 2, 3)
+          .distinct()
+          .subscribe(new Subscriber&lt;Integer&gt;() {
+        @Override
+        public void onNext(Integer item) {
+            System.out.println(&quot;Next: &quot; + item);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            System.err.println(&quot;Error: &quot; + error.getMessage());
+        }
+
+        @Override
+        public void onCompleted() {
+            System.out.println(&quot;Sequence complete.&quot;);
+        }
+    });
+</code></pre>
+<p>输出</p>
+<pre><code>Next: 1
+Next: 2
+Next: 3
+Sequence complete.
+</code></pre><ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinct(">distinct()</a>)</li>
+</ul>
+<h3 id="distinct-func1-">distinct(Func1)</h3>
+<p><img src="../images/operators/distinct.key.png" alt="distinct"></p>
+<p>这个操作符有一个变体接受一个函数函数。这个函数根据原始Observable发射的数据项产生一个Key，然后，比较这些Key而不是数据本身，来判定两个数据是否是不同的。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinct(rx.functions.Func1">distinct(Func1)</a>)</li>
+</ul>
+<h3 id="distinctuntilchanged">distinctUntilChanged</h3>
+<p><img src="../images/operators/distinctUntilChanged.png" alt="distinctUntilChanged"></p>
+<p>RxJava还是实现了一个<code>distinctUntilChanged</code>操作符。它只判定一个数据和它的直接前驱是否是不同的。</p>
+<h3 id="distinctuntilchanged-func1-">distinctUntilChanged(Func1)</h3>
+<p><img src="../images/operators/distinctUntilChanged.key.png" alt="distinctUntilChanged.key"></p>
+<p>和<code>distinct(Func1)</code>一样，根据一个函数产生的Key判定两个相邻的数据项是不是不同的。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#distinctUntilChanged(rx.functions.Func1">distinctUntilChanged(Func1)</a>)</li>
+</ul>
+<p><code>distinct</code>和<code>distinctUntilChanged</code>默认不在任何特定的调度器上执行。</p>
+</body>
+<html>

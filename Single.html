@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Single.html in D:\git\RxDocs</title>
+  <link rel="stylesheet" href="style/github-style.css">
+</head>
+<body>
+<h1 id="single">Single</h1>
+<h3 id="-">介绍</h3>
+<p>RxJava（以及它派生出来的RxGroovy和RxScala）中有一个名为<strong>Single</strong>的Observable变种。</p>
+<p>Single类似于Observable，不同的是，它总是只发射一个值，或者一个错误通知，而不是发射一系列的值。</p>
+<p>因此，不同于Observable需要三个方法onNext, onError, onCompleted，订阅Single只需要两个方法：</p>
+<ul>
+<li>onSuccess - Single发射单个的值到这个方法</li>
+<li>onError - 如果无法发射需要的值，Single发射一个Throwable对象到这个方法</li>
+</ul>
+<p>Single只会调用这两个方法中的一个，而且只会调用一次，调用了任何一个方法之后，订阅关系终止。</p>
+<h3 id="single-">Single的操作符</h3>
+<p>Single也可以组合使用多种操作，一些操作符让你可以混合使用Observable和Single：</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>返回值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>compose</td>
+<td>Single</td>
+<td>创建一个自定义的操作符</td>
+</tr>
+<tr>
+<td>concat and concatWith</td>
+<td>Observable</td>
+<td>连接多个Single和Observable发射的数据</td>
+</tr>
+<tr>
+<td>create</td>
+<td>Single</td>
+<td>调用观察者的create方法创建一个Single</td>
+</tr>
+<tr>
+<td>error</td>
+<td>Single</td>
+<td>返回一个立即给订阅者发射错误通知的Single</td>
+</tr>
+<tr>
+<td>flatMap</td>
+<td>Single</td>
+<td>返回一个Single，它发射对原Single的数据执行flatMap操作后的结果</td>
+</tr>
+<tr>
+<td>flatMapObservable</td>
+<td>Observable</td>
+<td>返回一个Observable，它发射对原Single的数据执行flatMap操作后的结果</td>
+</tr>
+<tr>
+<td>from</td>
+<td>Single</td>
+<td>将Future转换成Single</td>
+</tr>
+<tr>
+<td>just</td>
+<td>Single</td>
+<td>返回一个发射一个指定值的Single</td>
+</tr>
+<tr>
+<td>map</td>
+<td>Single</td>
+<td>返回一个Single，它发射对原Single的数据执行map操作后的结果</td>
+</tr>
+<tr>
+<td>merge</td>
+<td>Single</td>
+<td>将一个Single(它发射的数据是另一个Single，假设为B)转换成另一个Single(它发射来自另一个Single(B)的数据)</td>
+</tr>
+<tr>
+<td>merge and mergeWith</td>
+<td>Observable</td>
+<td>合并发射来自多个Single的数据</td>
+</tr>
+<tr>
+<td>observeOn</td>
+<td>Single</td>
+<td>指示Single在指定的调度程序上调用订阅者的方法</td>
+</tr>
+<tr>
+<td>onErrorReturn</td>
+<td>Single</td>
+<td>将一个发射错误通知的Single转换成一个发射指定数据项的Single</td>
+</tr>
+<tr>
+<td>subscribeOn</td>
+<td>Single</td>
+<td>指示Single在指定的调度程序上执行操作</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>Single</td>
+<td>它给原有的Single添加超时控制，如果超时了就发射一个错误通知</td>
+</tr>
+<tr>
+<td>toSingle</td>
+<td>Single</td>
+<td>将一个发射单个值的Observable转换为一个Single</td>
+</tr>
+<tr>
+<td>zip and zipWith</td>
+<td>Single</td>
+<td>将多个Single转换为一个，后者发射的数据是对前者应用一个函数后的结果</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-">操作符图示</h3>
+<p>详细的图解可以参考英文文档：<a href="http://reactivex.io/documentation/single.html">Single</a></p>
+</body>
+<html>

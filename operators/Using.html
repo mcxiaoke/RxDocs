@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Using.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="using">Using</h2>
+<p>创建一个只在Observable生命周期内存在的一次性资源</p>
+<p><img src="../images/operators/using.c.png" alt="using"></p>
+<p><code>Using</code>操作符让你可以指示Observable创建一个只在它的生命周期内存在的资源，当Observable终止时这个资源会被自动释放。</p>
+<p><img src="../images/operators/using.png" alt="using"></p>
+<p><code>using</code>操作符接受三个参数：</p>
+<ol>
+<li>一个用户创建一次性资源的工厂函数</li>
+<li>一个用于创建Observable的工厂函数</li>
+<li>一个用于释放资源的函数</li>
+</ol>
+<p>当一个观察者订阅<code>using</code>返回的Observable时，<code>using</code>将会使用Observable工厂函数创建观察者要观察的Observable，同时使用资源工厂函数创建一个你想要创建的资源。当观察者取消订阅这个Observable时，或者当观察者终止时（无论是正常终止还是因错误而终止），<code>using</code>使用第三个函数释放它创建的资源。</p>
+<p><code>using</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#using(rx.functions.Func0,%20rx.functions.Func1,%20rx.functions.Action1">using(Func0,Func1,Action1)</a>)</li>
+</ul>
+</body>
+<html>
