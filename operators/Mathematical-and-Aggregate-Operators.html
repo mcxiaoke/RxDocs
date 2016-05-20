@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Mathematical-and-Aggregate-Operators.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<p>本页展示的操作符用于对整个序列执行算法操作或其它操作，由于这些操作必须等待数据发射完成（通常也必须缓存这些数据），它们对于非常长或者无限的序列来说是危险的，不推荐使用。</p>
+<h4 id="-rxjava-math-"><code>rxjava-math</code> 模块的操作符</h4>
+<ul>
+<li><a href="Mathematical.html#Average"><strong><code>averageInteger( )</code></strong></a> — 求序列平均数并发射</li>
+<li><a href="Mathematical.html#Average"><strong><code>averageLong( )</code></strong></a> — 求序列平均数并发射</li>
+<li><a href="Mathematical.html#Average"><strong><code>averageFloat( )</code></strong></a> — 求序列平均数并发射</li>
+<li><a href="Mathematical.html#Average"><strong><code>averageDouble( )</code></strong></a> — 求序列平均数并发射</li>
+<li><a href="Mathematical.html#Max"><strong><code>max( )</code></strong></a> — 求序列最大值并发射</li>
+<li><a href="Mathematical.html#Max"><strong><code>maxBy( )</code></strong></a> — 求最大key对应的值并发射</li>
+<li><a href="Mathematical.html#Min"><strong><code>min( )</code></strong></a> — 求最小值并发射</li>
+<li><a href="Mathematical.html#Min"><strong><code>minBy( )</code></strong></a> — 求最小Key对应的值并发射</li>
+<li><a href="Mathematical.html#Sum"><strong><code>sumInteger( )</code></strong></a> — 求和并发射</li>
+<li><a href="Mathematical.html#Sum"><strong><code>sumLong( )</code></strong></a> — 求和并发射</li>
+<li><a href="Mathematical.html#Sum"><strong><code>sumFloat( )</code></strong></a> — 求和并发射</li>
+<li><a href="Mathematical.html#Sum"><strong><code>sumDouble( )</code></strong></a> — 求和并发射</li>
+</ul>
+<h4 id="-">其它聚合操作符</h4>
+<ul>
+<li><a href="Mathematical.html#Concat"><strong><code>concat( )</code></strong></a> — 顺序连接多个Observables</li>
+<li><a href="Mathematical.html#Count"><strong><code>count( )</code> and <code>countLong( )</code></strong></a> — 计算数据项的个数并发射结果</li>
+<li><a href="Mathematical.html#Reduce"><strong><code>reduce( )</code></strong></a> — 对序列使用reduce()函数并发射对吼的结果</li>
+<li><a href="Mathematical.html#Reduce"><strong><code>collect( )</code></strong></a> — 将原始Observable发射的数据放到一个单一的可变的数据结构中，然后返回一个发射这个数据结构的Observable</li>
+<li><a href="To.html"><strong><code>toList( )</code></strong></a> — 收集原始Observable发射的所有数据到一个列表，然后返回这个列表</li>
+<li><a href="To.html"><strong><code>toSortedList( )</code></strong></a> — 收集原始Observable发射的所有数据到一个有序列表，然后返回这个列表</li>
+<li><a href="To.html"><strong><code>toMap( )</code></strong></a> — 将序列数据转换为一个Map，Map的key是根据一个函数计算的</li>
+<li><a href="To.html"><strong><code>toMultiMap( )</code></strong></a> — 将序列数据转换为一个列表，同时也是一个Map，Map的key是根据一个函数计算的</li>
+</ul>
+</body>
+<html>

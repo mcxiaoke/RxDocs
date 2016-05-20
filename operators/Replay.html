@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Replay.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="replay">Replay</h2>
+<p>保证所有的观察者收到相同的数据序列，即使它们在Observable开始发射数据之后才订阅</p>
+<p><img src="../images/operators/replay.c.png" alt="replay"></p>
+<p>可连接的Observable (<em>connectable Observable</em>)与普通的Observable差不多，不过它并不会在被订阅时开始发射数据，而是直到使用了<code>Connect</code>操作符时才会开始。用这种方法，你可以在任何时候让一个Observable开始发射数据。</p>
+<p>如果在将一个Observable转换为可连接的Observable之前对它使用<code>Replay</code>操作符，产生的这个可连接Observable将总是发射完整的数据序列给任何未来的观察者，即使那些观察者在这个Observable开始给其它观察者发射数据之后才订阅。</p>
+<p><img src="../images/operators/replay.png" alt="replay"></p>
+<p>RxJava的实现为<code>replay</code>，它有多个接受不同参数的变体，有的可以指定<code>replay</code>的最大缓存数量，有的还可以指定调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(">replay()</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(int">replay(int)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(long,%20java.util.concurrent.TimeUnit">replay(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(int,%20long,%20java.util.concurrent.TimeUnit">replay(int,long,TimeUnit)</a>)</li>
+</ul>
+<p><img src="../images/operators/replay.f.png" alt="replay"></p>
+<p>有一种 <code>replay</code>返回一个普通的Observable。它可以接受一个变换函数为参数，这个函数接受原始Observable发射的数据项为参数，返回结果Observable要发射的一项数据。因此，这个操作符其实是<code>replay</code>变换之后的数据项。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1">replay(Func1)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1,%20int">replay(Func1,int)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1,%20long,%20java.util.concurrent.TimeUnit">replay(Func1,long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#replay(rx.functions.Func1,%20int,%20long,%20java.util.concurrent.TimeUnit">replay(Func1,int,long,TimeUnit)</a>)</li>
+</ul>
+</body>
+<html>

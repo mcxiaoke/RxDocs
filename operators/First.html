@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File First.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="first">First</h2>
+<p>只发射第一项（或者满足某个条件的第一项）数据</p>
+<p><img src="../images/operators/first.c.png" alt="first"></p>
+<p>如果你只对Observable发射的第一项数据，或者满足某个条件的第一项数据感兴趣，你可以使用<code>First</code>操作符。</p>
+<p>在某些实现中，<code>First</code>没有实现为一个返回Observable的过滤操作符，而是实现为一个在当时就发射原始Observable指定数据项的阻塞函数。在这些实现中，如果你想要的是一个过滤操作符，最好使用<code>Take(1)</code>或者<code>ElementAt(0)</code>。</p>
+<p>在一些实现中还有一个<code>Single</code>操作符。它的行为与<code>First</code>类似，但为了确保只发射单个值，它会等待原始Observable终止（否则，不是发射那个值，而是以一个错误通知终止）。你可以使用它从原始Observable获取第一项数据，而且也确保只发射一项数据。</p>
+<p>在RxJava中，这个操作符被实现为<code>first</code>，<code>firstOrDefault</code>和<code>takeFirst</code>。</p>
+<p>可能容易混淆，<code>BlockingObservable</code>也有名叫<code>first</code>和<code>firstOrDefault</code>的操作符，它们会阻塞并返回值，不是立即返回一个Observable。</p>
+<p>还有几个其它的操作符执行类似的功能。</p>
+<h3 id="-">过滤操作符</h3>
+<p><img src="../images/operators/first.png" alt="first"></p>
+<p>只发射第一个数据，使用没有参数的<code>first</code>操作符。</p>
+<p>示例代码</p>
+<pre><code class="lang-java">Observable.just(1, 2, 3)
+          .first()
+          .subscribe(new Subscriber&lt;Integer&gt;() {
+        @Override
+        public void onNext(Integer item) {
+            System.out.println(&quot;Next: &quot; + item);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            System.err.println(&quot;Error: &quot; + error.getMessage());
+        }
+
+        @Override
+        public void onCompleted() {
+            System.out.println(&quot;Sequence complete.&quot;);
+        }
+    });
+</code></pre>
+<p>输出</p>
+<pre><code>Next: 1
+Sequence complete.
+</code></pre><ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#first(">first()</a>)</li>
+</ul>
+<h3 id="first-func1-">first(Func1)</h3>
+<p><img src="../images/operators/firstN.png" alt="first"></p>
+<p>传递一个谓词函数给<code>first</code>，然后发射这个函数判定为<code>true</code>的第一项数据。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#first(rx.functions.Func1">first(Func1)</a>)</li>
+</ul>
+<h3 id="firstordefault">firstOrDefault</h3>
+<p><img src="../images/operators/firstOrDefault.png" alt="firstOrDefault"></p>
+<p><code>firstOrDefault</code>与<code>first</code>类似，但是在Observagle没有发射任何数据时发射一个你在参数中指定的默认值。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T">firstOrDefault(T)</a>)</li>
+</ul>
+<h3 id="firstordefault-func1-">firstOrDefault(Func1)</h3>
+<p><img src="../images/operators/firstOrDefaultN.png" alt="firstOrDefault"></p>
+<p>传递一个谓词函数给<code>firstOrDefault</code>，然后发射这个函数判定为<code>true</code>的第一项数据，如果没有数据通过了谓词测试就发射一个默认值。</p>
+<ul>
+<li>Javadoc <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#firstOrDefault(T, rx.functions.Func1">firstOrDefault(T, Func1)</a>)</li>
+</ul>
+<h3 id="takefirst">takeFirst</h3>
+<p><img src="../images/operators/first.takeFirst.png" alt="takeFirst"></p>
+<p><code>takeFirst</code>与<code>first</code>类似，除了这一点：如果原始Observable没有发射任何满足条件的数据，<code>first</code>会抛出一个<code>NoSuchElementException</code>，<code>takeFist</code>会返回一个空的Observable（不调用<code>onNext()</code>但是会调用<code>onCompleted</code>）。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeFirst(rx.functions.Func1">takeFirst(Func1)</a>)</li>
+</ul>
+<h3 id="single">single</h3>
+<p><img src="../images/operators/single.png" alt="single"></p>
+<p><code>single</code>操作符也与<code>first</code>类似，但是如果原始Observable在完成之前不是正好发射一次数据，它会抛出一个<code>NoSuchElementException</code>。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#single(">single()</a>)</li>
+</ul>
+<h3 id="single-func1-">single(Func1)</h3>
+<p><img src="../images/operators/single.p.png" alt="single"></p>
+<p><code>single</code>的变体接受一个谓词函数，发射满足条件的单个值，如果不是正好只有一个数据项满足条件，会以错误通知终止。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#single(rx.functions.Func1">single(Func1)</a>)</li>
+</ul>
+<h3 id="singleordefault">singleOrDefault</h3>
+<p><img src="../images/operators/singleOrDefault.png" alt="single"></p>
+<p>和<code>firstOrDefault</code>类似，但是如果原始Observable发射超过一个的数据，会以错误通知终止。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#singleOrDefault(T">singleOrDefault(T)</a>)</li>
+</ul>
+<h3 id="singleordefault-t-func1-">singleOrDefault(T,Func1)</h3>
+<p><img src="../images/operators/singleOrDefault.p.png" alt="single"></p>
+<p>和<code>firstOrDefault(T, Func1)</code>类似，如果没有数据满足条件，返回默认值；如果有多个数据满足条件，以错误通知终止。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#singleOrDefault(rx.functions.Func1,%20T">singleOrDefault(Func1,T)</a>)</li>
+</ul>
+<p>first系列的这几个操作符默认不在任何特定的调度器上执行。</p>
+</body>
+<html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File ElementAt.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="elementat">ElementAt</h2>
+<p>只发射第N项数据</p>
+<p><img src="../images/operators/elementAt.c.png" alt="elementAt"></p>
+<p><code>ElementAt</code>操作符获取原始Observable发射的数据序列指定索引位置的数据项，然后当做自己的唯一数据发射。</p>
+<p><img src="../images/operators/elementAt.png" alt="elementAt"></p>
+<p>RxJava将这个操作符实现为<code>elementAt</code>，给它传递一个基于0的索引值，它会发射原始Observable数据序列对应索引位置的值，如果你传递给<code>elementAt</code>的值为5，那么它会发射第六项的数据。</p>
+<p>如果你传递的是一个负数，或者原始Observable的数据项数小于<code>index+1</code>，将会抛出一个<code>IndexOutOfBoundsException</code>异常。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#elementAt(int">elementAt(int)</a>)</li>
+</ul>
+<h3 id="elementatordefault">elementAtOrDefault</h3>
+<p><img src="../images/operators/elementAtOrDefault.png" alt="elementAtOrDefault"></p>
+<p>RxJava还实现了<code>elementAtOrDefault</code>操作符。与<code>elementAt</code>的区别是，如果索引值大于数据项数，它会发射一个默认值（通过额外的参数指定），而不是抛出异常。但是如果你传递一个负数索引值，它仍然会抛出一个<code>IndexOutOfBoundsException</code>异常。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#elementAtOrDefault(int,%20T">elementAtOrDefault(int,T)</a>)</li>
+</ul>
+<p><code>elementAt</code>和<code>elementAtOrDefault</code>默认不在任何特定的调度器上执行。</p>
+</body>
+<html>

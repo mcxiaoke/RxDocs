@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File How-To-Use-RxJava.html in D:\git\RxDocs\topics</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h1 id="-">第一个例子</h1>
+<p>你可以在这里找到JVM平台几种语言的例子 <a href="https://github.com/ReactiveX/">language adaptor</a>:</p>
+<ul>
+<li><a href="https://github.com/ReactiveX/RxGroovy/tree/1.x/src/examples/groovy/rx/lang/groovy/examples">RxGroovy 示例</a></li>
+<li><a href="https://github.com/ReactiveX/RxClojure/tree/0.x/src/examples/clojure/rx/lang/clojure/examples">RxClojure 示例</a></li>
+<li><a href="https://github.com/ReactiveX/RxScala/tree/0.x/examples/src/main/scala">RxScala 示例</a></li>
+</ul>
+<p>下面的示例从一个字符串列表创建一个Observable，然后使用一个方法订阅这个Observable。</p>
+<h3 id="java">Java</h3>
+<pre><code class="lang-java">public static void hello(String... names) {
+    Observable.from(names).subscribe(new Action1&lt;String&gt;() {
+
+        @Override
+        public void call(String s) {
+            System.out.println(&quot;Hello &quot; + s + &quot;!&quot;);
+        }
+
+    });
+}
+</code></pre>
+<pre><code class="lang-java">hello(&quot;Ben&quot;, &quot;George&quot;);
+Hello Ben!
+Hello George!
+</code></pre>
+<h3 id="groovy">Groovy</h3>
+<pre><code class="lang-groovy">def hello(String[] names) {
+    Observable.from(names).subscribe { println &quot;Hello ${it}!&quot; }
+}
+</code></pre>
+<pre><code class="lang-groovy">hello(&quot;Ben&quot;, &quot;George&quot;)
+Hello Ben!
+Hello George!
+</code></pre>
+<h3 id="clojure">Clojure</h3>
+<pre><code class="lang-clojure">(defn hello
+  [&amp;rest]
+  (-&gt; (Observable/from &amp;rest)
+    (.subscribe #(println (str &quot;Hello &quot; % &quot;!&quot;)))))
+</code></pre>
+<pre><code>(hello [&quot;Ben&quot; &quot;George&quot;])
+Hello Ben!
+Hello George!
+</code></pre><h3 id="scala">Scala</h3>
+<pre><code class="lang-scala">import rx.lang.scala.Observable
+
+def hello(names: String*) {
+  Observable.from(names) subscribe { n =&gt;
+    println(s&quot;Hello $n!&quot;)
+  }
+}
+</code></pre>
+<pre><code class="lang-scala">hello(&quot;Ben&quot;, &quot;George&quot;)
+Hello Ben!
+Hello George!
+</code></pre>
+<h1 id="-rxjava">如何使用RxJava</h1>
+<p>要使用RxJava，首先你需要创建Observable（它们发射数据序列），使用Observable操作符变换那些Observables，获取严格符合你要求的数据，然后观察并处理对这些数据序列（通过实现观察者或订阅者，然后订阅变换后的Observable）。</p>
+<h2 id="-observables">创建Observables</h2>
+<p>要创建Observable，你可以手动实现Observable的行为，也可以传递一个函数给<a href="../operators/Create.html"><code>create( )</code></a>，还可以使用这些 <a href="../operators/Creating-Observables.html">创建操作符</a> 将一个已有的数据结构转换为Observable。</p>
+<h3 id="-observable">已有的数据结构创建Observable</h3>
+<p>你可以使用<a href="../operators/Just.html"><code>just( )</code></a> 和<a href="../operators/From.html"><code>from( )</code></a> 方法将对象，列表，对象属猪转换为发射那些对象的Observable：</p>
+<pre><code class="lang-java">Observable&lt;String&gt; o = Observable.from(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);
+
+def list = [5, 6, 7, 8]
+Observable&lt;Integer&gt; o = Observable.from(list);
+
+Observable&lt;String&gt; o = Observable.just(&quot;one object&quot;);
+</code></pre>
+<p>转换后的Observable每发射一项数据，会同步地调用任何订阅者的<a href="../Observables.html#回调方法"><code>onNext()</code></a>方法，最后会调用订阅者的<a href="../Observables.html#回调方法"><code>onCompleted()</code></a>方法。</p>
+<h3 id="-create-observable">使用<code>create( )</code>创建一个Observable</h3>
+<p>使用 <a href="../operators/Create.html"><code>create( )</code></a> 方法，你可以创建你自己的Observable，可以实现异步I/O，计算操作，甚至是无限的数据流。</p>
+<h4 id="-observable-">同步的Observable示例</h4>
+<pre><code class="lang-groovy">/**
+ * 这个例子展示了一个自定义的Observable，当有订阅时他会阻塞当前线程。
+ */
+def customObservableBlocking() {
+    return Observable.create { aSubscriber -&gt;
+        50.times { i -&gt;
+            if (!aSubscriber.unsubscribed) {
+                aSubscriber.onNext(&quot;value_${i}&quot;)
+            }
+        }
+        // after sending all values we complete the sequence
+        if (!aSubscriber.unsubscribed) {
+            aSubscriber.onCompleted()
+        }
+    }
+}
+
+// To see output:
+customObservableBlocking().subscribe { println(it) }
+</code></pre>
+<h4 id="-observable-">异步的Observable示例</h4>
+<p>The following example uses Groovy to create an Observable that emits 75 strings.<br>下面的例子使用<code>Groovy</code>创建了一个发射75个字符串的Observable。</p>
+<p>为了让它更清楚，例子很详细，使用静态类型和匿名内部类<code>Func1</code>：</p>
+<pre><code class="lang-groovy">/**
+ * This example shows a custom Observable that does not block
+ * when subscribed to as it spawns a separate thread.
+ */
+def customObservableNonBlocking() {
+    return Observable.create({ subscriber -&gt;
+        Thread.start {
+            for (i in 0..&lt;75) {
+                if (subscriber.unsubscribed) {
+                    return
+                }
+                subscriber.onNext(&quot;value_${i}&quot;)
+            }
+            // after sending all values we complete the sequence
+            if (!subscriber.unsubscribed) {
+                subscriber.onCompleted()
+            }
+        }
+    } as Observable.OnSubscribe)
+}
+
+// To see output:
+customObservableNonBlocking().subscribe { println(it) }
+</code></pre>
+<p>这是一个用<code>Clojure</code>写的例子，使用Future（而不是直接用线程），实现很简洁：</p>
+<pre><code class="lang-clojure">(defn customObservableNonBlocking []
+  &quot;This example shows a custom Observable that does not block 
+   when subscribed to as it spawns a separate thread.
+
+  returns Observable&lt;String&gt;&quot;
+  (Observable/create 
+    (fn [subscriber]
+      (let [f (future 
+                (doseq [x (range 50)] (-&gt; subscriber (.onNext (str &quot;value_&quot; x))))
+                ; after sending all values we complete the sequence
+                (-&gt; subscriber .onCompleted))
+        ))
+      ))
+</code></pre>
+<pre><code class="lang-clojure">; To see output
+(.subscribe (customObservableNonBlocking) #(println %))
+</code></pre>
+<p>这个例子从维基百科网站抓取文章，每抓取一篇会调用一次<code>onNext</code>：</p>
+<pre><code class="lang-clojure">(defn fetchWikipediaArticleAsynchronously [wikipediaArticleNames]
+  &quot;Fetch a list of Wikipedia articles asynchronously.
+
+   return Observable&lt;String&gt; of HTML&quot;
+  (Observable/create 
+    (fn [subscriber]
+      (let [f (future
+                (doseq [articleName wikipediaArticleNames]
+                  (-&gt; subscriber (.onNext (http/get (str &quot;http://en.wikipedia.org/wiki/&quot; articleName)))))
+                ; after sending response to onnext we complete the sequence
+                (-&gt; subscriber .onCompleted))
+        ))))
+</code></pre>
+<pre><code class="lang-clojure">(-&gt; (fetchWikipediaArticleAsynchronously [&quot;Tiger&quot; &quot;Elephant&quot;]) 
+  (.subscribe #(println &quot;--- Article ---\n&quot; (subs (:body %) 0 125) &quot;...&quot;)))
+</code></pre>
+<p>回到<code>Groovy</code>，同样是从维基百科抓取文章，这儿使用闭包代替匿名内部类：</p>
+<pre><code class="lang-groovy">/*
+ * Fetch a list of Wikipedia articles asynchronously.
+ */
+def fetchWikipediaArticleAsynchronously(String... wikipediaArticleNames) {
+    return Observable.create { subscriber -&gt;
+        Thread.start {
+            for (articleName in wikipediaArticleNames) {
+                if (subscriber.unsubscribed) {
+                    return
+                }
+                subscriber.onNext(new URL(&quot;http://en.wikipedia.org/wiki/${articleName}&quot;).text)
+            }
+            if (!subscriber.unsubscribed) {
+                subscriber.onCompleted()
+            }
+        }
+        return subscriber
+    }
+}
+
+fetchWikipediaArticleAsynchronously(&quot;Tiger&quot;, &quot;Elephant&quot;)
+    .subscribe { println &quot;--- Article ---\n${it.substring(0, 125)}&quot; }
+</code></pre>
+<p>结果：</p>
+<pre><code class="lang-text">--- Article ---
+ &lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; dir=&quot;ltr&quot; class=&quot;client-nojs&quot;&gt;
+&lt;head&gt;
+&lt;title&gt;Tiger - Wikipedia, the free encyclopedia&lt;/title&gt; ...
+--- Article ---
+ &lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; dir=&quot;ltr&quot; class=&quot;client-nojs&quot;&gt;
+&lt;head&gt;
+&lt;title&gt;Elephant - Wikipedia, the free encyclopedia&lt;/tit ...
+</code></pre>
+<p>Note that all of the above examples ignore error handling, for brevity. See below for examples that include error handling.</p>
+<p>More information can be found on the [[Observable]] and [[Creating Observables|Creating-Observables]] pages.</p>
+<p>注意：为了简洁，上面的所有例子都忽略了错误处理，查看下面包含错误处理的例子。</p>
+<p>更多的信息可以在这里找到：<a href="Observables.html"><code>Observable</code></a> 和 <a href="../operators/Creating-Observables.html"><code>Creating Observables</code></a>。</p>
+<h2 id="-">使用变换操作</h2>
+<p>RxJava让你可以链式使用<code>操作符</code>用来转换和组合多个Observables。</p>
+<p>The following example, in Groovy, uses a previously defined, asynchronous Observable that emits 75 items, skips over the first 10 of these (<a href="http://reactivex.io/documentation/operators/skip.html"><code>skip(10)</code></a>), then takes the next 5 (<a href="http://reactivex.io/documentation/operators/take.html"><code>take(5)</code></a>), and transforms them (<a href="http://reactivex.io/documentation/operators/map.html"><code>map(...)</code></a>) before subscribing and printing the items:</p>
+<p>下面是一个<code>Groovy</code>的例子，使用之前的定义，它会异步发射75个字符串，跳过最开始的10个（(<a href="../operators/Skip.html"><code>skip(10)</code></a>），然后获取接下来的5个（<a href="../operators/Taks.html"><code>take(5)</code></a>），在订阅之前使用<a href="../operators/Map.html"><code>map()</code></a>转换它们，然后打印结果字符串。</p>
+<pre><code class="lang-groovy">/**
+ * Asynchronously calls &#39;customObservableNonBlocking&#39; and defines
+ * a chain of operators to apply to the callback sequence.
+ */
+def simpleComposition() {
+    customObservableNonBlocking().skip(10).take(5)
+        .map({ stringValue -&gt; return stringValue + &quot;_xform&quot;})
+        .subscribe({ println &quot;onNext =&gt; &quot; + it})
+}
+</code></pre>
+<p>输出结果</p>
+<pre><code class="lang-text">onNext =&gt; value_10_xform
+onNext =&gt; value_11_xform
+onNext =&gt; value_12_xform
+onNext =&gt; value_13_xform
+onNext =&gt; value_14_xform
+</code></pre>
+<p>这里有一个图例解释了转换过程：</p>
+<p>&lt;img src=&quot;../images/operators/Composition.1.png&quot; width=&quot;640&quot; height=&quot;536&quot; /&gt;</p>
+<p>这一个例子使用<code>Clojure</code>，使用了三个异步的Observable，其中一个依赖另一个，使用<a href="../operators/Zip.html"><code>zip</code></a>组合这三个发射的数据项为一个单个数据项，最后使用<a href="../operators/Map.html"><code>map()</code></a>转换这个结果：</p>
+<pre><code class="lang-clojure">(defn getVideoForUser [userId videoId]
+  &quot;Get video metadata for a given userId
+   - video metadata
+   - video bookmark position
+   - user data
+  return Observable&lt;Map&gt;&quot;
+    (let [user-observable (-&gt; (getUser userId)
+              (.map (fn [user] {:user-name (:name user) :language (:preferred-language user)})))
+          bookmark-observable (-&gt; (getVideoBookmark userId videoId)
+              (.map (fn [bookmark] {:viewed-position (:position bookmark)})))
+          ; getVideoMetadata requires :language from user-observable so nest inside map function
+          video-metadata-observable (-&gt; user-observable 
+              (.mapMany
+                ; fetch metadata after a response from user-observable is received
+                (fn [user-map] 
+                  (getVideoMetadata videoId (:language user-map)))))]
+          ; now combine 3 observables using zip
+          (-&gt; (Observable/zip bookmark-observable video-metadata-observable user-observable 
+                (fn [bookmark-map metadata-map user-map]
+                  {:bookmark-map bookmark-map 
+                  :metadata-map metadata-map
+                  :user-map user-map}))
+            ; and transform into a single response object
+            (.map (fn [data]
+                  {:video-id videoId
+                   :video-metadata (:metadata-map data)
+                   :user-id userId
+                   :language (:language (:user-map data))
+                   :bookmark (:viewed-position (:bookmark-map data))
+                  })))))
+</code></pre>
+<p>输出是这样的：</p>
+<pre><code class="lang-clojure">{:video-id 78965, 
+ :video-metadata {:video-id 78965, :title House of Cards: Episode 1, 
+                  :director David Fincher, :duration 3365}, 
+ :user-id 12345, :language es-us, :bookmark 0}
+</code></pre>
+<p>这里有一个图例解释了这个过程：</p>
+<p>&lt;img src=&quot;../images/operators/Composition.2.png&quot; width=&quot;640&quot; height=&quot;742&quot; /&gt;</p>
+<p>The following example, in Groovy, comes from <a href="https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013">Ben Christensen’s QCon presentation on the evolution of the Netflix API</a>. It combines two Observables with the <a href="http://reactivex.io/documentation/operators/merge.html"><code>merge</code></a> operator, then uses the <a href="http://reactivex.io/documentation/operators/reduce.html"><code>reduce</code></a> operator to construct a single item out of the resulting sequence, then transforms that item with <a href="http://reactivex.io/documentation/operators/map.html"><code>map</code></a> before emitting it:</p>
+<p>下面的例子使用<code>Groovy</code>，来自这里 <a href="https://speakerdeck.com/benjchristensen/evolution-of-the-netflix-api-qcon-sf-2013">Ben Christensen’s QCon presentation on the evolution of the Netflix API</a>，它使用<a href="../operators/Merge.html"><code>merge</code></a>操作结合两个Observables，使用<a href="../operators/Reduce.html"><code>reduce</code></a>操作符从结果序列构建一个单独的结果数据项，然后在发射之前，使用<a href="../operators/Map.html"><code>map()</code></a>变换那个结果。</p>
+<pre><code class="lang-groovy">public Observable getVideoSummary(APIVideo video) {
+   def seed = [id:video.id, title:video.getTitle()];
+   def bookmarkObservable = getBookmark(video);
+   def artworkObservable = getArtworkImageUrl(video);
+   return( Observable.merge(bookmarkObservable, artworkObservable)
+      .reduce(seed, { aggregate, current -&gt; aggregate &lt;&lt; current })
+      .map({ [(video.id.toString() : it] }))
+}
+</code></pre>
+<p>这里也有一个图例解释<a href="../operators/Reduce.html"><code>reduce</code></a>从多个Observable的结果构建一个单一结构的过程：</p>
+<p>&lt;img src=&quot;../images/operators/Composition.3.png&quot; width=&quot;640&quot; height=&quot;640&quot; /&gt;</p>
+<h2 id="-">错误处理</h2>
+<p>这里是另一个版本的维基百科的例子，包含错误处理代码：</p>
+<pre><code class="lang-groovy">/*
+ * Fetch a list of Wikipedia articles asynchronously, with error handling.
+ */
+def fetchWikipediaArticleAsynchronouslyWithErrorHandling(String... wikipediaArticleNames) {
+    return Observable.create({ subscriber -&gt;
+        Thread.start {
+            try {
+                for (articleName in wikipediaArticleNames) {
+                    if (true == subscriber.isUnsubscribed()) {
+                        return;
+                    }
+                    subscriber.onNext(new URL(&quot;http://en.wikipedia.org/wiki/&quot;+articleName).getText());
+                }
+                if (false == subscriber.isUnsubscribed()) {
+                    subscriber.onCompleted();
+                }
+            } catch(Throwable t) {
+                if (false == subscriber.isUnsubscribed()) {
+                    subscriber.onError(t);
+                }
+            }
+            return (subscriber);
+        }
+    });
+}
+</code></pre>
+<p>下面的例子使用<code>Groovy</code>，注意错误发生时现在是如何调用<a href="Observables.html#回调函数"><code>onError(Throwable t)</code></a>的，下面的代码传递给<a href="../operators/Subscribe.html"><code>subscribe()</code></a>第二个方法用户处理<code>onError</code>通知：</p>
+<pre><code class="lang-groovy">fetchWikipediaArticleAsynchronouslyWithErrorHandling(&quot;Tiger&quot;, &quot;NonExistentTitle&quot;, &quot;Elephant&quot;)
+    .subscribe(
+        { println &quot;--- Article ---\n&quot; + it.substring(0, 125) }, 
+        { println &quot;--- Error ---\n&quot; + it.getMessage() })
+</code></pre>
+<p>查看 <a href="../operators/Error-Handling-Operators.html"><code>错误处理操作符</code></a> 这一夜了解更多RxJava中的错误处理技术，包括使用 <a href="../operators/Catch.html"><code>onErrorResumeNext()</code>和<code>onErrorReturn()</code></a>等方法，它们让你可以从错误中恢复。</p>
+<p>这里是一个<code>Groovy</code>的例子：</p>
+<pre><code class="lang-groovy">myModifiedObservable = myObservable.onErrorResumeNext({ t -&gt;
+   Throwable myThrowable = myCustomizedThrowableCreator(t);
+   return (Observable.error(myThrowable));
+});
+</code></pre>
+</body>
+<html>

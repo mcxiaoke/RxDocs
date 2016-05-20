@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Empty.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="empty-never-throw">Empty/Never/Throw</h2>
+<h3 id="empty">Empty</h3>
+<p>创建一个不发射任何数据但是正常终止的Observable</p>
+<h3 id="never">Never</h3>
+<p>创建一个不发射数据也不终止的Observable</p>
+<h3 id="throw">Throw</h3>
+<p>创建一个不发射数据以一个错误终止的Observable</p>
+<p>这三个操作符生成的Observable行为非常特殊和受限。测试的时候很有用，有时候也用于结合其它的Observables，或者作为其它需要Observable的操作符的参数。</p>
+<p>RxJava将这些操作符实现为 <code>empty</code>，<code>never</code>和<code>error</code>。<code>error</code>操作符需要一个<code>Throwable</code>参数，你的Observable会以此终止。这些操作符默认不在任何特定的调度器上执行，但是<code>empty</code>和<code>error</code>有一个可选参数是Scheduler，如果你传递了Scheduler参数，它们会在这个调度器上发送通知。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#empty(">empty()</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#never(">never()</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#error(java.lang.Throwable">error(java.lang.Throwable)</a>)</li>
+</ul>
+</body>
+<html>

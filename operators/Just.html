@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Just.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="just">Just</h2>
+<p>创建一个发射指定值的Observable</p>
+<p><img src="../images/operators/just.png" alt="just"></p>
+<p>Just将单个数据转换为发射那个数据的Observable。</p>
+<p>Just类似于From，但是From会将数组或Iterable的素具取出然后逐个发射，而Just只是简单的原样发射，将数组或Iterable当做单个数据。</p>
+<p>注意：如果你传递<code>null</code>给Just，它会返回一个发射<code>null</code>值的Observable。不要误认为它会返回一个空Observable（完全不发射任何数据的Observable），如果需要空Observable你应该使用<a href="#Empty">Empty</a>操作符。</p>
+<p>RxJava将这个操作符实现为<code>just</code>函数，它接受一至九个参数，返回一个按参数列表顺序发射这些数据的Observable。</p>
+<p>示例代码：</p>
+<pre><code class="lang-java">
+Observable.just(1, 2, 3)
+          .subscribe(new Subscriber&lt;Integer&gt;() {
+        @Override
+        public void onNext(Integer item) {
+            System.out.println(&quot;Next: &quot; + item);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            System.err.println(&quot;Error: &quot; + error.getMessage());
+        }
+
+        @Override
+        public void onCompleted() {
+            System.out.println(&quot;Sequence complete.&quot;);
+        }
+    });
+</code></pre>
+<p>输出</p>
+<pre><code>Next: 1
+Next: 2
+Next: 3
+Sequence complete.
+</code></pre><ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#just(T">just(item)</a>) (还有其它接受二到九个参数的版本)</li>
+</ul>
+</body>
+<html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Catch.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="catch">Catch</h2>
+<p>从<code>onError</code>通知中恢复发射数据</p>
+<p><img src="../images/operators/catch.png" alt="catch"></p>
+<p><code>Catch</code>操作符拦截原始Observable的<code>onError</code>通知，将它替换为其它的数据项或数据序列，让产生的Observable能够正常终止或者根本不终止。</p>
+<p>在某些ReactiveX的实现中，有一个叫<code>onErrorResumeNext</code>的操作符，它的行为与<code>Catch</code>相似。</p>
+<p>RxJava将<code>Catch</code>实现为三个不同的操作符：</p>
+<p><strong><code>onErrorReturn</code></strong></p>
+<p>让Observable遇到错误时发射一个特殊的项并且正常终止。</p>
+<p><strong><code>onErrorResumeNext</code></strong></p>
+<p>让Observable在遇到错误时开始发射第二个Observable的数据序列。</p>
+<p><strong><code>onExceptionResumeNext</code></strong></p>
+<p>让Observable在遇到错误时继续发射后面的数据项。</p>
+<h3 id="onerrorreturn">onErrorReturn</h3>
+<p><img src="../images/operators/onErrorReturn.png" alt="onErrorReturn"></p>
+<p><code>onErrorReturn</code>方法返回一个镜像原有Observable行为的新Observable，后者会忽略前者的<code>onError</code>调用，不会将错误传递给观察者，作为替代，它会发发射一个特殊的项并调用观察者的<code>onCompleted</code>方法。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onErrorReturn(rx.functions.Func1">onErrorReturn(Func1)</a>)</li>
+</ul>
+<h3 id="onerrorresumenext">onErrorResumeNext</h3>
+<p><img src="../images/operators/onErrorResumeNext.png" alt="onErrorResumeNext"></p>
+<p><code>onErrorResumeNext</code>方法返回一个镜像原有Observable行为的新Observable，后者会忽略前者的<code>onError</code>调用，不会将错误传递给观察者，作为替代，它会开始镜像另一个，备用的Observable。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onErrorResumeNext(rx.functions.Func1">onErrorResumeNext(Func1)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onErrorResumeNext(rx.Observable">onErrorResumeNext(Observable)</a>)</li>
+</ul>
+<h3 id="onexceptionresumenext">onExceptionResumeNext</h3>
+<p><img src="../images/operators/onExceptionResumeNextViaObservable.png" alt="onExceptionResumeNext"></p>
+<p>和<code>onErrorResumeNext</code>类似，<code>onExceptionResumeNext</code>方法返回一个镜像原有Observable行为的新Observable，也使用一个备用的Observable，不同的是，如果<code>onError</code>收到的<code>Throwable</code>不是一个<code>Exception</code>，它会将错误传递给观察者的<code>onError</code>方法，不会使用备用的Observable。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#onExceptionResumeNext(rx.Observable">onExceptionResumeNext(Observable)</a>)</li>
+</ul>
+</body>
+<html>

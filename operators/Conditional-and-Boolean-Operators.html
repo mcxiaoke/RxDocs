@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Conditional-and-Boolean-Operators.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<p>这个页面的操作符可用于根据条件发射或变换Observables，或者对它们做布尔运算：</p>
+<h3 id="-">条件操作符</h3>
+<ul>
+<li><a href="Conditional.html#Amb"><strong><code>amb( )</code></strong></a> — 给定多个Observable，只让第一个发射数据的Observable发射全部数据</li>
+<li><a href="Conditional.html#DefaultIfEmpty"><strong><code>defaultIfEmpty( )</code></strong></a> — 发射来自原始Observable的数据，如果原始Observable没有发射数据，就发射一个默认数据</li>
+<li>(<code>rxjava-computation-expressions</code>) <a href="Conditional.html#Repeat"><strong><code>doWhile( )</code></strong></a> — 发射原始Observable的数据序列，然后重复发射这个序列直到不满足这个条件为止</li>
+<li>(<code>rxjava-computation-expressions</code>) <a href="Conditional.html#Defer"><strong><code>ifThen( )</code></strong></a> — 只有当某个条件为真时才发射原始Observable的数据序列，否则发射一个空的或默认的序列</li>
+<li><a href="Conditional.html#SkipUntil"><strong><code>skipUntil( )</code></strong></a> — 丢弃原始Observable发射的数据，直到第二个Observable发射了一个数据，然后发射原始Observable的剩余数据</li>
+<li><a href="Conditional.html#SkipWhile"><strong><code>skipWhile( )</code></strong></a> — 丢弃原始Observable发射的数据，直到一个特定的条件为假，然后发射原始Observable剩余的数据</li>
+<li>(<code>rxjava-computation-expressions</code>) <a href="Conditional.html#Defer"><strong><code>switchCase( )</code></strong></a> — 基于一个计算结果，发射一个指定Observable的数据序列</li>
+<li><a href="Conditional.html#TakeUntil"><strong><code>takeUntil( )</code></strong></a> — 发射来自原始Observable的数据，直到第二个Observable发射了一个数据或一个通知</li>
+<li><a href="Conditional.html#TakeWhile"><strong><code>takeWhile( )</code> and <code>takeWhileWithIndex( )</code></strong></a> — 发射原始Observable的数据，直到一个特定的条件为真，然后跳过剩余的数据</li>
+<li>(<code>rxjava-computation-expressions</code>) <a href="Conditional.html#Repeat"><strong><code>whileDo( )</code></strong></a> — if a condition is true, emit the source Observable&#39;s sequence and then repeat the sequence as long as the condition remains true如果满足一个条件，发射原始Observable的数据，然后重复发射直到不满足这个条件为止</li>
+</ul>
+<blockquote>
+<p>(<code>rxjava-computation-expressions</code>) — 表示这个操作符当前是可选包 <code>rxjava-computation-expressions</code> 的一部分，还没有包含在标准RxJava的操作符集合里</p>
+</blockquote>
+<h3 id="-">布尔操作符</h3>
+<ul>
+<li><a href="Conditional.html#All"><strong><code>all( )</code></strong></a> — 判断是否所有的数据项都满足某个条件</li>
+<li><a href="Conditional.html#Contains"><strong><code>contains( )</code></strong></a> — 判断Observable是否会发射一个指定的值</li>
+<li><a href="Conditional.html#Contains"><strong><code>exists( )</code> and <code>isEmpty( )</code></strong></a> — 判断Observable是否发射了一个值</li>
+<li><a href="Conditional.html#Sequenceequal"><strong><code>sequenceEqual( )</code></strong></a> — test the equality of the sequences emitted by two Observables判断两个Observables发射的序列是否相等</li>
+</ul>
+</body>
+<html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Timer.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="timer">Timer</h2>
+<p>创建一个Observable，它在一个给定的延迟后发射一个特殊的值。</p>
+<p><img src="../images/operators/timer.png" alt="timer"></p>
+<p><code>Timer</code>操作符创建一个在给定的时间段之后返回一个特殊值的Observable。</p>
+<p>RxJava将这个操作符实现为<code>timer</code>函数。</p>
+<p><code>timer</code>返回一个Observable，它在延迟一段给定的时间后发射一个简单的数字0。</p>
+<p><code>timer</code>操作符默认在<code>computation</code>调度器上执行。有一个变体可以通过可选参数指定Scheduler。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timer(long,%20java.util.concurrent.TimeUnit">timer(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timer(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">timer(long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+</body>
+<html>

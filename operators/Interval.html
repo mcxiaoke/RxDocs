@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Interval.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="interval">Interval</h2>
+<p>创建一个按固定时间间隔发射整数序列的Observable</p>
+<p><img src="../images/operators/interval.c.png" alt="interval"></p>
+<p><code>Interval</code>操作符返回一个Observable，它按固定的时间间隔发射一个无限递增的整数序列。</p>
+<p><img src="../images/operators/interval.png" alt="interval"></p>
+<p>RxJava将这个操作符实现为<code>interval</code>方法。它接受一个表示时间间隔的参数和一个表示时间单位的参数。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#interval(long,%20java.util.concurrent.TimeUnit">interval(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#interval(long,%20java.util.concurrent.TimeUnit%20rx.Scheduler">interval(long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+<p><img src="../images/operators/timer.p.png" alt="timer"></p>
+<p>还有一个版本的<code>interval</code>返回一个Observable，它在指定延迟之后先发射一个零值，然后再按照指定的时间间隔发射递增的数字。这个版本的<code>interval</code>在RxJava 1.0.0中叫做<code>timer</code>，但是那个方法已经不建议使用了，因为一个名叫<code>interval</code>的操作符有同样的功能。</p>
+<p>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#interval(long,%20long,%20java.util.concurrent.TimeUnit">interval(long,long,TimeUnit)</a>)<br>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#interval(long,%20long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">interval(long,long,TimeUnit,Scheduler)</a>)</p>
+<p><code>interval</code>默认在<code>computation</code>调度器上执行。你也可以传递一个可选的Scheduler参数来指定调度器。</p>
+</body>
+<html>

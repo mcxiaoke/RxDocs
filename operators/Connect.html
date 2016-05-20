@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Connect.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="connect">Connect</h2>
+<p>让一个可连接的Observable开始发射数据给订阅者</p>
+<p><img src="../images/operators/publishConnect.c.png" alt="connect"></p>
+<p>可连接的Observable (<em>connectable Observable</em>)与普通的Observable差不多，不过它并不会在被订阅时开始发射数据，而是直到使用了<code>Connect</code>操作符时才会开始。用这个方法，你可以等待所有的观察者都订阅了Observable之后再开始发射数据。</p>
+<p><img src="../images/operators/publishConnect.png" alt="connect"></p>
+<p>RxJava中<code>connect</code>是<code>ConnectableObservable</code>接口的一个方法，使用<code>publish</code>操作符可以将一个普通的Observable转换为一个<code>ConnectableObservable</code>。</p>
+<p>调用<code>ConnectableObservable</code>的<code>connect</code>方法会让它后面的Observable开始给发射数据给订阅者。</p>
+<p><code>connect</code>方法返回一个<code>Subscription</code>对象，可以调用它的<code>unsubscribe</code>方法让Observable停止发射数据给观察者。</p>
+<p>即使没有任何订阅者订阅它，你也可以使用<code>connect</code>方法让一个Observable开始发射数据（或者开始生成待发射的数据）。这样，你可以将一个&quot;冷&quot;的Observable变为&quot;热&quot;的。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#connect(">connect()</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/ConnectableObservable.html#connect(rx.functions.Action1">connect(Action1)</a>)</li>
+</ul>
+</body>
+<html>

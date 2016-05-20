@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Min.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="min">Min</h2>
+<p>发射原始Observable的最小值</p>
+<p><img src="../images/operators/min.c.png" alt="min"></p>
+<p><code>Min</code>操作符操作一个发射数值的Observable并发射单个值：最小的那个值。</p>
+<p>RxJava中，<code>min</code>属于<code>rxjava-math</code>模块。</p>
+<p><img src="../images/operators/min.png" alt="min"></p>
+<p><code>min</code>接受一个可选参数，用于比较两项数据的大小，如果最小值的数据超过一项，<code>min</code>会发射原始Observable最近发射的那一项。</p>
+<p><img src="../images/operators/minBy.png" alt="minBy"></p>
+<p><code>minBy</code>类似于<code>min</code>，但是它发射的不是最小值，而是发射Key最小的项，Key由你指定的一个函数生成。</p>
+</body>
+<html>

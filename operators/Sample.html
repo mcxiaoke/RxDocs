@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Sample.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="sample">Sample</h2>
+<p>定期发射Observable最近发射的数据项</p>
+<p><img src="../images/operators/sample.c.png" alt="sample"></p>
+<p><code>Sample</code>操作符定时查看一个Observable，然后发射自上次采样以来它最近发射的数据。</p>
+<p>在某些实现中，有一个<code>ThrottleFirst</code>操作符的功能类似，但不是发射采样期间的最近的数据，而是发射在那段时间内的第一项数据。</p>
+<p>RxJava将这个操作符实现为<code>sample</code>和<code>throttleLast</code>。</p>
+<p>注意：如果自上次采样以来，原始Observable没有发射任何数据，这个操作返回的Observable在那段时间内也不会发射任何数据。</p>
+<p><img src="../images/operators/sample.png" alt="sample"></p>
+<p><code>sample</code>(别名<code>throttleLast</code>)的一个变体按照你参数中指定的时间间隔定时采样（<code>TimeUnit</code>指定时间单位）。</p>
+<p><code>sample</code>的这个变体默认在<code>computation</code>调度器上执行，但是你可以使用第三个参数指定其它的调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sample(long,%20java.util.concurrent.TimeUnit">sample(long,TimeUnit)</a>)和<a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleLast(long,%20java.util.concurrent.TimeUnit">throttleLast(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sample(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">sample(long,TimeUnit,Scheduler)</a>)和<a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleLast(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">throttleLast(long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+<p><img src="../images/operators/sample.o.png" alt="sample"></p>
+<p><code>sample</code>的这个变体每当第二个Observable发射一个数据（或者当它终止）时就对原始Observable进行采样。第二个Observable通过参数传递给<code>sample</code>。</p>
+<p><code>sample</code>的这个变体默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sample(rx.Observable">sample(Observable)</a>)</li>
+</ul>
+<p><img src="../images/operators/throttleFirst.png" alt="throttleFirst"></p>
+<p><code>throttleFirst</code>与<code>throttleLast/sample</code>不同，在每个采样周期内，它总是发射原始Observable的第一项数据，而不是最近的一项。</p>
+<p><code>throttleFirst</code>操作符默认在<code>computation</code>调度器上执行，但是你可以使用第三个参数指定其它的调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long,%20java.util.concurrent.TimeUnit">throttleFirst(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#throttleFirst(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">throttleFirst(long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+</body>
+<html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Error-Handling.html in D:\git\RxDocs\topics</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<p>一般来说，Observable不会抛异常。它会调用 <code>onError</code> 终止Observable序列，以此通知所有的观察者发生了一个不可恢复的错误。<br>但是，也存在一些异常。例如，如果 <code>onError</code> 调用失败了，Observable不会尝试再次调用 <code>onError</code> 去通知观察者，它会抛出 <code>RuntimeException</code>，<code>OnErrorFailedException</code> 或者 <code>OnErrorNotImplementedException</code>。</p>
+<h1 id="-">从错误中恢复的技术</h1>
+<p>So rather than <em>catch</em> exceptions, your observer or operator should more typically respond to <code>onError</code> notifications of exceptions. There are also a variety of Observable operators that you can use to react to or recover from <code>onError</code> notifications from Observables. For example, you might use an operator to:<br>因此，你的观察者或者操作符应该对异常发生时的 <code>onError</code> 通知做出合适的响应，而不是<em>捕获</em>(<em>catch</em>)异常。很多操作符可用于对Observable发射的<code>onError</code>通知做出响应或者从错误中恢复，例如，你可以：</p>
+<ol>
+<li>吞掉这个错误，切换到一个备用的Observable继续发射数据</li>
+<li>吞掉这个错误然后发射默认值</li>
+<li>吞掉这个错误并立即尝试重启这个Observable</li>
+<li>吞掉这个错误，在一些回退间隔后重启这个Observable</li>
+</ol>
+<p>你可以使用 [[异常处理操作符|Error Handling Operators]] 描述的操作符实现这些策略。</p>
+<h1 id="rxjava-">RxJava特有的异常</h1>
+<p>&lt;dl&gt;<br> &lt;dt&gt;&lt;code&gt;CompositeException&lt;/code&gt;&lt;/dt&gt;&lt;dd&gt;表示发生了多个异常。你可以使用异常的 &lt;code&gt;getExceptions()&lt;/code&gt; 方法获取单独的异常。&lt;/dd&gt;<br><br> &lt;dt&gt;&lt;code&gt;MissingBackpressureException&lt;/code&gt;&lt;/dt&gt;&lt;dd&gt;表示一个订阅者或者操作符试图对一个不支持反压操作的Observable应用该操作。可以参考 [[Backpressure]] 查找针对没有实现反压操作的Observable的解决办法。&lt;/dd&gt;<br><br> &lt;dt&gt;&lt;code&gt;OnErrorFailedException&lt;/code&gt;&lt;/dt&gt;&lt;dd&gt;表示Observable尝试调用观察者的 &lt;code&gt;onError()&lt;/code&gt; 方法，但是那个方法自己抛出了异常。&lt;/dd&gt;<br><br> &lt;dt&gt;&lt;code&gt;OnErrorNotImplementedException&lt;/code&gt;&lt;/dt&gt;&lt;dd&gt;表示一个Observable尝试调用它的观察者的&lt;code&gt;onError()&lt;/code&gt; 方法，但是那个方法不存在。有多种方法可以消除这个错误：可以调整Observable使它不会到达这个错误条件，也可以在观察者中实现一个&lt;code&gt;onError&lt;/code&gt; 处理器, 或者使用其它的操作符在错误到达之前拦截这个 &lt;code&gt;onError&lt;/code&gt; 通知。&lt;/dd&gt;<br><br> &lt;dt&gt;&lt;code&gt;OnErrorThrowable&lt;/code&gt;&lt;/dt&gt;&lt;dd&gt;观察者们可以用这种形式传递异常给它们的观察者们的 &lt;code&gt;onError()&lt;/code&gt; 方法。相比标准的&lt;code&gt;Throwable&lt;/code&gt;，这种Throwable包含更多的信息：错误本身和在错误发生时Observable的内部状态。&lt;/dd&gt;<br>&lt;/dl&gt;
+</p>
+</body>
+<html>

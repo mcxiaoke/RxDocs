@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Timestamp.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="timestamp">Timestamp</h2>
+<p>给Observable发射的数据项附加一个时间戳</p>
+<p><img src="../images/operators/timestamp.c.png" alt="Timestamp"></p>
+<p>RxJava中的实现为<code>timestamp</code>，它将一个发射T类型数据的Observable转换为一个发射类型为<code>Timestamped&lt;T&gt;</code>的数据的Observable，每一项都包含数据的原始发射时间。</p>
+<p><code>timestamp</code>默认在<code>immediate</code>调度器上执行，但是可以通过参数指定其它的调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timestamp(">timestamp()</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timestamp(rx.Scheduler">timestamp(Scheduler)</a>)</li>
+</ul>
+</body>
+<html>

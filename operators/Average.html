@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Average.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="average">Average</h2>
+<p>计算原始Observable发射数字的平均值并发射它</p>
+<p><img src="../images/operators/average.c.png" alt="average"></p>
+<p><code>Average</code>操作一个发射数字的Observable，并发射原始Observable的数字序列的平均值。</p>
+<p>这个操作符不包含在RxJava核心模块中，它属于不同的<code>rxjava-math</code>模块。它被实现为四个操作符：<code>averageDouble</code>, <code>averageFloat</code>, <code>averageInteger</code>, <code>averageLong</code>。</p>
+<p><img src="../images/operators/average.f.png" alt="average"></p>
+<p>如果原始Observable不发射任何数据，这个操作符会抛异常：<code>IllegalArgumentException</code>。</p>
+</body>
+<html>

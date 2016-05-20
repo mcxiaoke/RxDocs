@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File SequenceEqual.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="sequenceequal">SequenceEqual</h2>
+<p>判定两个Observables是否发射相同的数据序列。</p>
+<p><img src="../images/operators/sequenceEqual.c.png" alt="sequenceEqual"></p>
+<p>传递两个Observable给<code>SequenceEqual</code>操作符，它会比较两个Observable的发射物，如果两个序列是相同的（相同的数据，相同的顺序，相同的终止状态），它就发射true，否则发射false。</p>
+<p><img src="../images/operators/sequenceEqual.png" alt="sequenceEqual"></p>
+<p>它还有一个版本接受第三个参数，可以传递一个函数用于比较两个数据项是否相同。</p>
+<p>这个操作符默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable,%20rx.Observable">sequenceEqual(Observable,Observable)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable,%20rx.Observable,%20rx.functions.Func2">sequenceEqual(Observable,Observable,Func2)</a>)</li>
+</ul>
+</body>
+<html>

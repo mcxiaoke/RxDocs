@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File TakeLast.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="takelast">TakeLast</h2>
+<p>发射Observable发射的最后N项数据</p>
+<p><img src="../images/operators/takeLast.c.png" alt="takeLast"></p>
+<p>使用<code>TakeLast</code>操作符修改原始Observable，你可以只发射Observable&#39;发射的后N项数据，忽略前面的数据。</p>
+<h3 id="tasklast-n">taskLast.n</h3>
+<p><img src="../images/operators/takeLast.n.png" alt="takeLast"></p>
+<p>使用<code>takeLast</code>操作符，你可以只发射原始Observable发射的后N项数据，忽略之前的数据。注意：这会延迟原始Observable发射的任何数据项，直到它全部完成。</p>
+<p><code>takeLast</code>的这个变体默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLast(int">takeLast(int)</a>)</li>
+</ul>
+<h3 id="takelast-t">takeLast.t</h3>
+<p><img src="../images/operators/takeLast.t.png" alt="takeLast"></p>
+<p>还有一个<code>takeLast</code>变体接受一个时长而不是数量参数。它会发射在原始Observable的生命周期内最后一段时间内发射的数据。时长和时间单位通过参数指定。</p>
+<p>注意：这会延迟原始Observable发射的任何数据项，直到它全部完成。</p>
+<p><code>takeLast</code>的这个变体默认在<code>computation</code>调度器上执行，但是你可以使用第三个参数指定其它的调度器。</p>
+<h3 id="takelastbuffer">takeLastBuffer</h3>
+<p><img src="../images/operators/takeLastBuffer.png" alt="takeLast"></p>
+<p>还有一个操作符叫<code>takeLastBuffer</code>，它和<code>takeLast</code>类似，，唯一的不同是它把所有的数据项收集到一个<code>List</code>再发射，而不是依次发射一个。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int">takeLastBuffer(int)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long,%20java.util.concurrent.TimeUnit">takeLastBuffer(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">takeLastBuffer(long,TimeUnit,Scheduler)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int,%20long,%20java.util.concurrent.TimeUnit">takeLastBuffer(int,long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeLastBuffer(int,%20long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">takeLastBuffer(int,long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+</body>
+<html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File README.html in D:\git\RxDocs</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h1 id="reactivex-rxjava-">ReactiveX/RxJava文档中文版</h1>
+<p><strong>项目地址：<a href="https://github.com/mcxiaoke/RxDocs">https://github.com/mcxiaoke/RxDocs</a>，欢迎Star和帮忙改进。</strong></p>
+<p>有任何意见或建议，到这里提出 <a href="https://github.com/mcxiaoke/RxDocs/issues/new">Create New Issue</a></p>
+<h2 id="-">阅读地址</h2>
+<ul>
+<li><a href="http://mcxiaoke.gitbooks.io/rxdocs/content/">ReactiveX文档中文翻译</a></li>
+<li><a href="https://www.gitbook.com/book/mcxiaoke/rxdocs/details">PDF/ePub/Mobi格式下载</a></li>
+</ul>
+<h2 id="-">说明</h2>
+<ul>
+<li>大部分是翻译自 <a href="http://reactivex.io/">ReactiveX.io</a> 和 <a href="https://github.com/ReactiveX/rxjava/wiki">RxJava Wiki</a>，修正了原文的一些错误，补充了详细的说明和示例</li>
+</ul>
+<h2 id="-">版本历史</h2>
+<ul>
+<li>0.9.5 - 2016.03.14 文本修正和润色，感谢@htoooth/@AlanCheen/@Ydcool/@loshine/@ppoffice帮忙完善</li>
+<li>0.9.0 - 2015.11.25 修正错误和文本润色，感谢@slb1988/@htoooth/@jiyee/@donglua帮忙完善</li>
+<li>0.8.0 - 2015.07.27 完成全部文档的初步审校，修正了部分用词不当的地方</li>
+<li>0.7.0 - 2015.07.24 完成全部文档的初译，调整了目录的部分链接和文本</li>
+<li>0.6.0 - 2015.07.22 完成绝大部分文档的翻译，使用GitBook发布初始版本</li>
+</ul>
+<h2 id="-">目录</h2>
+<ul>
+<li><a href="Intro.html">ReactiveX</a> - 什么是Rx，Rx的理念和优势</li>
+<li><a href="Observables.html">Observables</a> - 简要介绍Observable的观察者模型</li>
+<li><a href="Single.html">Single</a> - 一种特殊的只发射单个值的Observable</li>
+<li><a href="Subject.html">Subject</a> - Observable和Observer的复合体，也是二者的桥梁</li>
+<li><a href="Scheduler.html">Scheduler</a> - 介绍了各种异步任务调度和默认调度器</li>
+<li><a href="All-Operators-List.html">All Operators List</a> - 按字母顺序的全部操作符列表</li>
+<li><a href="Operators.html">Operators Categories</a> - 按目录分类的主要操作符列表<ul>
+<li><a href="operators/Creating-Observables.html">Creating 创建操作</a> - <code>Create</code>/<code>Defer</code>/<code>From</code>/<code>Just</code>/<code>Start</code>/<code>Repeat</code>/<code>Range</code></li>
+<li><a href="operators/Transforming-Observables.html">Transforming 变换操作</a> - <code>Buffer</code>/<code>Window</code>/<code>Map</code>/<code>FlatMap</code>/<code>GroupBy</code>/<code>Scan</code></li>
+<li><a href="operators/Filtering-Observables.html">Filtering 过滤操作</a> - <code>Debounce</code>/<code>Distinct</code>/<code>Filter</code>/<code>Sample</code>/<code>Skip</code>/<code>Take</code></li>
+<li><a href="operators/Combining-Observables.html">Combining 结合操作</a> - <code>And</code>/<code>StartWith</code>/<code>Join</code>/<code>Merge</code>/<code>Switch</code>/<code>Zip</code></li>
+<li><a href="operators/Error-Handling-Operators.html">Error Handling 错误处理</a> - <code>Catch</code>/<code>Retry</code></li>
+<li><a href="operators/Observable-Utility-Operators.html">Utility 辅助操作</a> - <code>Delay</code>/<code>Do</code>/<code>ObserveOn</code>/<code>SubscribeOn</code>/<code>Subscribe</code></li>
+<li><a href="operators/Conditional-and-Boolean-Operators.html">Conditional 条件和布尔操作</a> - <code>All</code>/<code>Amb</code>/<code>Contains</code>/<code>SkipUntil</code>/<code>TakeUntil</code></li>
+<li><a href="operators/Mathematical-and-Aggregate-Operators.html">Mathematical 算术和聚合操作</a> - <code>Average</code>/<code>Concat</code>/<code>Count</code>/<code>Max</code>/<code>Min</code>/<code>Sum</code>/<code>Reduce</code></li>
+<li><a href="operators/Async-Operators.html">Async 异步操作</a> - <code>Start</code>/<code>ToAsync</code>/<code>StartFuture</code>/<code>FromAction</code>/<code>FromCallable</code>/<code>RunAsync</code></li>
+<li><a href="operators/Connectable-Observable-Operators.html">Connect 连接操作</a> - <code>Connect</code>/<code>Publish</code>/<code>RefCount</code>/<code>Replay</code></li>
+<li><a href="operators/To.html">Convert 转换操作</a> - <code>ToFuture</code>/<code>ToList</code>/<code>ToIterable</code>/<code>ToMap</code>/<code>toMultiMap</code></li>
+<li><a href="operators/Blocking-Observable-Operators.html">Blocking 阻塞操作</a> - <code>ForEach</code>/<code>First</code>/<code>Last</code>/<code>MostRecent</code>/<code>Next</code>/<code>Single</code>/<code>Latest</code></li>
+<li><a href="operators/String-Observables.html">String 字符串操作</a> - <code>ByLine</code>/<code>Decode</code>/<code>Encode</code>/<code>From</code>/<code>Join</code>/<code>Split</code>/<code>StringConcat</code></li>
+</ul>
+</li>
+<li><a href="Topics.html">RxJava文档和教程</a><ul>
+<li><a href="topics/Getting-Started.html">RxJava入门指南</a></li>
+<li><a href="topics/How-To-Use-RxJava.html">RxJava使用示例</a></li>
+<li><a href="topics/Implementing-Your-Own-Operators.html">实现自定义操作符</a></li>
+<li><a href="topics/Plugins.html">自定义插件</a></li>
+<li><a href="topics/Backpressure.html">Backpressure</a></li>
+<li><a href="topics/Error-Handling.html">错误处理</a></li>
+<li><a href="topics/The-RxJava-Android-Module.html">Android模块</a></li>
+<li><a href="topics/How-to-Contribute.html">参与开发</a></li>
+<li><a href="topics/Additional-Reading.html">补充阅读材料</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="-">链接</h2>
+<ul>
+<li><a href="http://reactivex.io/intro.html">ReactiveX.io</a></li>
+<li><a href="https://github.com/ReactiveX/RxJava/wiki">RxJava Wiki</a></li>
+<li><a href="http://reactivex.io/RxJava/javadoc/">RxJava Javadoc</a></li>
+<li><a href="http://rxmarbles.com/">RxMarbles</a></li>
+<li><a href="http://akarnokd.blogspot.com/">Advanced RxJava</a></li>
+<li><a href="http://www.introtorx.com/content/v1.0.10621.0/01_WhyRx.html">Intro to Rx</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/data/gg577609.aspx">MSDN</a></li>
+</ul>
+<hr>
+<h2 id="-">许可协议</h2>
+<ul>
+<li><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode">署名-非商业性使用-相同方式共享 4.0 国际</a></li>
+</ul>
+<hr>
+<h2 id="-">联系方式</h2>
+<ul>
+<li>Blog: <a href="http://blog.mcxiaoke.com">http://blog.mcxiaoke.com</a></li>
+<li>Github: <a href="https://github.com/mcxiaoke">https://github.com/mcxiaoke</a></li>
+<li>Email: <a href="mailto:github#mcxiaoke.com">github@mcxiaoke.com</a></li>
+</ul>
+<h2 id="-">开源项目</h2>
+<ul>
+<li>Rx文档中文翻译: <a href="https://github.com/mcxiaoke/RxDocs">https://github.com/mcxiaoke/RxDocs</a></li>
+<li>MQTT协议中文版: <a href="https://github.com/mcxiaoke/mqtt">https://github.com/mcxiaoke/mqtt</a></li>
+<li>Awesome-Kotlin: <a href="https://github.com/mcxiaoke/awesome-kotlin">https://github.com/mcxiaoke/awesome-kotlin</a></li>
+<li>Kotlin-Koi: <a href="https://github.com/mcxiaoke/kotlin-koi">https://github.com/mcxiaoke/kotlin-koi</a></li>
+<li>Next公共组件库: <a href="https://github.com/mcxiaoke/Android-Next">https://github.com/mcxiaoke/Android-Next</a></li>
+<li>PackerNg极速打包: <a href="https://github.com/mcxiaoke/packer-ng-plugin">https://github.com/mcxiaoke/packer-ng-plugin</a></li>
+<li>Gradle渠道打包: <a href="https://github.com/mcxiaoke/gradle-packer-plugin">https://github.com/mcxiaoke/gradle-packer-plugin</a></li>
+<li>EventBus实现xBus: <a href="https://github.com/mcxiaoke/xBus">https://github.com/mcxiaoke/xBus</a></li>
+<li>蘑菇饭App: <a href="https://github.com/mcxiaoke/minicat">https://github.com/mcxiaoke/minicat</a></li>
+<li>饭否客户端: <a href="https://github.com/mcxiaoke/fanfouapp-opensource">https://github.com/mcxiaoke/fanfouapp-opensource</a></li>
+<li>Volley镜像: <a href="https://github.com/mcxiaoke/android-volley">https://github.com/mcxiaoke/android-volley</a></li>
+</ul>
+<hr>
+</body>
+<html>

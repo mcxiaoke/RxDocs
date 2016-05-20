@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File All.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="all">All</h2>
+<p>判定是否Observable发射的所有数据都满足某个条件</p>
+<p><img src="../images/operators/all.c.png" alt="all"></p>
+<p>传递一个谓词函数给<code>All</code>操作符，这个函数接受原始Observable发射的数据，根据计算返回一个布尔值。<code>All</code>返回一个只发射一个单个布尔值的Observable，如果原始Observable正常终止并且每一项数据都满足条件，就返回true；如果原始Observable的任意一项数据不满足条件就返回False。</p>
+<p><img src="../images/operators/all.png" alt="all"></p>
+<p>RxJava将这个操作符实现为<code>all</code>，它默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#all(rx.functions.Func1">all(Func1)</a>)</li>
+</ul>
+</body>
+<html>

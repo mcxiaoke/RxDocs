@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Map.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="map">Map</h2>
+<p>对Observable发射的每一项数据应用一个函数，执行变换操作</p>
+<p><img src="../images/operators/map.png" alt="map"></p>
+<p><code>Map</code>操作符对原始Observable发射的每一项数据应用一个你选择的函数，然后返回一个发射这些结果的Observable。</p>
+<p>RxJava将这个操作符实现为<code>map</code>函数。这个操作符默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#map(rx.functions.Func1">map(Func1)</a>)</li>
+</ul>
+<h3 id="cast">cast</h3>
+<p><img src="../images/operators/cast.png" alt="cast"></p>
+<p><code>cast</code>操作符将原始Observable发射的每一项数据都强制转换为一个指定的类型，然后再发射数据，它是<code>map</code>的一个特殊版本。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#cast(java.lang.Class">cast(Class)</a>)</li>
+</ul>
+<h3 id="encode">encode</h3>
+<p><img src="../images/operators/St.encode.png" alt="encode"></p>
+<p><code>encode</code>在<code>StringObservable</code>类中，不是标准RxJava的一部分，它也是一个特殊的<code>map</code>操作符。<code>encode</code>将一个发射字符串的Observable变换为一个发射字节数组（这个字节数组按照原始字符串中的多字节字符边界划分）的Observable。</p>
+<h3 id="byline">byLine</h3>
+<p><img src="../images/operators/St.byLine.png" alt="byLine"></p>
+<p><code>byLine</code>同样在<code>StringObservable</code>类中，也不是标准RxJava的一部分，它也是一个特殊的<code>map</code>操作符。<code>byLine</code>将一个发射字符串的Observable变换为一个按行发射来自原始Observable的字符串的Observable。</p>
+</body>
+<html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Getting-Started.html in D:\git\RxDocs\topics</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<p>RxJava是 <a href="http://reactivex.io/">ReactiveX</a> 在JVM上的一个实现，ReactiveX使用Observable序列组合异步和基于事件的程序。更多关于ReactiveX的资料，可以查看 <a href="../docs/Intro.html">ReactiveX 介绍</a> 页面。</p>
+<h2 id="rxjava-">RxJava介绍</h2>
+<h3 id="rxjava-">RxJava 是轻量级的</h3>
+<p>RxJava尽力做到非常轻巧。它仅关注Observable的抽象和与之相关的高层函数，实现为一个单独的JAR文件。</p>
+<h3 id="rxjava-">RxJava 是一个多语言实现</h3>
+<p>RxJava 支持Java 6或者更新的版本，以及其它的JVM语言如 <a href="https://github.com/ReactiveX/RxGroovy">Groovy</a>, <a href="https://github.com/ReactiveX/RxClojure">Clojure</a>, <a href="https://github.com/ReactiveX/RxJRuby">JRuby</a>, <a href="https://github.com/ReactiveX/RxKotlin">Kotlin</a> 和 <a href="https://github.com/ReactiveX/RxScala">Scala</a>。RxJava 可用于更多的语言环境，而不仅仅是Java和Scala，而且它致力于尊重每一种JVM语言的习惯。</p>
+<h3 id="rxjava-">RxJava 第三方库</h3>
+<p>下面是可与RxJava协作的第三方库：</p>
+<ul>
+<li><a href="https://github.com/Netflix/Hystrix/wiki/How-To-Use#wiki-Reactive-Execution">Hystrix</a> - 用于分布式系统的一个延时和容错处理框架</li>
+<li><a href="http://camel.apache.org/rx.html">Camel RX</a>  - 一个用于<a href="http://camel.apache.org/components.html">Apache Camel</a> 的 RxJava 兼容层</li>
+<li><a href="https://github.com/myfreeweb/rxjava-http-tail">rxjava-http-tail</a> - 让你可以跟踪HTTP日志，就像使用 <code>tail -f</code> 一样</li>
+<li><a href="https://github.com/vert-x/mod-rxvertx">mod-rxvertx - Extension for VertX</a> - 使用 RxJava 封装的VertX库</li>
+<li><a href="https://github.com/davidmoten/rxjava-jdbc">rxjava-jdbc</a> - 使用RxJava流式处理JDBC连接，还支持语句的函数式组合</li>
+<li><a href="https://github.com/davidmoten/rtree">rtree</a> - 使用RxJava实现的一个纯内存的可变的R-tree和R*-tree</li>
+</ul>
+<h2 id="-">使用指南</h2>
+<p>你可以在Maven Central <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.reactivex%22%20AND%20a%3A%22rxjava%22">http://search.maven.org</a> 找到用于Maven, Ivy, Gradle, SBT和其它构建工具需要的二进制文件和依赖信息.</p>
+<p>Maven示例:</p>
+<pre><code class="lang-xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.reactivex&lt;/groupId&gt;
+    &lt;artifactId&gt;rxjava&lt;/artifactId&gt;
+    &lt;version&gt;1.0.10&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>Ivy示例:</p>
+<pre><code class="lang-xml">&lt;dependency org=&quot;io.reactivex&quot; name=&quot;rxjava&quot; rev=&quot;1.0.10&quot; /&gt;
+</code></pre>
+<p>SBT示例:</p>
+<pre><code class="lang-scala">libraryDependencies += &quot;com.netflix.rxjava&quot; % &quot;rxjava-scala&quot; % &quot;1.0.10&quot;
+</code></pre>
+<p>Gradle示例:</p>
+<pre><code class="lang-groovy">compile &#39;io.reactivex:rxjava:1.0.10&#39;
+</code></pre>
+<p>如果你没有使用构建系统，想直接下载JAR文件的话可以在这里找到：</p>
+<p><a href="https://repo1.maven.org/maven2/io/reactivex/">https://repo1.maven.org/maven2/io/reactivex/</a></p>
+<h2 id="-">编译构建</h2>
+<p>检出和构建RxJava的源码，使用以下命令：</p>
+<pre><code>$ git clone git@github.com:ReactiveX/RxJava.git
+$ cd RxJava/
+$ ./gradlew build
+</code></pre><p>要执行一个完整的构建，使用这个命令：</p>
+<pre><code>$ ./gradlew clean build
+</code></pre><p>构建命令的输出大概是这样的：</p>
+<pre><code>$ ./gradlew build
+:rxjava:compileJava
+:rxjava:processResources UP-TO-DATE
+:rxjava:classes
+:rxjava:jar
+:rxjava:sourcesJar
+:rxjava:signArchives SKIPPED
+:rxjava:assemble
+:rxjava:licenseMain UP-TO-DATE
+:rxjava:licenseTest UP-TO-DATE
+:rxjava:compileTestJava
+:rxjava:processTestResources UP-TO-DATE
+:rxjava:testClasses
+:rxjava:test
+:rxjava:check
+:rxjava:build
+
+BUILD SUCCESSFUL
+
+Total time: 30.758 secs
+</code></pre><p>执行完整的构建的话，你会看到单元测试的执行，输出类似于这样：</p>
+<pre><code>&gt; Building &gt; :rxjava:test &gt; 91 tests completed
+</code></pre><h2 id="-">故障排除</h2>
+<p>有一位开发者上报了下面这个错误：</p>
+<blockquote>
+<p>Could not resolve all dependencies for configuration &#39;:language-adaptors:rxjava-scala:provided&#39;</p>
+</blockquote>
+<p>他在从<code>.gradle/caches</code>和<code>.m2/repository/org/scala-lang/</code>移除了旧版本的 <code>scala-library</code>之后解决了这个问题，然后执行了一次完整构建。&lt;a href=&quot;https://gist.github.com/jaceklaskowski/9496058&quot;&gt;(查看详细信息)&lt;/a&gt;</p>
+<p>在构建RxJava时你可能会遇到下面的错误:</p>
+<blockquote>
+<p>Failed to apply plugin [id &#39;java&#39;]<br>Could not generate a proxy class for class nebula.core.NamedContainerProperOrder.</p>
+</blockquote>
+<p>这是JVM的问题，详细信息可以参考 <a href="https://jira.codehaus.org/browse/GROOVY-6951">GROOVY-6951</a> 。如果遇到这个问题，可以在构建RxJava之前执行 <code>export GRADLE_OPTS=-noverify</code>，或者升级你机器上的JDK。</p>
+</body>
+<html>

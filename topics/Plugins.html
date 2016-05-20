@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Plugins.html in D:\git\RxDocs\topics</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<p>插件让你可以用多种方式修改RxJava的默认行为：</p>
+<ul>
+<li>修改默认的计算、IO和新线程调度器集合</li>
+<li>为RxJava可能遇到的特殊错误注册一个错误处理器</li>
+<li>注册一个函数记录一些常规RxJava活动的发生</li>
+</ul>
+<h1 id="rxjavaschedulershook">RxJavaSchedulersHook</h1>
+<p>这个插件让你可以使用你选择的调度器覆盖默认的计算、IO和新线程调度 (<code>Scheduler</code>)，要做到这些，需要继承 <code>RxJavaSchedulersHook</code> 类并覆写这些方法：</p>
+<ul>
+<li><code>Scheduler getComputationScheduler( )</code></li>
+<li><code>Scheduler getIOScheduler( )</code></li>
+<li><code>Scheduler getNewThreadScheduler( )</code></li>
+<li><code>Action0 onSchedule(action)</code></li>
+</ul>
+<p>然后是下面这些步骤：</p>
+<ol>
+<li>创建一个你实现的 <code>RxJavaSchedulersHook</code> 子类的对象。</li>
+<li>使用 <code>RxJavaPlugins.getInstance( )</code> 获取全局的RxJavaPlugins对象。</li>
+<li>将你的默认调度器对象传递给 <code>RxJavaPlugins</code> 的 <code>registerSchedulersHook( )</code> 方法。</li>
+</ol>
+<p>完成这些后，RxJava会开始使用你的方法返回的调度器，而不是内置的默认调度器。</p>
+<h1 id="rxjavaerrorhandler">RxJavaErrorHandler</h1>
+<p>这个插件让你可以注册一个函数处理传递给 <code>Subscriber.onError(Throwable)</code> 的错误。要做到这一点，需要继承 <code>RxJavaErrorHandler</code> 类并覆写这个方法：</p>
+<ul>
+<li><code>void handleError(Throwable e)</code></li>
+</ul>
+<p>然后是下面这些步骤：</p>
+<ol>
+<li>创建一个你实现的 <code>RxJavaErrorHandler</code> 子类的对象。</li>
+<li>使用 <code>RxJavaPlugins.getInstance( )</code> 获取全局的RxJavaPlugins对象。</li>
+<li>将你的错误处理器对象传递给 <code>RxJavaPlugins</code> 的 <code>registerErrorHandler( )</code> 方法。</li>
+</ol>
+<p>完成这些后，RxJava会开始使用你的错误处理器处理传递给 <code>Subscriber.onError(Throwable)</code> 的错误。</p>
+<h1 id="rxjavaobservableexecutionhook">RxJavaObservableExecutionHook</h1>
+<p>这个插件让你可以注册一个函数用于记录日志或者性能数据收集，RxJava在某些常规活动时会调用它。要做到这一点，需要继承 <code>RxJavaObservableExecutionHook</code> 类并覆写这些方法：</p>
+<p>&lt;table&gt;&lt;thead&gt;<br> &lt;tr&gt;&lt;th&gt;方法&lt;/th&gt;&lt;th&gt;何时调用&lt;/th&gt;&lt;/tr&gt;<br> &lt;/thead&gt;&lt;tbody&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;tt&gt;onCreate( )&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;在 &lt;tt&gt;Observable.create( )&lt;/tt&gt;方法中&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;tt&gt;onSubscribeStart( )&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;在 &lt;tt&gt;Observable.subscribe( )&lt;/tt&gt;之前立刻&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;tt&gt;onSubscribeReturn( )&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;在 &lt;tt&gt;Observable.subscribe( )&lt;/tt&gt;之后立刻&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;tt&gt;onSubscribeError( )&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;在&lt;tt&gt;Observable.subscribe( )&lt;/tt&gt;执行失败时&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;tt&gt;onLift( )&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;在&lt;tt&gt;Observable.lift( )&lt;/tt&gt;方法中&lt;/td&gt;&lt;/tr&gt;<br> &lt;/tbody&gt;<br>&lt;/table&gt;
+
+</p>
+<p>然后是下面这些步骤：</p>
+<ol>
+<li>创建一个你实现的 <code>RxJavaObservableExecutionHook</code> 子类的对象。</li>
+<li>使用 <code>RxJavaPlugins.getInstance( )</code> 获取全局的RxJavaPlugins对象。</li>
+<li>将你的Hook对象传递给 <code>RxJavaPlugins</code> 的 <code>registerObservableExecutionHook( )</code> 方法。</li>
+</ol>
+<p>When you do this, RxJava will begin to call your functions when it encounters the specific conditions they were designed to take note of.<br>完成这些后，在满足某些特殊的条件时，RxJava会开始调用你的方法。</p>
+</body>
+<html>

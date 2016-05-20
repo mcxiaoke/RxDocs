@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File From.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="from">From</h2>
+<p>将其它种类的对象和数据类型转换为Observable</p>
+<p><img src="../images/operators/from.c.png" alt="from"></p>
+<p>当你使用Observable时，如果你要处理的数据都可以转换成展现为Observables，而不是需要混合使用Observables和其它类型的数据，会非常方便。这让你在数据流的整个生命周期中，可以使用一组统一的操作符来管理它们。</p>
+<p>例如，Iterable可以看成是同步的Observable；Future，可以看成是总是只发射单个数据的Observable。通过显式地将那些数据转换为Observables，你可以像使用Observable一样与它们交互。</p>
+<p>因此，大部分ReactiveX实现都提供了将语言特定的对象和数据结构转换为Observables的方法。</p>
+<p><img src="../images/operators/from.png" alt="from"></p>
+<p>在RxJava中，<code>from</code>操作符可以转换Future、Iterable和数组。对于Iterable和数组，产生的Observable会发射Iterable或数组的每一项数据。</p>
+<p>示例代码</p>
+<pre><code class="lang-java">
+Integer[] items = { 0, 1, 2, 3, 4, 5 };
+Observable myObservable = Observable.from(items);
+
+myObservable.subscribe(
+    new Action1&lt;Integer&gt;() {
+        @Override
+        public void call(Integer item) {
+            System.out.println(item);
+        }
+    },
+    new Action1&lt;Throwable&gt;() {
+        @Override
+        public void call(Throwable error) {
+            System.out.println(&quot;Error encountered: &quot; + error.getMessage());
+        }
+    },
+    new Action0() {
+        @Override
+        public void call() {
+            System.out.println(&quot;Sequence complete&quot;);
+        }
+    }
+);
+</code></pre>
+<p>输出</p>
+<pre><code>0
+1
+2
+3
+4
+5
+Sequence complete
+</code></pre><p>对于Future，它会发射Future.get()方法返回的单个数据。<code>from</code>方法有一个可接受两个可选参数的版本，分别指定超时时长和时间单位。如果过了指定的时长Future还没有返回一个值，这个Observable会发射错误通知并终止。</p>
+<p><code>from</code>默认不在任何特定的调度器上执行。然而你可以将Scheduler作为可选的第二个参数传递给Observable，它会在那个调度器上管理这个Future。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(T%5B%5D">from(array)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.lang.Iterable">from(Iterable)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future">from(Future)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future,%20rx.Scheduler">from(Future,Scheduler)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#from(java.util.concurrent.Future,%20long,%20java.util.concurrent.TimeUnit">from(Future,timeout, timeUnit)</a>)</li>
+</ul>
+<h3 id="rxjavaasyncutil">RxJavaAsyncUtil</h3>
+<p><img src="../images/operators/fromFunc0.png" alt="from func)"></p>
+<p>此外，在可选包 <code>RxJavaAsyncUtil</code> 中，你还可以用下面这些操作符将actions，callables，functions和runnables转换为发射这些动作的执行结果的Observable：</p>
+<ul>
+<li>fromAction</li>
+<li>fromCallable</li>
+<li>fromFunc0</li>
+<li>fromRunnable</li>
+</ul>
+<p>在这个页面 <a href="http://reactivex.io/documentation/operators/start.html">Start</a> 查看关于这些操作符的更多信息。</p>
+<p><img src="../images/operators/St.from.png" alt="from"></p>
+<p>注意：还有一个可选的<code>StringObservable</code>类中也有一个<code>from</code>方法，它将一个字符流或者一个REader转换为一个发射字节数组或字符串的Observable。</p>
+<h3 id="runasync2">runAsync2</h3>
+<p>注意：这里与后面<code>start</code>操作符里的<code>runAsync</code>说明重复了</p>
+<p>在单独的<code>RxJavaAsyncUtil</code>包中（默认不包含在RxJava中）,还有一个<code>runAsync</code>函数。传递一个<code>Action</code>和一个<code>Scheduler</code>给<code>runAsync</code>，它会返回一个<code>StoppableObservable</code>，这个Observable使用<code>Action</code>产生发射的数据项。</p>
+<p>传递一个<code>Action</code>和一个<code>Scheduler</code>给<code>runAsync</code>，它返回一个使用这个<code>Action</code>产生数据的<code>StoppableObservable</code>。这个<code>Action</code>接受一个<code>Observable</code>和一个<code>Subscription</code>作为参数，它使用<code>Subscription</code>检查<code>unsubscribed</code>条件，一旦发现条件为真就立即停止发射数据。在任何时候你都可以使用<code>unsubscribe</code>方法手动停止一个<code>StoppableObservable</code>（这会同时取消订阅与这个<code>StoppableObservable</code>关联的<code>Subscription</code>）。</p>
+<p>由于<code>runAsync</code>会立即调用<code>Action</code>并开始发射数据，在你创建StoppableObservable之后到你的观察者准备好接受数据之前这段时间里，可能会有一部分数据会丢失。如果这不符合你的要求，可以使用<code>runAsync</code>的一个变体，它也接受一个<code>Subject</code>参数，传递一个<code>ReplaySubject</code>给它，你可以获取其它丢失的数据了。</p>
+<h3 id="decode">decode</h3>
+<p><img src="../images/operators/St.decode.png" alt="decode"></p>
+<p><code>StringObservable</code>类不是默认RxJava的一部分，包含一个<code>decode</code>操作符，这个操作符将一个多字节字符流转换为一个发射字节数组的Observable，这些字节数组按照字符的边界划分。</p>
+</body>
+<html>

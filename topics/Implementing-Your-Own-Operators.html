@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Implementing-Your-Own-Operators.html in D:\git\RxDocs\topics</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h1 id="-">实现自己的操作符</h1>
+<p>你可以实现你自己的Observable操作符，本文展示怎么做。</p>
+<p>如果你的操作符是被用于<em>创造</em>一个Observable，而不是变换或者响应一个Observable，使用 <a href="http://reactivex.io/documentation/operators/create.html"><code>create( )</code></a> 方法，不要试图手动实现 <code>Observable</code>。另外，你可以按照下面的用法说明创建一个自定义的操作符。</p>
+<p>如果你的操作符是用于Observable发射的单独的数据项，按照下面的说明做：<a href="Implementing-Your-Own-Operators#序列操作符"><em>Sequence Operators</em></a> 。如果你的操作符是用于变换Observable发射的整个数据序列，按照这个说明做：<a href="Implementing-Your-Own-Operators#变换操作符"><em>Transformational Operators</em></a> 。</p>
+<p><strong>提示：</strong> 在一个类似于Groovy的语言Xtend中，你可以以 <em>extension methods</em> 的方式实现你自己的操作符 ,不使用本文的方法，它们也可以链式调用。详情参见 <a href="http://mnmlst-dvlpr.blogspot.de/2014/07/rxjava-and-xtend.html">RxJava and Xtend</a></p>
+<h1 id="-">序列操作符</h1>
+<p>下面的例子向你展示了怎样使用<code>lift( )</code>操作符将你的自定义操作符（在这个例子中是 <code>myOperator</code>）与标准的RxJava操作符（如<code>ofType</code>和<code>map</code>）一起使用：</p>
+<pre><code class="lang-groovy">fooObservable = barObservable.ofType(Integer).map({it*2}).lift(new MyOperator&lt;T&gt;()).map({&quot;transformed by myOperator: &quot; + it});
+</code></pre>
+<p>下面这部分向你展示了你的操作符的脚手架形式，以便它能正确的与<code>lift()</code>搭配使用。</p>
+<h2 id="-">实现你的操作符</h2>
+<p>将你的自定义操作符定义为实现了 <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.Operator.html"><code>Operator</code></a> 接口的一个公开类, 就像这样：</p>
+<pre><code class="lang-java">public class MyOperator&lt;T&gt; implements Operator&lt;T&gt; {
+  public MyOperator( /* any necessary params here */ ) {
+    /* 这里添加必要的初始化代码 */
+  }
+
+  @Override
+  public Subscriber&lt;? super T&gt; call(final Subscriber&lt;? super T&gt; s) {
+    return new Subscriber&lt;t&gt;(s) {
+      @Override
+      public void onCompleted() {
+        /* 这里添加你自己的onCompleted行为，或者仅仅传递完成通知： */
+        if(!s.isUnsubscribed()) {
+          s.onCompleted();
+        }
+      }
+
+      @Override
+      public void onError(Throwable t) {
+        /* 这里添加你自己的onError行为, 或者仅仅传递错误通知：*/
+        if(!s.isUnsubscribed()) {
+          s.onError(t);
+        }
+      }
+
+      @Override
+      public void onNext(T item) {
+        /* 这个例子对结果的每一项执行排序操作，然后返回这个结果 */
+        if(!s.isUnsubscribed()) {
+          transformedItem = myOperatorTransformOperation(item);
+          s.onNext(transformedItem);
+        }
+      }
+    };
+  }
+}
+</code></pre>
+<h1 id="-">变换操作符</h1>
+<p>下面的例子向你展示了怎样使用 <code>compose( )</code> 操作符将你得自定义操作符（在这个例子中，是一个名叫<code>myTransformer</code>的操作符，它将一个发射整数的Observable转换为发射字符串的）与标准的RxJava操作符（如<code>ofType</code>和<code>map</code>）一起使用：</p>
+<pre><code class="lang-groovy">fooObservable = barObservable.ofType(Integer).map({it*2}).compose(new MyTransformer&lt;Integer,String&gt;()).map({&quot;transformed by myOperator: &quot; + it});
+</code></pre>
+<p>下面这部分向你展示了你的操作符的脚手架形式，以便它能正确的与<code>compose()</code>搭配使用。</p>
+<h2 id="-">实现你的变换器</h2>
+<p>将你的自定义操作符定义为实现了 <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.Transformer.html"><code>Transformer</code></a> 接口的一个公开类，就像这样：</p>
+<pre><code class="lang-java">public class MyTransformer&lt;Integer,String&gt; implements Transformer&lt;Integer,String&gt; {
+  public MyTransformer( /* any necessary params here */ ) {
+    /* 这里添加必要的初始化代码 */
+  }
+
+  @Override
+  public Observable&lt;String&gt; call(Observable&lt;Integer&gt; source) {
+    /* 
+     * 这个简单的例子Transformer应用一个map操作，
+     * 这个map操作将发射整数变换为发射整数的字符串表示。
+     */
+    return source.map( new Func1&lt;Integer,String&gt;() {
+      @Override
+      public String call(Integer t1) {
+        return String.valueOf(t1);
+      }
+    } );
+  }
+}
+</code></pre>
+<h2 id="-">参见</h2>
+<ul>
+<li><a href="http://blog.danlew.net/2015/03/02/dont-break-the-chain/">&ldquo;Don&#8217;t break the chain: use RxJava&#8217;s compose() operator&rdquo;</a> by Dan Lew</li>
+</ul>
+<h1 id="-">其它需要考虑的</h1>
+<ul>
+<li>在发射任何数据（或者通知）给订阅者之前，你的序列操作符可能需要检查它的 <a href="Observable#unsubscribing"><code>Subscriber.isUnsubscribed( )</code></a> 状态，如果没有订阅者了，没必要浪费时间生成数据项。</li>
+<li>请注意：你的序列操作符必须复合Observable协议的核心原则：<ul>
+<li>它可能调用订阅者的 <a href="Observable#onnext-oncompleted-and-onerror"><code>onNext( )</code></a> 方法任意次，但是这些调用必须是不重叠的。</li>
+<li>它只能调用订阅者的 <a href="Observable#onnext-oncompleted-and-onerror"><code>onCompleted( )</code></a> 或 <a href="Observable#onnext-oncompleted-and-onerror"><code>onError( )</code></a> 正好一次，但不能都调用，而且不能在这之后调用订阅者的 <a href="Observable#onnext-oncompleted-and-onerror"><code>onNext( )</code></a> 方法。</li>
+<li>如果你不能保证你得操作符遵从这两个原则，你可以给它添加 <a href="Observable-Utility-Operators#serialize"><code>serialize( )</code></a> 操作符，它会强制保持正确的行为。</li>
+</ul>
+</li>
+<li>请关注这里 <a href="https://github.com/ReactiveX/RxJava/issues/1962">Issue #1962</a> &amp;mdash；需要有一个计划创建一个测试脚手架，你可以用它来写测试验证你的新操作符遵从了Observable协议。</li>
+<li>不要让你的操作符阻塞别的操作。</li>
+<li>When possible, you should compose new operators by combining existing operators, rather than implementing them with new code. RxJava itself does this with some of its standard operators, for example:</li>
+<li>如果可能，你应该组合现有的操作符创建你的新操作符，而不是从零开始实现它。RxJava自身的标准操作符也是这样做的，例如：<ul>
+<li><a href="http://reactivex.io/documentation/operators/first.html"><code>first( )</code></a> 被定义为 &lt;tt&gt;<a href="http://reactivex.io/documentation/operators/take.html">take(1)</a>.<a href="http://reactivex.io/documentation/operators/first.html">single( )</a>&lt;/tt&gt;</li>
+<li><a href="http://reactivex.io/documentation/operators/ignoreelements.html"><code>ignoreElements( )</code></a> 被定义为 &lt;tt&gt;<a href="http://reactivex.io/documentation/operators/filter.html">filter(alwaysFalse( ))</a>&lt;/tt&gt;</li>
+<li><a href="http://reactivex.io/documentation/operators/reduce.html"><code>reduce(a)</code></a> 被定义为 &lt;tt&gt;<a href="http://reactivex.io/documentation/operators/scan.html">scan(a)</a>.<a href="http://reactivex.io/documentation/operators/last.html">last( )</a>&lt;/tt&gt;</li>
+</ul>
+</li>
+<li>如果你的操作符使用了函数或者lambda表达式作为参数，请注意它们可能是异常的来源，而且要准备好捕获这些异常，并且使用 <code>onError()</code> 通知订阅者。<ul>
+<li>某些异常被认为是致命的，对它们来说，调用 <code>onError()</code>毫无意义，那样或者是无用的，或者只是对问题的妥协。你可以使用 <code>Exceptions.throwIfFatal(throwable)</code> 方法过滤掉这些致命的异常，并重新抛出它们，而不是试图发射关于它们的通知。</li>
+</ul>
+</li>
+<li>一般说来，一旦发生错误应立即通知订阅者，而不是首先尝试发射更多的数据。</li>
+<li>请注意 <code>null</code> 可能是Observable发射的一个合法数据。频繁发生错误的一个来源是：测试一些变量并且将持有一个非 <code>null</code> 值作为是否发射了数据的替代。一个值为 <code>null</code> 的数据仍然是一个发射数据项，它与没有发射任何东西是不能等同的。</li>
+<li>想让你的操作符在反压(<em>backpressure</em>)场景中变得得好可能会非常棘手。可以参考Dávid Karnok的博客 <a href="http://akarnokd.blogspot.hu/">Advanced RxJava</a>，这里有一个涉及到的各种因素和怎样处理它们的很值得看的讨论。</li>
+</ul>
+</body>
+<html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File TakeWhile.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="takewhile">TakeWhile</h2>
+<p>发射Observable发射的数据，直到一个指定的条件不成立</p>
+<p><img src="../images/operators/takeWhile.c.png" alt="takeWhile"></p>
+<p><code>TakeWhile</code>发射原始Observable，直到你指定的某个条件不成立的那一刻，它停止发射原始Observable，并终止自己的Observable。</p>
+<p>RxJava中的<code>takeWhile</code>操作符返回一个镜像原始Observable行为的Observable，直到某一项数据你指定的函数返回<code>false</code>那一刻，这个新的Observable发射<code>onCompleted</code>终止通知。</p>
+<p><code>takeWhile</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeWhile(rx.functions.Func1">takeWhile(Func1)</a>)</li>
+</ul>
+</body>
+<html>

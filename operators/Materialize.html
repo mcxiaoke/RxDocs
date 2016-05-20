@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Materialize.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="materialize-dematerialize">Materialize/Dematerialize</h2>
+<p><code>Materialize</code>将数据项和事件通知都当做数据项发射，<code>Dematerialize</code>刚好相反。</p>
+<p><img src="../images/operators/materialize.c.png" alt="materialize"></p>
+<p>一个合法的有限的Obversable将调用它的观察者的<code>onNext</code>方法零次或多次，然后调用观察者的<code>onCompleted</code>或<code>onError</code>正好一次。<code>Materialize</code>操作符将这一系列调用，包括原来的<code>onNext</code>通知和终止通知<code>onCompleted</code>或<code>onError</code>都转换为一个Observable发射的数据序列。</p>
+<p>RxJava的<code>materialize</code>将来自原始Observable的通知转换为<code>Notification</code>对象，然后它返回的Observable会发射这些数据。</p>
+<p><code>materialize</code>默认不在任何特定的调度器 (<a href="Scheduler.html"><code>Scheduler</code></a>) 上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#materialize(">materialize()</a>)</li>
+</ul>
+<p><img src="../images/operators/dematerialize.c.png" alt="dematerialize"></p>
+<p><code>Dematerialize</code>操作符是<code>Materialize</code>的逆向过程，它将<code>Materialize</code>转换的结果还原成它原本的形式。</p>
+<p><code>dematerialize</code>反转这个过程，将原始Observable发射的<code>Notification</code>对象还原成Observable的通知。</p>
+<p><code>dematerialize</code>默认不在任何特定的调度器 (<a href="Scheduler.html"><code>Scheduler</code></a>) 上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#dematerialize(">dematerialize()</a>)</li>
+</ul>
+</body>
+<html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Amb.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="amb">Amb</h2>
+<p>给定两个或多个Observable，它只发射最先发射数据或通知的那个Observable的所有数据</p>
+<p><img src="../images/operators/amb.c.png" alt="amb"></p>
+<p>传递多个Observable给<code>Amb</code>时，它只发射其中一个Observable的数据和通知：最先发送通知给<code>Amb</code>的那个，不管发射的是一项数据还是一个<code>onError</code>或<code>onCompleted</code>通知。<code>Amb</code>将忽略和丢弃其它所有Observables的发射物。</p>
+<p><img src="../images/operators/amb.png" alt="amb"></p>
+<p>RxJava的实现是<code>amb</code>，有一个类似的对象方法<code>ambWith</code>。例如，<code>Observable.amb(o1,o2)</code>和<code>o1.ambWith(o2)</code>是等价的。</p>
+<p>这个操作符默认不在任何特定的调度器上执行。</p>
+</body>
+<html>

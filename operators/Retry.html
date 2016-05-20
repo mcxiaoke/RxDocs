@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Retry.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="retry">Retry</h2>
+<p>如果原始Observable遇到错误，重新订阅它期望它能正常终止</p>
+<p><img src="../images/operators/retry.C.png" alt="retry"></p>
+<p><code>Retry</code>操作符不会将原始Observable的<code>onError</code>通知传递给观察者，它会订阅这个Observable，再给它一次机会无错误地完成它的数据序列。<code>Retry</code>总是传递<code>onNext</code>通知给观察者，由于重新订阅，可能会造成数据项重复，如上图所示。</p>
+<p>RxJava中的实现为<code>retry</code>和<code>retryWhen</code>。</p>
+<p>无论收到多少次<code>onError</code>通知，无参数版本的<code>retry</code>都会继续订阅并发射原始Observable。</p>
+<p>接受单个<code>count</code>参数的<code>retry</code>会最多重新订阅指定的次数，如果次数超了，它不会尝试再次订阅，它会把最新的一个<code>onError</code>通知传递给它的观察者。</p>
+<p>还有一个版本的<code>retry</code>接受一个谓词函数作为参数，这个函数的两个参数是：重试次数和导致发射<code>onError</code>通知的<code>Throwable</code>。这个函数返回一个布尔值，如果返回<code>true</code>，<code>retry</code>应该再次订阅和镜像原始的Observable，如果返回<code>false</code>，<code>retry</code>会将最新的一个<code>onError</code>通知传递给它的观察者。</p>
+<p><code>retry</code>操作符默认在<code>trampoline</code>调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retry(">retry()</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retry(long">retry(long)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retry(rx.functions.Func2">retry(Func2)</a>)</li>
+</ul>
+<h3 id="retrywhen">retryWhen</h3>
+<p><img src="../images/operators/retryWhen.f.png" alt="retryWhen"></p>
+<p><code>retryWhen</code>和<code>retry</code>类似，区别是，<code>retryWhen</code>将<code>onError</code>中的<code>Throwable</code>传递给一个函数，这个函数产生另一个Observable，<code>retryWhen</code>观察它的结果再决定是不是要重新订阅原始的Observable。如果这个Observable发射了一项数据，它就重新订阅，如果这个Observable发射的是<code>onError</code>通知，它就将这个通知传递给观察者然后终止。</p>
+<p><code>retryWhen</code>默认在<code>trampoline</code>调度器上执行，你可以通过参数指定其它的调度器。</p>
+<p>示例代码</p>
+<pre><code class="lang-java">
+Observable.create((Subscriber&lt;? super String&gt; s) -&gt; {
+      System.out.println(&quot;subscribing&quot;);
+      s.onError(new RuntimeException(&quot;always fails&quot;));
+  }).retryWhen(attempts -&gt; {
+      return attempts.zipWith(Observable.range(1, 3), (n, i) -&gt; i).flatMap(i -&gt; {
+          System.out.println(&quot;delay retry by &quot; + i + &quot; second(s)&quot;);
+          return Observable.timer(i, TimeUnit.SECONDS);
+      });
+  }).toBlocking().forEach(System.out::println);
+</code></pre>
+<p>输出</p>
+<pre><code>subscribing
+delay retry by 1 second(s)
+subscribing
+delay retry by 2 second(s)
+subscribing
+delay retry by 3 second(s)
+subscribing
+</code></pre><ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retryWhen(rx.functions.Func1">retryWhen(Func1)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#retryWhen(rx.functions.Func1,%20rx.Scheduler">retryWhen(Func1,Scheduler)</a>)</li>
+</ul>
+</body>
+<html>

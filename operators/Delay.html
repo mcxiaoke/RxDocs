@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Delay.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h1 id="delay">Delay</h1>
+<p>延迟一段指定的时间再发射来自Observable的发射物</p>
+<p><img src="../images/operators/delay.c.png" alt="delay"></p>
+<p><code>Delay</code>操作符让原始Observable在发射每项数据之前都暂停一段指定的时间段。效果是Observable发射的数据项在时间上向前整体平移了一个增量。</p>
+<p>RxJava的实现是 <code>delay</code>和<code>delaySubscription</code>。</p>
+<p><img src="../images/operators/delay.png" alt="delay"></p>
+<p>第一种<code>delay</code>接受一个定义时长的参数（包括数量和单位）。每当原始Observable发射一项数据，<code>delay</code>就启动一个定时器，当定时器过了给定的时间段时，<code>delay</code>返回的Observable发射相同的数据项。</p>
+<p>注意：<code>delay</code>不会平移<code>onError</code>通知，它会立即将这个通知传递给订阅者，同时丢弃任何待发射的<code>onNext</code>通知。然而它会平移一个<code>onCompleted</code>通知。</p>
+<p><code>delay</code>默认在<code>computation</code>调度器上执行，你可以通过参数指定使用其它的调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#delay(long,%20java.util.concurrent.TimeUnit">delay(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#delay(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">delay()</a>)</li>
+</ul>
+<p><img src="../images/operators/delay.o.png" alt="delay"></p>
+<p>另一种<code>delay</code>不实用常数延时参数，它使用一个函数针对原始Observable的每一项数据返回一个Observable，它监视返回的这个Observable，当任何那样的Observable终止时，<code>delay</code>返回的Observable就发射关联的那项数据。</p>
+<p>这种<code>delay</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#delay(rx.functions.Func1">delay(Func1)</a>)</li>
+</ul>
+<p><img src="../images/operators/delay.oo.png" alt="delay"></p>
+<p>这个版本的<code>delay</code>对每一项数据使用一个Observable作为原始Observable的延时定时器。</p>
+<p>这种<code>delay</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#delay(rx.functions.Func0,%20rx.functions.Func1">delay(Func0,Func1)</a>)</li>
+</ul>
+<p><img src="../images/operators/delaySubscription.png" alt="delay"></p>
+<p>还有一个操作符<code>delaySubscription</code>让你你可以延迟订阅原始Observable。它结合搜一个定义延时的参数。</p>
+<p><code>delaySubscription</code>默认在<code>computation</code>调度器上执行，你可以通过参数指定使用其它的调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#delaySubscription(long,%20java.util.concurrent.TimeUnit">delaySubscription(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#delaySubscription(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">delaySubscription(long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+<p><img src="../images/operators/delaySubscription.o.png" alt="delay"></p>
+<p>还有一个版本的<code>delaySubscription</code>使用一个Obseable而不是一个固定的时长来设置订阅延时。 </p>
+<p>这种<code>delaySubscription</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#delaySubscription(rx.functions.Func0">delaySubscription(Func0)</a>)</li>
+</ul>
+</body>
+<html>

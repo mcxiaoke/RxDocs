@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Conditional.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h1 id="-">条件和布尔操作</h1>
+<h2 id="all">All</h2>
+<p>判定是否Observable发射的所有数据都满足某个条件</p>
+<p><img src="../images/operators/all.c.png" alt="all"></p>
+<p>传递一个谓词函数给<code>All</code>操作符，这个函数接受原始Observable发射的数据，根据计算返回一个布尔值。<code>All</code>返回一个只发射一个单个布尔值的Observable，如果原始Observable正常终止并且每一项数据都满足条件，就返回true；如果原始Observable的任何一项数据不满足条件就返回False。</p>
+<p><img src="../images/operators/all.png" alt="all"></p>
+<p>RxJava将这个操作符实现为<code>all</code>，它默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#all(rx.functions.Func1">all(Func1)</a>)</li>
+</ul>
+<h2 id="amb">Amb</h2>
+<p>给定两个或多个Observables，它只发射首先发射数据或通知的那个Observable的所有数据</p>
+<p><img src="../images/operators/amb.c.png" alt="amb"></p>
+<p>当你传递多个Observable给<code>Amb</code>时，它只发射其中一个Observable的数据和通知：首先发送通知给<code>Amb</code>的那个，不管发射的是一项数据还是一个<code>onError</code>或<code>onCompleted</code>通知。<code>Amb</code>将忽略和丢弃其它所有Observables的发射物。</p>
+<p><img src="../images/operators/amb.png" alt="amb"></p>
+<p>RxJava的实现是<code>amb</code>，有一个类似的对象方法<code>ambWith</code>。例如，<code>Observable.amb(o1,o2)</code>和<code>o1.ambWith(o2)</code>是等价的。</p>
+<p>这个操作符默认不在任何特定的调度器上执行。</p>
+<h2 id="contains">Contains</h2>
+<p>判定一个Observable是否发射一个特定的值</p>
+<p><img src="../images/operators/contains.c.png" alt="contains"></p>
+<p>给<code>Contains</code>传一个指定的值，如果原始Observable发射了那个值，它返回的Observable将发射true，否则发射false。</p>
+<p>相关的一个操作符<code>IsEmpty</code>用于判定原始Observable是否没有发射任何数据。</p>
+<p><img src="../images/operators/contains.png" alt="contains"></p>
+<p><code>contains</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#contains(java.lang.Object">contains(Object)</a>)</li>
+</ul>
+<p><img src="../images/operators/exists.png" alt="exists"></p>
+<p>RxJava中还有一个<code>exists</code>操作符，它通过一个谓词函数测试原始Observable发射的数据，只要任何一项满足条件就返回一个发射true的Observable，否则返回一个发射false的Observable。</p>
+<p><code>exists</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#exists(rx.functions.Func1">exists(Func1)</a>)</li>
+</ul>
+<p><img src="../images/operators/isEmpty.png" alt="isEmpty"></p>
+<p><code>isEmpty</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#isEmpty(">isEmpty()</a>)</li>
+</ul>
+<h2 id="defaultifempty">DefaultIfEmpty</h2>
+<p>发射来自原始Observable的值，如果原始Observable没有发射任何值，就发射一个默认值</p>
+<p><img src="../images/operators/defaultIfEmpty.c.png" alt="defaultIfEmtpy"></p>
+<p><code>DefaultIfEmpty</code>简单的精确地发射原始Observable的值，如果原始Observable没有发射任何数据正常终止（以<code>onCompleted</code>d的形式），<code>DefaultIfEmpty</code>返回的Observable就发射一个你提供的默认值。</p>
+<p>RxJava将这个操作符实现为<code>defaultIfEmpty</code>。它默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#defaultIfEmpty(T">defaultIfEmpty(T)</a>)</li>
+</ul>
+<p>还有一个新的操作符<code>switchIfEmpty</code>，不在RxJava 1.0.0版中，它和<code>defaultIfEmtpy</code>类似，不同的是，如果原始Observable没有发射数据，它发射一个备用Observable的发射物。</p>
+<h2 id="sequenceequal">SequenceEqual</h2>
+<p>判定两个Observables是否发射相同的数据序列。</p>
+<p><img src="../images/operators/sequenceEqual.c.png" alt="sequenceEqual"></p>
+<p>传递两个Observable给<code>SequenceEqual</code>操作符，它会比较两个Observable的发射物，如果两个序列是相同的（相同的数据，相同的顺序，相同的终止状态），它就发射true，否则发射false。</p>
+<p><img src="../images/operators/sequenceEqual.png" alt="sequenceEqual"></p>
+<p>它还有一个版本接受第三个参数，可以传递一个函数用于比较两个数据项是否相同。</p>
+<p>这个操作符默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable,%20rx.Observable">sequenceEqual(Observable,Observable)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#sequenceEqual(rx.Observable,%20rx.Observable,%20rx.functions.Func2">sequenceEqual(Observable,Observable,Func2)</a>)</li>
+</ul>
+<h2 id="skipuntil">SkipUntil</h2>
+<p>丢弃原始Observable发射的数据，直到第二个Observable发射了一项数据</p>
+<p><img src="../images/operators/skipUntil.c.png" alt="skipUntil"></p>
+<p><code>SkipUntil</code>订阅原始的Observable，但是忽略它的发射物，直到第二个Observable发射了一项数据那一刻，它开始发射原始Observable。</p>
+<p>RxJava中对应的是<code>skipUntil</code>，它默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipUntil(rx.Observable">skipUntil(Observable)</a>)</li>
+</ul>
+<h2 id="skipwhile">SkipWhile</h2>
+<p>丢弃Observable发射的数据，直到一个指定的条件不成立</p>
+<p><img src="../images/operators/skipWhile.c.png" alt="skipWhile"></p>
+<p><code>SkipWhile</code>订阅原始的Observable，但是忽略它的发射物，直到你指定的某个条件变为false的那一刻，它开始发射原始Observable。</p>
+<p><code>skipWhile</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#skipWhile(rx.functions.Func1">skipWhile(Func1)</a>)</li>
+</ul>
+<h2 id="takeuntil">TakeUntil</h2>
+<p>当第二个Observable发射了一项数据或者终止时，丢弃原始Observable发射的任何数据</p>
+<p><img src="../images/operators/takeUntil.c.png" alt="takeUntil"></p>
+<p><code>TakeUntil</code>订阅并开始发射原始Observable，它还监视你提供的第二个Observable。如果第二个Observable发射了一项数据或者发射了一个终止通知，<code>TakeUntil</code>返回的Observable会停止发射原始Observable并终止。</p>
+<p><img src="../images/operators/takeUntil.png" alt="takeUntil"></p>
+<p>RxJava中的实现是<code>takeUntil</code>。注意：第二个Observable发射一项数据或一个<code>onError</code>通知或一个<code>onCompleted</code>通知都会导致<code>takeUntil</code>停止发射数据。</p>
+<p><code>takeUntil</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeUntil(rx.Observable">takeUntil(Observable)</a>)</li>
+</ul>
+<p><img src="../images/operators/takeUntil.p.png" alt="takeUntil"></p>
+<p>还有一个版本的<code>takeUntil</code>，不在RxJava 1.0.0版中，它使用一个谓词函数而不是第二个Observable来判定是否需要终止发射数据，它的行为类似于<code>takeWhile</code>。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeUntil(rx.functions.Func1">takeUntil(Func1)</a>)</li>
+</ul>
+<h2 id="takewhile">TakeWhile</h2>
+<p>发射Observable发射的数据，直到一个指定的条件不成立</p>
+<p><img src="../images/operators/takeWhile.c.png" alt="takeWhile"></p>
+<p><code>TakeWhile</code>发射原始Observable，直到你指定的某个条件不成立的那一刻，它停止发射原始Observable，并终止自己的Observable。</p>
+<p>RxJava中的<code>takeWhile</code>操作符返回一个镜像原始Observable行为的Observable，直到某一项数据你指定的函数返回<code>false</code>那一刻，这个新的Observable发射<code>onCompleted</code>终止通知。</p>
+<p><code>takeWhile</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeWhile(rx.functions.Func1">takeWhile(Func1)</a>)</li>
+</ul>
+</body>
+<html>

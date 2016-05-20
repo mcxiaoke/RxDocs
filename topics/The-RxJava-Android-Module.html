@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File The-RxJava-Android-Module.html in D:\git\RxDocs\topics</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h1 id="-">介绍</h1>
+<p><code>rxjava-android</code> 模块包含RxJava的Android特定的绑定代码。它给RxJava添加了一些类，用于帮助在Android应用中编写响应式(<code>reactive</code>)的组件。</p>
+<ul>
+<li>它提供了一个可以在给定的Android <code>Handler</code> 上调度 <code>Observable</code> 的调度器 <code>Scheduler</code>，特别是在UI主线程上。</li>
+<li>它提供了一些操作符，让你可以更容易的处理 <code>Fragment</code> 和 <code>Activity</code> 的生命周期方法。</li>
+<li>它提供了很多Android消息和通知组件的包装类，用于与Rx的调用链搭配使用。</li>
+<li>针对常见的Android用例和重要的UI，它提供了可复用的、自包含的响应式组件。（<em>即将到来</em>）</li>
+</ul>
+<h1 id="binaries">Binaries</h1>
+<p>你可以在 <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22rxandroid%22">http://search.maven.org</a> 找到用于Maven, Ivy, Gradle和其它构建系统的二进制文件和依赖信息。</p>
+<p><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22rxandroid%22">Maven</a> 示例：</p>
+<pre><code class="lang-xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.reactivex&lt;/groupId&gt;
+    &lt;artifactId&gt;rxandroid&lt;/artifactId&gt;
+    &lt;version&gt;0.23.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>Ivy 示例：</p>
+<pre><code class="lang-xml">&lt;dependency org=&quot;io.reactivex&quot; name=&quot;rxandroid&quot; rev=&quot;0.23.0&quot; /&gt;
+</code></pre>
+<p>当前支持的最低API版本(<code>minSdkVersion</code>)是 <code>10</code> (Android 2.3/Gingerbread)</p>
+<h1 id="-">示例</h1>
+<h2 id="-ui-observing-">在UI线程观察(Observing)</h2>
+<p>在Android上，通常处理异步任务时你会在主线程上等待(observing)处理结果，一般情况下你使用 <code>AsyncTask</code> 达到这个目的。使用RxJava，你会使用 <code>observeOn</code> 操作符声明你要在主线程等待 <code>Observable</code> 的结果：</p>
+<pre><code class="lang-java">public class ReactiveFragment extends Fragment {
+
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    Observable.from(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(/* an Observer */);
+}
+</code></pre>
+<p>这个例子中，Observable在一个新的线程执行，结果通过 <code>onNext</code> 在主线程发射。</p>
+<h2 id="-observing-">在任意线程观察(Observing)</h2>
+<p>前面的例子是一个普遍概念的特殊版本：Android使用一个叫 <code>Handler</code> 的类绑定异步通信到消息循环。为了在任意线程 <code>观察</code> 一个Observable，需要创建一个与那个类关联的 <code>Handler</code>，然后使用 <code>AndroidSchedulers.handlerThread</code> 调度器：</p>
+<pre><code class="lang-java">new Thread(new Runnable() {
+    @Override
+    public void run() {
+        final Handler handler = new Handler(); // bound to this thread
+        Observable.from(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.handlerThread(handler))
+                .subscribe(/* an Observer */)
+
+        // perform work, ...
+    }
+}, &quot;custom-thread-1&quot;).start();
+</code></pre>
+<p>这个例子中，Observable在一个新的线程执行，结果通过 <code>onNext</code> 在 <code>custom-thread-1</code> 线程上发射。（这个例子不太自然，因为你可以调用<code>observeOn(Schedulers.currentThread())</code>，但是它说清楚了这个想法。）</p>
+<h2 id="fragment-activity-">Fragment和Activity生命周期</h2>
+<p>在Android上，要在异步操作中访问框架中的对象有些棘手，那是因为Andoid系统可以决定销毁(<code>destroy</code>)一个 <code>Activity</code>，例如，当一个后台线程还在运行的时候，如果这个线程尝试访问一个已经死掉的<code>Activity</code>中的View对象，会导致异常退出(Crash)。（这也会导致内存泄露，因为 <code>Activity</code> 已经不可见了，你的后台线程还持有它的引用。）</p>
+<p>这仍然是在Android上使用RxJava需要关注的一个问题，但是通过使用 <code>Subscription</code>和其它Observable操作符，你可以优雅地解决这个问题。通常来说，当你在<code>Activity</code>中订阅一个<code>Observable</code>的结果时（无论是直接的还是通过一个内部类），你必须在 <code>onDestroy</code> 里取消订阅，就像下面例子里展示的那样：</p>
+<pre><code class="lang-java">// MyActivity
+private Subscription subscription;
+
+protected void onCreate(Bundle savedInstanceState) {
+    this.subscription = observable.subscribe(this);
+}
+
+...
+
+protected void onDestroy() {
+    this.subscription.unsubscribe();
+    super.onDestroy();
+}
+</code></pre>
+<p>这样确保所有指向订阅者(这个<code>Activity</code>)的引用尽快释放，不会再有通知通过 <code>onNext</code> 发射给这个订阅者。</p>
+<p>有一个问题，如果由于屏幕方向的变化导致这个 <code>Activity</code> 被销毁，在 <code>onCreate</code> 中这个Observable会再次启动。你可以使用 <code>cache</code> 或 <code>replay</code> 操作符阻止它发生，这些操作符保证Observable在 <code>Activity</code> 的生命周期内存在（你可以在一个全局的缓存中保存它，比如放在Fragment中。）你可以使用任何操作符，只要能保证：当订阅者订阅一个已经在运行的Observable时，在它与<code>Activity</code> 解除关联的这段时间里发射的数据都会被<code>回放</code>，并且来自这个Observable的任何离线通知都会正常分发。</p>
+<h1 id="-">参考资料</h1>
+<ul>
+<li><a href="http://open.blogs.nytimes.com/2014/08/18/getting-groovy-with-reactive-android/?_php=true&amp;_type=blogs&amp;_php=true&amp;_type=blogs&amp;_r=1&amp;">How the New York Times is building its Android app with Groovy/RxJava</a> by Mohit Pandey</li>
+<li><a href="http://mttkay.github.io/blog/2013/08/25/functional-reactive-programming-on-android-with-rxjava/">Functional Reactive Programming on Android With RxJava</a> and <a href="https://speakerdeck.com/mttkay/conquering-concurrency-bringing-the-reactive-extensions-to-the-android-platform">Conquering concurrency - bringing the Reactive Extensions to the Android platform</a> by Matthias Käppler</li>
+<li><a href="https://github.com/kaushikgopal/Android-RxJava">Learning RxJava for Android by example</a> by Kaushik Gopal</li>
+<li><a href="http://blog.futurice.com/top-7-tips-for-rxjava-on-android">Top 7 Tips for RxJava on Android</a> and <a href="http://www.slideshare.net/TimoTuominen1/rxjava-architectures-on-android-8-android-livecode-32531688">Rx Architectures in Android</a> by Timo Tuominen</li>
+<li><a href="http://slid.es/yaroslavheriatovych/frponandroid">FRP on Android</a> by Yaroslav Heriatovych</li>
+<li><a href="http://blog.futurice.com/tech-pick-of-the-week-rx-for-net-and-rxjava-for-android">Rx for .NET and RxJava for Android</a> by Olli Salonen</li>
+<li><a href="http://blog.futurice.com/android-development-has-its-own-swift">RxJava in Xtend for Android</a> by Andre Medeiros</li>
+<li><a href="http://mnmlst-dvlpr.blogspot.de/2014/07/rxjava-and-xtend.html">RxJava and Xtend</a> by Stefan Oehme</li>
+<li>Grokking RxJava, <a href="http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/">Part 1: The Basics</a>, <a href="http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/">Part 2: Operator, Operator</a>, <a href="http://blog.danlew.net/2014/09/30/grokking-rxjava-part-3/">Part 3: Reactive with Benefits</a>, <a href="http://blog.danlew.net/2014/10/08/grokking-rxjava-part-4/">Part 4: Reactive Android</a> - published in Sep/Oct 2014 by Daniel Lew</li>
+</ul>
+</body>
+<html>

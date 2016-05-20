@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File DefaultIfEmpty.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="defaultifempty">DefaultIfEmpty</h2>
+<p>发射来自原始Observable的值，如果原始Observable没有发射任何值，就发射一个默认值</p>
+<p><img src="../images/operators/defaultIfEmpty.c.png" alt="defaultIfEmtpy"></p>
+<p><code>DefaultIfEmpty</code>简单的精确地发射原始Observable的值，如果原始Observable没有发射任何数据正常终止（以<code>onCompleted</code>d的形式），<code>DefaultIfEmpty</code>返回的Observable就发射一个你提供的默认值。</p>
+<p>RxJava将这个操作符实现为<code>defaultIfEmpty</code>。它默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#defaultIfEmpty(T">defaultIfEmpty(T)</a>)</li>
+</ul>
+<p>还有一个新的操作符<code>switchIfEmpty</code>，不在RxJava 1.0.0版中，它和<code>defaultIfEmtpy</code>类似，不同的是，如果原始Observable没有发射数据，它发射一个备用Observable的发射物。</p>
+</body>
+<html>

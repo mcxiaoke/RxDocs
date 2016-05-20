@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Buffer.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="buffer">Buffer</h2>
+<p>定期收集Observable的数据放进一个数据包裹，然后发射这些数据包裹，而不是一次发射一个值。</p>
+<p><img src="../images/operators/buffer.png" alt="buffer"></p>
+<p><code>Buffer</code>操作符将一个Observable变换为另一个，原来的Observable正常发射数据，变换产生的Observable发射这些数据的缓存集合。<code>Buffer</code>操作符在很多语言特定的实现中有很多种变体，它们在如何缓存这个问题上存在区别。</p>
+<p>注意：如果原来的Observable发射了一个<code>onError</code>通知，<code>Buffer</code>会立即传递这个通知，而不是首先发射缓存的数据，即使在这之前缓存中包含了原始Observable发射的数据。</p>
+<p><code>Window</code>操作符与<code>Buffer</code>类似，但是它在发射之前把收集到的数据放进单独的Observable，而不是放进一个数据结构。</p>
+<p>在RxJava中有许多<code>Buffer</code>的变体：</p>
+<h3 id="buffer-count-">buffer(count)</h3>
+<p><img src="../images/operators/buffer3.png" alt="buffer3"></p>
+<p><code>buffer(count)</code>以列表(List)的形式发射非重叠的缓存，每一个缓存至多包含来自原始Observable的count项数据（最后发射的列表数据可能少于count项）</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(int">buffer(int)</a>)</li>
+</ul>
+<h3 id="buffer-count-skip-">buffer(count, skip)</h3>
+<p><img src="../images/operators/buffer4.png" alt="buffer4"></p>
+<p><code>buffer(count, skip)</code>从原始Observable的第一项数据开始创建新的缓存，此后每当收到<code>skip</code>项数据，用<code>count</code>项数据填充缓存：开头的一项和后续的<code>count-1</code>项，它以列表(List)的形式发射缓存，取决于<code>count</code>和<code>skip</code>的值，这些缓存可能会有重叠部分（比如skip &lt; count时），也可能会有间隙（比如skip &gt; count时）。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(int,%20int">buffer(int,int)</a>)</li>
+</ul>
+<h3 id="buffer-bufferclosingselector-">buffer(bufferClosingSelector)</h3>
+<p><img src="../images/operators/buffer1.png" alt="buffer1"></p>
+<p>当它订阅原来的Observable时，<code>buffer(bufferClosingSelector)</code>开始将数据收集到一个<code>List</code>，然后它调用<code>bufferClosingSelector</code>生成第二个Observable，当第二个Observable发射一个<code>TClosing</code>时，<code>buffer</code>发射当前的<code>List</code>，然后重复这个过程：开始组装一个新的<code>List</code>，然后调用<code>bufferClosingSelector</code>创建一个新的Observable并监视它。它会一直这样做直到原来的Observable执行完成。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(rx.functions.Func0">buffer(Func0)</a>)</li>
+</ul>
+<h3 id="buffer-boundary-">buffer(boundary)</h3>
+<p><img src="../images/operators/buffer8.png" alt="buffer8"></p>
+<p><code>buffer(boundary)</code>监视一个名叫<code>boundary</code>的Observable，每当这个Observable发射了一个值，它就创建一个新的<code>List</code>开始收集来自原始Observable的数据并发射原来的<code>List</code>。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(rx.Observable">buffer(Observable)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(rx.Observable,%20int">buffer(Observable,int)</a>)</li>
+</ul>
+<h3 id="buffer-bufferopenings-bufferclosingselector-">buffer(bufferOpenings, bufferClosingSelector)</h3>
+<p><img src="../images/operators/buffer2.png" alt="buffer2"></p>
+<p><code>buffer(bufferOpenings, bufferClosingSelector)</code>监视这个叫<code>bufferOpenings</code>的Observable（它发射<code>BufferOpening</code>对象），每当<code>bufferOpenings</code>发射了一个数据时，它就创建一个新的<code>List</code>开始手机原始Observable的数据，并将<code>bufferOpenings</code>传递给<code>closingSelector</code>函数。这个函数返回一个Observable。<code>buffer</code>监视这个Observable，当它检测到一个来自这个Observable的数据时，就关闭<code>List</code>并且发射它自己的数据（之前的那个List）。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(rx.Observable,%20rx.functions.Func1">buffer(Observable,Func1)</a>)</li>
+</ul>
+<h3 id="buffer-timespan-unit-scheduler-">buffer(timespan, unit[, scheduler])</h3>
+<p><img src="../images/operators/buffer5.png" alt="buffer5"></p>
+<p><code>buffer(timespan, unit)</code>定期以<code>List</code>的形式发射新的数据，每个时间段，收集来自原始Observable的数据（从前面一个数据包裹之后，或者如果是第一个数据包裹，从有观察者订阅原来的Observale之后开始）。还有另一个版本的<code>buffer</code>接受一个<code>Scheduler</code>参数，默认情况下会使用<code>computation</code>调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(long,%20java.util.concurrent.TimeUnit">buffer(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">buffer(long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+<h3 id="buffer-timespan-unit-count-scheduler-">buffer(timespan, unit, count[, scheduler])</h3>
+<p><img src="../images/operators/buffer6.png" alt="buffer6"></p>
+<p>每当收到来自原始Observable的count项数据，或者每过了一段指定的时间后，<code>buffer(timespan, unit, count)</code>就以<code>List</code>的形式发射这期间的数据，即使数据项少于count项。还有另一个版本的<code>buffer</code>接受一个<code>Scheduler</code>参数，默认情况下会使用<code>computation</code>调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(long,%20java.util.concurrent.TimeUnit,%20int">buffer(long,TimeUnit,int)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(long,%20java.util.concurrent.TimeUnit,%20int,%20rx.Scheduler">buffer(long,TimeUnit,int,Scheduler)</a>)</li>
+</ul>
+<h3 id="buffer-timespan-timeshift-unit-scheduler-">buffer(timespan, timeshift, unit[, scheduler])</h3>
+<p><img src="../images/operators/buffer7.png" alt="buffer7"></p>
+<p><code>buffer(timespan, timeshift, unit)</code>在每一个<code>timeshift</code>时期内都创建一个新的<code>List</code>,然后用原始Observable发射的每一项数据填充这个列表（在把这个<code>List</code>当做自己的数据发射前，从创建时开始，直到过了<code>timespan</code>这么长的时间）。如果<code>timespan</code>长于<code>timeshift</code>，它发射的数据包将会重叠，因此可能包含重复的数据项。</p>
+<p>还有另一个版本的<code>buffer</code>接受一个<code>Scheduler</code>参数，默认情况下会使用<code>computation</code>调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(long,%20long,%20java.util.concurrent.TimeUnit">buffer(long,long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(long,%20long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">buffer(long,long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+<h3 id="buffer-backpressure">buffer-backpressure</h3>
+<p>你可以使用<code>Buffer</code>操作符实现反压<code>backpressure</code>（意思是，处理这样一个Observable：它产生数据的速度可能比它的观察者消费数据的速度快）。</p>
+<p><img src="../images/operators/bp.buffer2.png" alt="bp.buffer2"></p>
+<p>Buffer操作符可以将大量的数据序列缩减为较少的数据缓存序列，让它们更容易处理。例如，你可以按固定的时间间隔，定期关闭和发射来自一个爆发性Observable的数据缓存。这相当于一个缓冲区。</p>
+<p>示例代码</p>
+<pre><code class="lang-java">Observable&lt;List&lt;Integer&gt;&gt; burstyBuffered = bursty.buffer(500, TimeUnit.MILLISECONDS);
+</code></pre>
+<p><img src="../images/operators/bp.buffer1.png" alt="bp.buffer1"></p>
+<p>或者，如果你想更进一步，可以在爆发期将数据收集到缓存，然后在爆发期终止时发射这些数据，使用 <a href="Filtering-Operators#Debounce"><code>Debounce</code></a> 操作符给<code>buffer</code>操作符发射一个缓存关闭指示器(<code>buffer closing indicator</code>)可以做到这一点。</p>
+<p>代码示例：</p>
+<pre><code class="lang-java">
+// we have to multicast the original bursty Observable so we can use it
+// both as our source and as the source for our buffer closing selector:
+Observable&lt;Integer&gt; burstyMulticast = bursty.publish().refCount();
+// burstyDebounced will be our buffer closing selector:
+Observable&lt;Integer&gt; burstyDebounced = burstyMulticast.debounce(10, TimeUnit.MILLISECONDS);
+// and this, finally, is the Observable of buffers we&#39;re interested in:
+Observable&lt;List&lt;Integer&gt;&gt; burstyBuffered = burstyMulticast.buffer(burstyDebounced);
+</code></pre>
+<h3 id="-">参见</h3>
+<ul>
+<li><a href="http://nerds.weddingpartyapp.com/tech/2015/01/05/debouncedbuffer-used-in-rxbus-example/">DebouncedBuffer With RxJava by Gopal Kaushik</a></li>
+</ul>
+</body>
+<html>

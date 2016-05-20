@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File TakeUntil.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="test/style.css">
+</head>
+<body>
+<h2 id="takeuntil">TakeUntil</h2>
+<p>当第二个Observable发射了一项数据或者终止时，丢弃原始Observable发射的任何数据</p>
+<p><img src="../images/operators/takeUntil.c.png" alt="takeUntil"></p>
+<p><code>TakeUntil</code>订阅并开始发射原始Observable，它还监视你提供的第二个Observable。如果第二个Observable发射了一项数据或者发射了一个终止通知，<code>TakeUntil</code>返回的Observable会停止发射原始Observable并终止。</p>
+<p><img src="../images/operators/takeUntil.png" alt="takeUntil"></p>
+<p>RxJava中的实现是<code>takeUntil</code>。注意：第二个Observable发射一项数据或一个<code>onError</code>通知或一个<code>onCompleted</code>通知都会导致<code>takeUntil</code>停止发射数据。</p>
+<p><code>takeUntil</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeUntil(rx.Observable">takeUntil(Observable)</a>)</li>
+</ul>
+<p><img src="../images/operators/takeUntil.p.png" alt="takeUntil"></p>
+<p>还有一个版本的<code>takeUntil</code>，不在RxJava 1.0.0版中，它使用一个谓词函数而不是第二个Observable来判定是否需要终止发射数据，它的行为类似于<code>takeWhile</code>。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#takeUntil(rx.functions.Func1">takeUntil(Func1)</a>)</li>
+</ul>
+</body>
+<html>
