@@ -1,6 +1,8 @@
 body {
   background-color: White;
-  margin-left: 15px;
+  margin: 0 auto;
+  padding: 1em;
+  max-width: 80em;
 }
 h1 {
   color: maroon;
