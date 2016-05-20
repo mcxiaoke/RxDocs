@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>File Error-Handling.html in D:\git\RxDocs\topics</title>
-  <link rel="stylesheet" href="test/style.css">
+  <link rel="stylesheet" href="../style/github-style.css">
 </head>
 <body>
 <p>一般来说，Observable不会抛异常。它会调用 <code>onError</code> 终止Observable序列，以此通知所有的观察者发生了一个不可恢复的错误。<br>但是，也存在一些异常。例如，如果 <code>onError</code> 调用失败了，Observable不会尝试再次调用 <code>onError</code> 去通知观察者，它会抛出 <code>RuntimeException</code>，<code>OnErrorFailedException</code> 或者 <code>OnErrorNotImplementedException</code>。</p>

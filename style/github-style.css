@@ -1,0 +1,57 @@
+body {
+  background-color: White;
+  margin-left: 15px;
+}
+h1 {
+  color: maroon;
+}
+code, div.highlight {
+  background-color: MintCream;
+  padding-left: -5px;
+  margin-left: 5px;
+}
+
+div.highlight {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 80%;
+}
+.p {
+  color: Black;
+}
+.n, .pl-vpf {
+  color: Black;
+  font-weight: medium;
+}
+.nf, .pl-enf {
+  color: DarkGreen;
+}
+.nx {
+  color: #005B5B;
+  font-weight: medium;
+}
+.o, .pl-ko {
+  color: black;
+}
+.mi, .pl-cn {
+  color: Brown;
+  font-weight: bold;
+}
+.k, .pl-s, .pl-k {
+  color: DarkSlateBlue;
+  font-weight: bold;
+}
+.kd {
+  color: DarkSlate;
+  font-weight: bold;
+}
+.s1 {
+  color: Chocolate;
+  font-weight: 500;
+}
+.s2 {
+  color: Red;
+}
+.c, .pl-c {
+  color: Orange;
+}
