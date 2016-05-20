@@ -11,6 +11,10 @@ code, div.highlight {
   margin-left: 5px;
 }
 
+img {
+  max-width: 100%;
+}
+
 div.highlight {
   padding-top: 10px;
   padding-bottom: 10px;
