@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Timeout.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="timeout">Timeout</h2>
+<p>对原始Observable的一个镜像，如果过了一个指定的时长仍没有发射数据，它会发一个错误通知</p>
+<p><img src="../images/operators/timeout.c.png" alt="Timeout"></p>
+<p>如果原始Observable过了指定的一段时长没有发射任何数据，<code>Timeout</code>操作符会以一个<code>onError</code>通知终止这个Observable。</p>
+<p>RxJava中的实现为<code>timeout</code>，但是有好几个变体。</p>
+<p><img src="../images/operators/timeout.1.png" alt="Timeout"></p>
+<p>第一个变体接受一个时长参数，每当原始Observable发射了一项数据，<code>timeout</code>就启动一个计时器，如果计时器超过了指定指定的时长而原始Observable没有发射另一项数据，<code>timeout</code>就抛出<code>TimeoutException</code>，以一个错误通知终止Observable。</p>
+<p>这个<code>timeout</code>默认在<code>computation</code>调度器上执行，你可以通过参数指定其它的调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long,%20java.util.concurrent.TimeUnit">timeout(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">timeout()</a>)</li>
+</ul>
+<p><img src="../images/operators/timeout.2.png" alt="Timeout"></p>
+<p>这个版本的<code>timeout</code>在超时时会切换到使用一个你指定的备用的Observable，而不是发错误通知。它也默认在<code>computation</code>调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long,%20java.util.concurrent.TimeUnit,%20rx.Observable">timeout(long,TimeUnit,Observable)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(long,%20java.util.concurrent.TimeUnit,%20rx.Observable,%20rx.Scheduler">timeout(long,TimeUnit,Observable,Scheduler)</a>)</li>
+</ul>
+<p><img src="../images/operators/timeout.3.png" alt="Timeout"></p>
+<p>这个版本的<code>timeout</code>使用一个函数针对原始Observable的每一项返回一个Observable，如果当这个Observable终止时原始Observable还没有发射另一项数据，就会认为是超时了，<code>timeout</code>就抛出<code>TimeoutException</code>，以一个错误通知终止Observable。</p>
+<p>这个<code>timeout</code>默认在<code>immediate</code>调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func1">timeout(Func1)</a>)</li>
+</ul>
+<p><img src="../images/operators/timeout.4.png" alt="Timeout"></p>
+<p>这个版本的<code>timeout</code>同时指定超时时长和备用的Observable。它默认在<code>immediate</code>调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func1,%20rx.Observable">timeout(Func1,Observable)</a>)</li>
+</ul>
+<p><img src="../images/operators/timeout.5.png" alt="Timeout"></p>
+<p>这个版本的<code>time</code>除了给每一项设置超时，还可以单独给第一项设置一个超时。它默认在<code>immediate</code>调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func0,%20rx.functions.Func1">timeout(Func0,Func1)</a>)</li>
+</ul>
+<p><img src="../images/operators/timeout.6.png" alt="Timeout"></p>
+<p>同上，但是同时可以指定一个备用的Observable。它默认在<code>immediate</code>调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#timeout(rx.functions.Func0,%20rx.functions.Func1,%20rx.Observable">timeout(Func0,Func1,Observable)</a>)</li>
+</ul>
+</body>
+<html>

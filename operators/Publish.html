@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Publish.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="publish">Publish</h2>
+<p>将普通的Observable转换为可连接的Observable</p>
+<p><img src="../images/operators/publishConnect.c.png" alt="publish"></p>
+<p>可连接的Observable (<em>connectable Observable</em>)与普通的Observable差不多，不过它并不会在被订阅时开始发射数据，而是直到使用了<code>Connect</code>操作符时才会开始。用这种方法，你可以在任何时候让一个Observable开始发射数据。</p>
+<p><img src="../images/operators/publishConnect.png" alt="publish"></p>
+<p>RxJava的实现为<code>publish</code>。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(">publish()</a>)</li>
+</ul>
+<p><img src="../images/operators/publishConnect.f.png" alt="publish"></p>
+<p>有一个变体接受一个函数作为参数。这个函数用原始Observable发射的数据作为参数，产生一个新的数据作为<code>ConnectableObservable</code>给发射，替换原位置的数据项。实质是在签名的基础上添加一个<code>Map</code>操作。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#publish(rx.functions.Func1">publish(Func1)</a>)</li>
+</ul>
+</body>
+<html>

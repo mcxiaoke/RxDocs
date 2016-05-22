@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File GroupBy.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="groupby">GroupBy</h2>
+<p>将一个Observable分拆为一些Observables集合，它们中的每一个发射原始Observable的一个子序列</p>
+<p><img src="../images/operators/groupBy.c.png" alt="groupBy"></p>
+<p><code>GroupBy</code>操作符将原始Observable分拆为一些Observables集合，它们中的每一个发射原始Observable数据序列的一个子序列。哪个数据项由哪一个Observable发射是由一个函数判定的，这个函数给每一项指定一个Key，Key相同的数据会被同一个Observable发射。</p>
+<p>RxJava实现了<code>groupBy</code>操作符。它返回Observable的一个特殊子类<code>GroupedObservable</code>，实现了<code>GroupedObservable</code>接口的对象有一个额外的方法<code>getKey</code>，这个Key用于将数据分组到指定的Observable。</p>
+<p>有一个版本的<code>groupBy</code>允许你传递一个变换函数，这样它可以在发射结果<code>GroupedObservable</code>之前改变数据项。</p>
+<p>注意：<code>groupBy</code>将原始Observable分解为一个发射多个<code>GroupedObservable</code>的Observable，一旦有订阅，每个<code>GroupedObservable</code>就开始缓存数据。因此，如果你忽略这些<code>GroupedObservable</code>中的任何一个，这个缓存可能形成一个潜在的内存泄露。因此，如果你不想观察，也不要忽略<code>GroupedObservable</code>。你应该使用像<code>take(0)</code>这样会丢弃自己的缓存的操作符。</p>
+<p>如果你取消订阅一个<code>GroupedObservable</code>，那个Observable将会终止。如果之后原始的Observable又发射了一个与这个Observable的Key匹配的数据，<code>groupBy</code>将会为这个Key创建一个新的<code>GroupedObservable</code>。</p>
+<p><code>groupBy</code>默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.functions.Func1">groupBy(Func1)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#groupBy(rx.functions.Func1,%20rx.functions.Func1">groupBy(Func1,Func1)</a>)</li>
+</ul>
+</body>
+<html>

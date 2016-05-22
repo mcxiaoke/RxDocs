@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File How-to-Contribute.html in D:\git\RxDocs\topics</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<p>RxJava的开发仍在持续进行中，而且有一个很长的任务列表需要处理：<a href="https://github.com/ReactiveX/RxJava/issues">RxJava Issues</a>。</p>
+<p>如果你愿意贡献代码，我们请你：</p>
+<ul>
+<li>阅读 [[Rx Design Guidelines|<a href="http://blogs.msdn.com/b/rxteam/archive/2010/10/28/rx-design-guidelines.aspx">http://blogs.msdn.com/b/rxteam/archive/2010/10/28/rx-design-guidelines.aspx</a>]]</li>
+<li>审阅现有的代码，并且遵从已有的模式和习惯</li>
+<li>包含单元测试</li>
+<li>移植操作符的时候坚持Rx.Net实现定义的Rx协议（每一个条目都试着引用正确的MSDN文档）</li>
+</ul>
+<p>有关许可协议的信息可以在这里找到：<a href="https://github.com/ReactiveX/RxJava/blob/1.x/CONTRIBUTING.html">CONTRIBUTING</a></p>
+<h2 id="-eclipse">将工程导入Eclipse</h2>
+<p>有两种方法：</p>
+<p>###作为Eclipse项目导入</p>
+<p>先执行命令：</p>
+<pre><code>./gradlew eclipse
+</code></pre><p>打开Eclipse：</p>
+<ul>
+<li>choose File - Import - General - Existing Projects into Workspace</li>
+<li>Browse to RxJava folder</li>
+<li>click Finish.</li>
+<li>Right click on the project in Package Explorer, select Properties - Java Compiler - Errors/Warnings - click Enable project specific settings.</li>
+<li>Still in Errors/Warnings, go to Deprecated and restricted API and set Forbidden reference (access-rules) to Warning.</li>
+</ul>
+<p>###作为Gradle项目导入</p>
+<p>你需要安装Eclise的Gradle插件。</p>
+<p>打开Eclipse：</p>
+<ul>
+<li>choose File - Import - Gradle - Gradle Project. </li>
+<li>Browse to RxJava folder</li>
+<li>click Build Model</li>
+<li>select the project</li>
+<li>click Finish</li>
+</ul>
+</body>
+<html>

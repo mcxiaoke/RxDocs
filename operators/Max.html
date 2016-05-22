@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Max.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="max">Max</h2>
+<p>发射原始Observable的最大值</p>
+<p><img src="../images/operators/max.c.png" alt="max"></p>
+<p><code>Max</code>操作符操作一个发射数值的Observable并发射单个值：最大的那个值。</p>
+<p>RxJava中，<code>max</code>属于<code>rxjava-math</code>模块。</p>
+<p><img src="../images/operators/max.png" alt="max"></p>
+<p><code>max</code>接受一个可选参数，用于比较两项数据的大小，如果最大值的数据超过一项，<code>max</code>会发射原始Observable最近发射的那一项。</p>
+<p><img src="../images/operators/maxBy.png" alt="maxBy"></p>
+<p><code>maxBy</code>类似于<code>max</code>，但是它发射的不是最大值，而是发射Key最大的项，Key由你指定的一个函数生成。</p>
+</body>
+<html>

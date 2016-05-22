@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Observable-Utility-Operators.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<p>这个页面列出了很多用于Observable的辅助操作符</p>
+<ul>
+<li><a href="Materialize.html"><strong><code>materialize( )</code></strong></a> — 将Observable转换成一个通知列表convert an Observable into a list of Notifications</li>
+<li><a href="Materialize.html"><strong><code>dematerialize( )</code></strong></a> — 将上面的结果逆转回一个Observable</li>
+<li><a href="Timestamp.html"><strong><code>timestamp( )</code></strong></a> — 给Observable发射的每个数据项添加一个时间戳</li>
+<li><a href="Serialize.html"><strong><code>serialize( )</code></strong></a> — 强制Observable按次序发射数据并且要求功能是完好的</li>
+<li><a href="Replay.html"><strong><code>cache( )</code></strong></a> — 记住Observable发射的数据序列并发射相同的数据序列给后续的订阅者</li>
+<li><a href="ObserveOn.html"><strong><code>observeOn( )</code></strong></a> — 指定观察者观察Observable的调度器</li>
+<li><a href="SubscribeOn.html"><strong><code>subscribeOn( )</code></strong></a> — 指定Observable执行任务的调度器</li>
+<li><a href="Do.html"><strong><code>doOnEach( )</code></strong></a> — 注册一个动作，对Observable发射的每个数据项使用</li>
+<li><a href="Do.html"><strong><code>doOnCompleted( )</code></strong></a> — 注册一个动作，对正常完成的Observable使用</li>
+<li><a href="Do.html"><strong><code>doOnError( )</code></strong></a> — 注册一个动作，对发生错误的Observable使用</li>
+<li><a href="Do.html"><strong><code>doOnTerminate( )</code></strong></a> — 注册一个动作，对完成的Observable使用，无论是否发生错误</li>
+<li><a href="Do.html"><strong><code>doOnSubscribe( )</code></strong></a> — 注册一个动作，在观察者订阅时使用</li>
+<li><a href="Do.html"><strong><code>doOnUnsubscribe( )</code></strong></a> — 注册一个动作，在观察者取消订阅时使用</li>
+<li><a href="Do.html"><strong><code>finallyDo( )</code></strong></a> — 注册一个动作，在Observable完成时使用</li>
+<li><a href="Delay.html"><strong><code>delay( )</code></strong></a> — 延时发射Observable的结果</li>
+<li><a href="Delay.html"><strong><code>delaySubscription( )</code></strong></a> — 延时处理订阅请求</li>
+<li><a href="TimeInterval.html"><strong><code>timeInterval( )</code></strong></a> — 定期发射数据</li>
+<li><a href="Using.html"><strong><code>using( )</code></strong></a> — 创建一个只在Observable生命周期存在的资源</li>
+<li><a href="First.html"><strong><code>single( )</code></strong></a> — 强制返回单个数据，否则抛出异常</li>
+<li><a href="First.html"><strong><code>singleOrDefault( )</code></strong></a> — 如果Observable完成时返回了单个数据，就返回它，否则返回默认数据</li>
+<li><a href="To.html"><strong><code>toFuture( )</code></strong>, <strong><code>toIterable( )</code></strong>, <strong><code>toList( )</code></strong></a> — 将Observable转换为其它对象或数据结构</li>
+</ul>
+</body>
+<html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File And.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="and-then-when">And/Then/When</h2>
+<p>使用Pattern和Plan作为中介，将两个或多个Observable发射的数据集合并到一起</p>
+<p><img src="../images/operators/and_then_when.C.png" alt="and/then/when"></p>
+<p>And/Then/When操作符组合的行为类似于<code>zip</code>，但是它们使用一个中间数据结构。接受两个或多个Observable，一次一个将它们的发射物合并到<code>Pattern</code>对象，然后操作那个<code>Pattern</code>对象，变换为一个<code>Plan</code>。随后将这些<code>Plan</code>变换为Observable的发射物。</p>
+<p><img src="../images/operators/and_then_when.png" alt="and/then/when"></p>
+<p>它们属于<code>rxjava-joins</code>模块，不是核心RxJava包的一部分。</p>
+</body>
+<html>

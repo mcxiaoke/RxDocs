@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Blocking-Observable-Operators.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<p>这一节解释 <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html"><code>BlockingObservable</code></a> 的子类. 一个阻塞的Observable 继承普通的Observable类，增加了一些可用于阻塞Observable发射的数据的操作符。</p>
+<p>要将普通的<code>Observable</code> 转换为 <code>BlockingObservable</code>，可以使用 <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toBlocking("><code>Observable.toBlocking( )</code></a>) 方法或者<a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable"><code>BlockingObservable.from( )</code></a>) 方法。</p>
+<ul>
+<li><a href="Subscribe.html"><strong><code>forEach( )</code></strong></a> — 对Observable发射的每一项数据调用一个方法，会阻塞直到Observable完成</li>
+<li><a href="First.html"><strong><code>first( )</code></strong></a> — 阻塞直到Observable发射了一个数据，然后返回第一项数据</li>
+<li><a href="First.html"><strong><code>firstOrDefault( )</code></strong></a> — 阻塞直到Observable发射了一个数据或者终止，返回第一项数据，或者返回默认值</li>
+<li><a href="Last.html"><strong><code>last( )</code></strong></a> — 阻塞直到Observable终止，然后返回最后一项数据</li>
+<li><a href="Last.html"><strong><code>lastOrDefault( )</code></strong></a> — 阻塞直到Observable终止，然后返回最后一项的数据，或者返回默认值</li>
+<li><a href="First.html"><strong><code>mostRecent( )</code></strong></a> — 返回一个总是返回Observable最近发射的数据的iterable</li>
+<li><a href="TakeLast.html"><strong><code>next( )</code></strong></a> — 返回一个Iterable，会阻塞直到Observable发射了另一个值，然后返回那个值</li>
+<li><a href="First.html"><strong><code>latest( )</code></strong></a> — 返回一个iterable，会阻塞直到或者除非Observable发射了一个iterable没有返回的值，然后返回这个值</li>
+<li><a href="First.html"><strong><code>single( )</code></strong></a> — 如果Observable终止时只发射了一个值，返回那个值，否则抛出异常</li>
+<li><a href="First.html"><strong><code>singleOrDefault( )</code></strong></a> — 如果Observable终止时只发射了一个值，返回那个值，否则否好默认值</li>
+<li><a href="To.html"><strong><code>toFuture( )</code></strong></a> — 将Observable转换为一个Future</li>
+<li><a href="To.html"><strong><code>toIterable( )</code></strong></a> — 将一个发射数据序列的Observable转换为一个Iterable</li>
+<li><a href="To.html"><strong><code>getIterator( )</code></strong></a> — 将一个发射数据序列的Observable转换为一个Iterator</li>
+</ul>
+<blockquote>
+<p>伴随这个解释还有一个修改版的弹珠图，表示阻塞Observable的弹珠图：</p>
+</blockquote>
+<p><img src="../images/operators/B.legend.png" alt="BlockingObservables"></p>
+<h2 id="blockingobservable-">BlockingObservable的方法</h2>
+<p><code>BlockingObservable</code>的方法不是将一个Observable变换为另一个，也不是过滤Observables，它们会打断Observable的调用链，会阻塞等待直到Observable发射了想要的数据，然后返回这个数据（而不是一个Observable）。</p>
+<p>要将一个Observable转换为一个<code>BlockingObservable</code>，你可以使用<code>Observable.toBlocking</code>或<code>BlockingObservable.from</code>方法。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#toBlocking(">Observable.toBlocking()</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable">BlockingObservable.from(Observable)</a>)</li>
+</ul>
+<h3 id="first">first</h3>
+<p><img src="../images/operators/B.first.png" alt="first"></p>
+<p>要获取<code>BlockingObservable</code>的发射物，使用无参数的<code>first</code>方法。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#first(">BlockingObservable.first()</a>)</li>
+</ul>
+<h3 id="first-p">first.p</h3>
+<p><img src="../images/operators/B.first.p.png" alt="first"></p>
+<p>你也可以给<code>first</code>方法传递一个谓词函数用于获取满足条件的<code>BlockingObservable</code>。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#first(rx.functions.Func1">BlockingObservable.first(Func1)</a>)</li>
+</ul>
+<h3 id="firstordefault">firstOrDefault</h3>
+<p><img src="../images/operators/B.firstOrDefault.png" alt="firstOrDefault"></p>
+<p>和过滤操作符一样，如果原始Observable没有数据，<code>first</code>会抛出异常<code>NoSuchElementException</code>，<code>firstOrDefault</code>会返回一个默认值。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#firstOrDefault(T">BlockingObservable.firstOrDefault()</a>)</li>
+</ul>
+<h3 id="firstordefault-p">firstOrDefault.p</h3>
+<p><img src="../images/operators/B.firstOrDefault.p.png" alt="firstOrDefault"></p>
+<p><code>firstOrDefault</code>同样也接受一个谓词函数作为参数，用于获取满足条件的第一项，如果没有满足条件的就返回默认值。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#firstOrDefault(T,%20rx.functions.Func1">BlockingObservable.firstOrDefault(T, Func1)</a>)</li>
+</ul>
+<h3 id="single">single</h3>
+<p><img src="../images/operators/B.single.png" alt="single"></p>
+<p><code>single</code>和<code>first</code>类似，但是如果不是正好发射一个数据，会抛出异常<code>NoSuchElementException</code>。其它几个变体的功能也是类似的。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#single(">single()</a>)</li>
+</ul>
+<h3 id="single-p">single.p</h3>
+<p><img src="../images/operators/B.single.p.png" alt="single"></p>
+<p>同上，接受一个谓词函数，如果满足条件的不是正好一个，会抛出异常。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#single(rx.functions.Func1">single(Func1)</a>)</li>
+</ul>
+<h3 id="singleordefault">singleOrDefault</h3>
+<p><img src="../images/operators/B.singleOrDefault.png" alt="single"></p>
+<p>类似<code>firstOrDefault</code>，在为空时返回默认值，超过一个就抛出异常。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#singleOrDefault(T">singleOrDefault(T)</a>)</li>
+</ul>
+<h3 id="singleordefault-p">singleOrDefault.p</h3>
+<p><img src="../images/operators/B.singleOrDefault.p.png" alt="single"></p>
+<p>类似<code>firstOrDefault</code>，接受一个谓词函数，如果没有复合条件的，返回默认值；如果有多个复合条件的，以错误通知终止。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#singleOrDefault(rx.functions.Func1,%20T">singleOrDefault(Func1,T)</a>)</li>
+</ul>
+<h3 id="next">next</h3>
+<p><img src="../images/operators/B.next.png" alt="next"></p>
+<p><code>next</code>操作符会阻塞直到<code>BlockingObservable</code>返回另外一个值，然后它返回那个值。你可以重复调用这个方法从<code>BlockingObservable</code>获取后续的数据项。以阻塞的方式高效的迭代获取它的发射物。</p>
+<p><code>latest</code>操作符也是类似的，但是它不会阻塞等待下一个值，它立即返回最近发射的数据项，只在Observable还没有发射任何数据时会阻塞。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#next(">next()</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#latest(">latest()</a>)</li>
+</ul>
+<h3 id="mostrecent">mostRecent</h3>
+<p><img src="../images/operators/B.mostRecent.png" alt="mostRecent"></p>
+<p><code>mostRecent</code>操作符让你可以用类似的方式迭代一个<code>BlockingObservable</code>，但是它总是立即返回一个值，或者是默认值（如果<code>BlockingObservable</code>还没有发射任何数据），或者是<code>BlockingObservable</code>最近发射的数据项。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#mostRecent(T">mostRecent(T)</a>)</li>
+</ul>
+<h3 id="foreach">forEach</h3>
+<p><code>BlockingObservable</code>类中也有一个类似的叫作<code>forEach</code>的方法。要使用这个方法，你首先需要使用<code>BlockingObservable.from</code>方法或<code>Observable.toBlocking</code>操作符将原始Observable转换为一个<code>BlockingObservable</code>。</p>
+<p><code>BlockingObservable.forEach</code>接受单个函数作为参数，这个函数的作用类似于普通Observable订阅中的<code>onNext</code>函数。<code>forEach</code>自身会阻塞知道<code>BlockingObservable</code>完成，当它不阻塞时就是完成了，不是通过调用一个回调方法表示它完成了。如果遇到了错误它将抛出一个<code>RuntimeException</code>（而不是调用一个类似于<code>onError</code>的回调方法）。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#forEach(rx.functions.Action1">BlockingObservable.forEach(Action1)</a>)</li>
+</ul>
+<h4 id="-">参见：</h4>
+<ul>
+<li>javadoc: &lt;a href=&quot;http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html&quot;&gt;<code>BlockingObservable</code>&lt;/a&gt;</li>
+<li>javadoc: &lt;a href=&quot;http://reactivex.io/RxJava/javadoc/rx/Observable.html#toBlocking()&quot;&gt;<code>toBlocking()</code>&lt;/a&gt;</li>
+<li>javadoc: &lt;a href=&quot;http://reactivex.io/RxJava/javadoc/rx/observables/BlockingObservable.html#from(rx.Observable)&quot;&gt;<code>BlockingObservable.from()</code>&lt;/a&gt;</li>
+</ul>
+<h2 id="-">附录：相似的阻塞和非阻塞操作符列表</h2>
+<p>&lt;table&gt;<br> &lt;thead&gt;<br>  &lt;tr&gt;&lt;th rowspan=&quot;2&quot;&gt;操作符&lt;/th&gt;&lt;th colspan=&quot;3&quot;&gt;执行结果&lt;/th&gt;&lt;th rowspan=&quot;2&quot;&gt;Rx.NET等价操作&lt;/th&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;th&gt;发射多个数据的Observable&lt;/th&gt;&lt;th&gt;发射单个数据的Observable&lt;/th&gt;&lt;th&gt;不发射数据的Observable&lt;/th&gt;&lt;/tr&gt;<br> &lt;/thead&gt;<br> &lt;tbody&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;Observable.first&lt;/code&gt;&lt;/td&gt;&lt;td&gt; 第一项&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;&lt;i&gt;该元素不存在&lt;/i&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;firstAsync&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;BlockingObservable.first&lt;/code&gt;&lt;/td&gt;&lt;td&gt; 第一项&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;&lt;i&gt;该元素不存在&lt;/i&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;first&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;Observable.firstOrDefault&lt;/code&gt;&lt;/td&gt;&lt;td&gt; 第一项&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;默认数据&lt;/td&gt;&lt;td&gt;&lt;code&gt;firstOrDefaultAsync&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;BlockingObservable.firstOrDefault&lt;/code&gt;&lt;/td&gt;&lt;td&gt; 第一项&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;默认数据&lt;/td&gt;&lt;td&gt;&lt;code&gt;firstOrDefault&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;Observable.last&lt;/code&gt;&lt;/td&gt;&lt;td&gt;最后一项&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;&lt;i&gt;该元素不存在&lt;/i&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;lastAsync&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;BlockingObservable.last&lt;/code&gt;&lt;/td&gt;&lt;td&gt;最后一项&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;&lt;i&gt;该元素不存在&lt;/i&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;last&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;Observable.lastOrDefault&lt;/code&gt;&lt;/td&gt;&lt;td&gt;最后一项&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;默认数据&lt;/td&gt;&lt;td&gt;&lt;code&gt;lastOrDefaultAsync&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;BlockingObservable.lastOrDefault&lt;/code&gt;&lt;/td&gt;&lt;td&gt;最后一项&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;默认数据&lt;/td&gt;&lt;td&gt;&lt;code&gt;lastOrDefault&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;Observable.single&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;i&gt;非法参数&lt;/i&gt;&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;&lt;i&gt;该元素不存在&lt;/i&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;singleAsync&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;BlockingObservable.single&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;i&gt;非法参数&lt;/i&gt;&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;&lt;i&gt;该元素不存在&lt;/i&gt;&lt;/td&gt;&lt;td&gt;&lt;code&gt;single&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;Observable.singleOrDefault&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;i&gt;非法参数&lt;/i&gt;&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;默认数据&lt;/td&gt;&lt;td&gt;&lt;code&gt;singleOrDefaultAsync&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br>  &lt;tr&gt;&lt;td&gt;&lt;code&gt;BlockingObservable.singleOrDefault&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;i&gt;非法参数&lt;/i&gt;&lt;/td&gt;&lt;td&gt;单个数据&lt;/td&gt;&lt;td&gt;默认数据&lt;/td&gt;&lt;td&gt;&lt;code&gt;singleOrDefault&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;<br> &lt;/tbody&gt;<br>&lt;/table&gt;
+</p>
+</body>
+<html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File CombineLatest.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="combinelatest">CombineLatest</h2>
+<p>当两个Observables中的任何一个发射了数据时，使用一个函数结合每个Observable发射的最近数据项，并且基于这个函数的结果发射数据。</p>
+<p><img src="../images/operators/combineLatest.c.png" alt="combineLatest"></p>
+<p><code>CombineLatest</code>操作符行为类似于<code>zip</code>，但是只有当原始的Observable中的每一个都发射了一条数据时<code>zip</code>才发射数据。<code>CombineLatest</code>则在原始的Observable中任意一个发射了数据时发射一条数据。当原始Observables的任何一个发射了一条数据时，<code>CombineLatest</code>使用一个函数结合它们最近发射的数据，然后发射这个函数的返回值。</p>
+<p><img src="../images/operators/combineLatest.png" alt="combineLatest"></p>
+<p>RxJava将这个操作符实现为<code>combineLatest</code>，它接受二到九个Observable作为参数，或者单个Observables列表作为参数。它默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(java.util.List,%20rx.functions.FuncN">combineLatest(List,FuncN)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#combineLatest(rx.Observable,%20rx.Observable,%20rx.functions.Func2">combineLatest(Observable,Observable,Func2)</a>)</li>
+</ul>
+<h3 id="withlatestfrom">withLatestFrom</h3>
+<p><img src="../images/operators/withLatestFrom.png" alt="withLatestFrom"></p>
+<p><code>withLatestFrom</code>操作符还在开发中，不是1.0版本的一部分。类似于<code>combineLatest</code>，但是只在单个原始Observable发射了一条数据时才发射数据。</p>
+</body>
+<html>

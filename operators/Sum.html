@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Sum.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="sum">Sum</h2>
+<p>计算Observable发射的数值的和并发射这个和</p>
+<p><img src="../images/operators/sum.c.png" alt="sum"></p>
+<p><code>Sum</code>操作符操作一个发射数值的Observable，仅发射单个值：原始Observable所有数值的和。</p>
+<p>RxJava的实现是<code>sumDouble</code>, <code>sumFloat</code>, <code>sumInteger</code>, <code>sumLong</code>，它们不是RxJava核心模块的一部分，属于<code>rxjava-math</code>模块。</p>
+<p><img src="../images/operators/sum.f.png" alt="sum.f"></p>
+<p>你可以使用一个函数，计算Observable每一项数据的函数返回值的和。</p>
+<p>在<code>StringObservable</code>类（这个类不是RxJava核心模块的一部分）中有一个<code>stringConcat</code>操作符，它将一个发射字符串序列的Observable转换为一个发射单个字符串的Observable，后者这个字符串表示的是前者所有字符串的连接。</p>
+<p><img src="../images/operators/St.join.png" alt="St.join"></p>
+<p><code>StringObservable</code>类还有一个<code>join</code>操作符，它将一个发射字符串序列的Observable转换为一个发射单个字符串的Observable，后者这个字符串表示的是前者所有字符串以你指定的分界符连接的结果。</p>
+</body>
+<html>

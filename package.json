@@ -1,0 +1,25 @@
+{
+  "name": "rx-docs",
+  "version": "1.0.0",
+  "description": "ReactiveX/RxJava文档中文版",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcxiaoke/RxDocs.git"
+  },
+  "keywords": [
+    "ReactiveX"
+  ],
+  "author": "mcxiaoke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcxiaoke/RxDocs/issues"
+  },
+  "dependencies": {
+    "markdown-to-html": "0.0.11"
+  },
+  "homepage": "https://github.com/mcxiaoke/RxDocs"
+}

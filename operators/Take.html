@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Take.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="take">Take</h2>
+<p>只发射前面的N项数据</p>
+<p><img src="../images/operators/take.c.png" alt="take"></p>
+<p>使用<code>Take</code>操作符让你可以修改Observable的行为，只返回前面的N项数据，然后发射完成通知，忽略剩余的数据。</p>
+<p><img src="../images/operators/take.png" alt="take"></p>
+<p>RxJava将这个操作符实现为<code>take</code>函数。</p>
+<p>如果你对一个Observable使用<code>take(n)</code>（或它的同义词<code>limit(n)</code>）操作符，而那个Observable发射的数据少于N项，那么<code>take</code>操作生成的Observable不会抛异常或发射<code>onError</code>通知，在完成前它只会发射相同的少量数据。</p>
+<p>示例代码</p>
+<pre><code class="lang-java">Observable.just(1, 2, 3, 4, 5, 6, 7, 8)
+          .take(4)
+          .subscribe(new Subscriber&lt;Integer&gt;() {
+        @Override
+        public void onNext(Integer item) {
+            System.out.println(&quot;Next: &quot; + item);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            System.err.println(&quot;Error: &quot; + error.getMessage());
+        }
+
+        @Override
+        public void onCompleted() {
+            System.out.println(&quot;Sequence complete.&quot;);
+        }
+    });
+</code></pre>
+<p>输出</p>
+<pre><code>Next: 1
+Next: 2
+Next: 3
+Next: 4
+Sequence complete.
+</code></pre><p><code>take(int)</code>默认不任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(int">take(int)</a>)</li>
+</ul>
+<p><img src="../images/operators/take.t.png" alt="take"></p>
+<p><code>take</code>的这个变体接受一个时长而不是数量参数。它会丢发射Observable开始的那段时间发射的数据，时长和时间单位通过参数指定。</p>
+<p><code>take</code>的这个变体默认在<code>computation</code>调度器上执行，但是你可以使用第三个参数指定其它的调度器。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(long,%20java.util.concurrent.TimeUnit">take(long,TimeUnit)</a>)</li>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#take(long,%20java.util.concurrent.TimeUnit,%20rx.Scheduler">take(long,TimeUnit,Scheduler)</a>)</li>
+</ul>
+</body>
+<html>

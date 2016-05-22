@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>File Serialize.html in D:\git\RxDocs\operators</title>
+  <link rel="stylesheet" href="../style/github-style.css">
+</head>
+<body>
+<h2 id="serialize">Serialize</h2>
+<p>强制一个Observable连续调用并保证行为正确</p>
+<p><img src="../images/operators/serialize.c.png" alt=""></p>
+<p>一个Observable可以异步调用它的观察者的方法，可能是从不同的线程调用。这可能会让Observable行为不正确，它可能会在某一个<code>onNext</code>调用之前尝试调用<code>onCompleted</code>或<code>onError</code>方法，或者从两个不同的线程同时调用<code>onNext</code>方法。使用<code>Serialize</code>操作符，你可以纠正这个Observable的行为，保证它的行为是正确的且是同步的。</p>
+<p>RxJava中的实现是<code>serialize</code>，它默认不在任何特定的调度器上执行。</p>
+<ul>
+<li>Javadoc: <a href="http://reactivex.io/RxJava/javadoc/rx/Observable.html#serialize(">serialize()</a>)</li>
+</ul>
+</body>
+<html>
