@@ -85,7 +85,7 @@ Hello George!
 
 ### 已有的数据结构创建Observable
 
-你可以使用[`just( )`](../operators/Just.md) 和[`from( )`](../operators/From.md) 方法将对象，列表，对象属猪转换为发射那些对象的Observable：
+你可以使用[`just( )`](../operators/Just.md) 和[`from( )`](../operators/From.md) 方法将对象，列表，对象属性转换为发射那些对象的Observable：
 
 ```java
 Observable<String> o = Observable.from("a", "b", "c");
