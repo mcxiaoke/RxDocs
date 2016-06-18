@@ -51,7 +51,7 @@
 
 ![buffer2](../images/operators/buffer2.png)
 
-`buffer(bufferOpenings, bufferClosingSelector)`监视这个叫`bufferOpenings`的Observable（它发射`BufferOpening`对象），每当`bufferOpenings`发射了一个数据时，它就创建一个新的`List`开始手机原始Observable的数据，并将`bufferOpenings`传递给`closingSelector`函数。这个函数返回一个Observable。`buffer`监视这个Observable，当它检测到一个来自这个Observable的数据时，就关闭`List`并且发射它自己的数据（之前的那个List）。
+`buffer(bufferOpenings, bufferClosingSelector)`监视这个叫`bufferOpenings`的Observable（它发射`BufferOpening`对象），每当`bufferOpenings`发射了一个数据时，它就创建一个新的`List`开始收集原始Observable的数据，并将`bufferOpenings`传递给`closingSelector`函数。这个函数返回一个Observable。`buffer`监视这个Observable，当它检测到一个来自这个Observable的数据时，就关闭`List`并且发射它自己的数据（之前的那个List）。
 
 * Javadoc: [buffer(Observable,Func1)](http://reactivex.io/RxJava/javadoc/rx/Observable.html#buffer(rx.Observable,%20rx.functions.Func1))
 
