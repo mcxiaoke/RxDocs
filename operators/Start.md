@@ -33,7 +33,7 @@
 
 ![deferFuture](../images/operators/deferFuture.png)
 
-`rxjava-async`模块还包含一个`deferFuture`操作符，传递给它一个返回`Future`的函数（这个`Future`返回一个`Observable`），`deferFuture`返回一个Observable，但是不会调用你提供的函数，知道有观察者订阅它返回的Observable。这时，它立即调用`Future`的`get()`方法，然后镜像发射`get()`方法返回的Observable发射的数据。
+`rxjava-async`模块还包含一个`deferFuture`操作符，传递给它一个返回`Future`的函数（这个`Future`返回一个`Observable`），`deferFuture`返回一个Observable，但是不会调用你提供的函数，直到有观察者订阅它返回的Observable。这时，它立即调用`Future`的`get()`方法，然后镜像发射`get()`方法返回的Observable发射的数据。
 
 用这种方法，你可以在Observables调用链中包含一个返回Observable的`Future`对象。
 
