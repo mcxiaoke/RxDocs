@@ -11,7 +11,7 @@
 * (`rxjava-computation-expressions`) [**`switchCase( )`**](Conditional.md#Defer) — 基于一个计算结果，发射一个指定Observable的数据序列
 * [**`takeUntil( )`**](Conditional.md#TakeUntil) — 发射来自原始Observable的数据，直到第二个Observable发射了一个数据或一个通知
 * [**`takeWhile( )` and `takeWhileWithIndex( )`**](Conditional.md#TakeWhile) — 发射原始Observable的数据，直到一个特定的条件为真，然后跳过剩余的数据
-* (`rxjava-computation-expressions`) [**`whileDo( )`**](Conditional.md#Repeat) — if a condition is true, emit the source Observable's sequence and then repeat the sequence as long as the condition remains true如果满足一个条件，发射原始Observable的数据，然后重复发射直到不满足这个条件为止
+* (`rxjava-computation-expressions`) [**`whileDo( )`**](Conditional.md#Repeat) — 如果条件为`true`，则发射源Observable数据序列，并且只要条件保持为`true`就重复发射此数据序列
 
 > (`rxjava-computation-expressions`) — 表示这个操作符当前是可选包 `rxjava-computation-expressions` 的一部分，还没有包含在标准RxJava的操作符集合里
 
