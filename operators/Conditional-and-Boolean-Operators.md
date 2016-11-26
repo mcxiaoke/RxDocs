@@ -20,4 +20,4 @@
 * [**`all( )`**](Conditional.md#All) — 判断是否所有的数据项都满足某个条件
 * [**`contains( )`**](Conditional.md#Contains) — 判断Observable是否会发射一个指定的值
 * [**`exists( )` and `isEmpty( )`**](Conditional.md#Contains) — 判断Observable是否发射了一个值
-* [**`sequenceEqual( )`**](Conditional.md#Sequenceequal) — test the equality of the sequences emitted by two Observables判断两个Observables发射的序列是否相等
+* [**`sequenceEqual( )`**](Conditional.md#Sequenceequal) — 判断两个Observables发射的序列是否相等
