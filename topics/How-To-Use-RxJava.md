@@ -397,7 +397,7 @@ fetchWikipediaArticleAsynchronouslyWithErrorHandling("Tiger", "NonExistentTitle"
 ```
 
 
-查看 [`错误处理操作符`](../operators/Error-Handling-Operators.md) 这一夜了解更多RxJava中的错误处理技术，包括使用 [`onErrorResumeNext()`和`onErrorReturn()`](../operators/Catch.md)等方法，它们让你可以从错误中恢复。
+查看 [`错误处理操作符`](../operators/Error-Handling-Operators.md) 这一页了解更多RxJava中的错误处理技术，包括使用 [`onErrorResumeNext()`和`onErrorReturn()`](../operators/Catch.md)等方法，它们让你可以从错误中恢复。
 
 这里是一个`Groovy`的例子：
 
