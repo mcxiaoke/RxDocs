@@ -15,6 +15,7 @@
 
 ## 版本历史
 
+* 1.0.1 - 2017.07.20 图片链接修正，文本修正
 * 1.0.0 - 2016.11.28 文本修正和润色，感谢@jiefly/@donglua/@cccxm等帮忙完善
 * 0.9.5 - 2016.03.14 文本修正和润色，感谢@htoooth/@AlanCheen/@Ydcool/@loshine/@ppoffice帮忙完善
 * 0.9.0 - 2015.11.25 修正错误和文本润色，感谢@slb1988/@htoooth/@jiyee/@donglua帮忙完善
