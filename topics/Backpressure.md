@@ -20,7 +20,7 @@ Cold Observables are ideal for the reactive pull model of backpressure described
 
 Your first line of defense against the problems of over-producing Observables is to use some of the ordinary set of Observable operators to reduce the number of emitted items to a more manageable number. The examples in this section will show how you might use such operators to handle a bursty Observable like the one illustrated in the following marble diagram:
 
-<img src="/images/roperators/bp.bursty.png" width="640" height="35" />​
+<img src="/images/operators/bp.bursty.png" width="640" height="35" />​
 
 By fine-tuning the parameters to these operators you can ensure that a slow-consuming observer is not overwhelmed by a fast-producing Observable.
 
