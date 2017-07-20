@@ -3,7 +3,7 @@
 * [**`ConnectableObservable.connect( )`**](Connect.md) — 指示一个可连接的Observable开始发射数据
 * [**`Observable.publish( )`**](Publish.md) — 将一个Observable转换为一个可连接的Observable
 * [**`Observable.replay( )`**](Replay.md) — 确保所有的订阅者看到相同的数据序列，即使它们在Observable开始发射数据之后才订阅
-* [**`ConnectableObservable.refCount( )`**](Refcount.md) — 让一个可连接的Observable表现得像一个普通的Observable
+* [**`ConnectableObservable.refCount( )`**](RefCount.md) — 让一个可连接的Observable表现得像一个普通的Observable
 
 一个可连接的Observable与普通的Observable差不多，除了这一点：可连接的Observable在被订阅时并不开始发射数据，只有在它的`connect()`被调用时才开始。用这种方法，你可以等所有的潜在订阅者都订阅了这个Observable之后才开始发射数据。
 
