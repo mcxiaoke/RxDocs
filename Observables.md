@@ -129,11 +129,11 @@ Rx的操作符让你可以用声明式的风格组合异步操作序列，它拥
 
 1. [创建操作](operators/Creating-Observables.md) Create, Defer, Empty/Never/Throw, From, Interval, Just, Range, Repeat, Start, Timer
 2. [变换操作](operators/Transforming-Observables.md) Buffer, FlatMap, GroupBy, Map, Scan和Window
-3. [过滤操作](operators/Filter-Observables.md) Debounce, Distinct, ElementAt, Filter, First, IgnoreElements, Last, Sample, Skip, SkipLast, Take, TakeLast
+3. [过滤操作](operators/Filtering-Observables.md) Debounce, Distinct, ElementAt, Filter, First, IgnoreElements, Last, Sample, Skip, SkipLast, Take, TakeLast
 4. [组合操作](operators/Combining-Observables.md) And/Then/When, CombineLatest, Join, Merge, StartWith, Switch, Zip
-5. [错误处理](operators/Error-Handling-Observables.md) Catch和Retry
+5. [错误处理](operators/Error-Handling-Operators.md) Catch和Retry
 6. [辅助操作](operators/Observable-Utility-Operators.md) Delay, Do, Materialize/Dematerialize, ObserveOn, Serialize, Subscribe, SubscribeOn, TimeInterval, Timeout, Timestamp, Using
-7. [条件和布尔操作](operators/Conditional-Observables.md) All, Amb, Contains, DefaultIfEmpty, SequenceEqual, SkipUntil, SkipWhile, TakeUntil, TakeWhile
+7. [条件和布尔操作](operators/Conditional-and-Boolean-Operators.md) All, Amb, Contains, DefaultIfEmpty, SequenceEqual, SkipUntil, SkipWhile, TakeUntil, TakeWhile
 8. [算术和集合操作](operators/Mathematical-and-Aggregate-Operators.md) Average, Concat, Count, Max, Min, Reduce, Sum
 9. [转换操作](operators/To.md) To
 10. [连接操作](operators/Connectable-Observable-Operators.md) Connect, Publish, RefCount, Replay
